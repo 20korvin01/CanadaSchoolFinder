@@ -175,6 +175,24 @@ const provinceImages = {
   ],
 };
 
+// Teaser-Texte für Provinzen
+const provinceTeasers = {
+  "Alberta": "Alberta beeindruckt mit den majestätischen Rocky Mountains und endlosen Prärien. Die Provinz ist bekannt für ihre Nationalparks und das Energiezentrum Calgary.",
+  "British Columbia": "British Columbia lockt mit wilden Küsten, Regenwäldern und den Coast Mountains. Vancouver zählt zu den lebenswertesten Städten weltweit.",
+  "Manitoba": "Manitoba ist die Heimat der arktischen Tundra, Prärien und des berühmten Polarbärenortes Churchill. Die Provinzhauptstadt Winnipeg ist kulturelles Zentrum.",
+  "New Brunswick": "New Brunswick verbindet französische und englische Einflüsse mit malerischen Küsten. Die Bay of Fundy bietet weltweit die höchsten Gezeiten.",
+  "Newfoundland and Labrador": "Newfoundland and Labrador bietet dramatische Küstenlandschaften und historische Fischerdörfer. Hier liegt das östlichste Punkt Nordamerikas.",
+  "Nova Scotia": "Nova Scotia begeistert mit Seefahrtsgeschichte, Hummer und Leuchttürmen. Die Provinz ist ideal für Roadtrips entlang des berühmten Cabot Trail.",
+  "Ontario": "Ontario beherbergt die multikulturelle Metropole Toronto und die Niagarafälle. Die Provinz ist wirtschaftliches und politisches Zentrum Kanadas.",
+  "Prince Edward Island": "PEI ist Kanadas kleinste Provinz und berühmt für rote Klippen, Kartoffelfelder und 'Anne of Green Gables'. Ruhig, charmant und maritim geprägt.",
+  "Quebec": "Quebec ist das Herz französischsprachiger Kultur in Nordamerika. Montreal und Quebec City verbinden Geschichte, Kunst und europäisches Flair.",
+  "Saskatchewan": "Saskatchewan ist das Land des offenen Himmels – ideal für Sternbeobachtung. Die Prärieprovinz lebt von Landwirtschaft und weiten Landschaften.",
+  "Northwest Territories": "Die Northwest Territories sind geprägt von unberührter Wildnis, dem Great Slave Lake und Nordlichtern. Yellowknife liegt am Rande der Arktis.",
+  "Yukon": "Yukon erinnert an den Goldrausch und bietet Wildnis pur. Der berühmte Klondike und der Kluane Nationalpark machen die Region einzigartig.",
+  "Nunavut": "Nunavut ist Kanadas nördlichstes und jüngstes Territorium mit überwiegend indigener Bevölkerung. Hier dominieren Eislandschaften und Inuit-Kultur."
+};
+
+
 // Aktueller Galerie-Status
 let currentImageIndex = 0;
 let currentImages = [];
@@ -295,30 +313,33 @@ function showFeatureInfo(feature) {
   
   if (feature.properties) {
     const props = feature.properties;
-    const provinceName = props.prov_name_en || 'Unbekannte Region';
+    const provinceName = props.prov_name_en;
     title.textContent = provinceName;
-    
+
     // Debug: Provinzname in Console ausgeben
     console.log('Provinzname:', provinceName);
     console.log('Verfügbare Provinzen:', Object.keys(provinceImages));
-    
+
     // Bilder für die Provinz laden
-    const images = provinceImages[provinceName] || [];
+    const images = provinceImages[provinceName];
     console.log('Gefundene Bilder:', images);
-    
+
     // Bildergalerie erstellen
     imageContainer.innerHTML = createImageGallery(images);
-    
+
+    // Teaser-Text einfügen
+    const teaserText = `<div class="province-teaser">${provinceTeasers[provinceName]}</div>`;
+
     // Informationen anzeigen
     details.innerHTML = `
       <h4>${provinceName}</h4>
-      ${props.prov_name_fr ? `<p><strong>Französischer Name:</strong> ${props.prov_name_fr}</p>` : ''}
-      <p><strong>Typ:</strong> ${props.prov_type || 'Nicht verfügbar'}</p>
-      <p><strong>Provinzcode:</strong> ${props.prov_code || 'Nicht verfügbar'}</p>
-      <p><strong>Jahr:</strong> ${props.year || 'Nicht verfügbar'}</p>
+      ${teaserText}
+      <p><strong>Französischer Name:</strong> ${props.prov_name_fr}</p>
+      <p><strong>Typ:</strong> ${props.prov_type}</p>
+      <p><strong>Provinzcode:</strong> ${props.prov_code}</p>
       <p>Weitere Informationen über diese Region werden hier angezeigt...</p>
     `;
-    
+
     // Event Listeners für Galerie hinzufügen
     setTimeout(() => {
       addGalleryEventListeners();

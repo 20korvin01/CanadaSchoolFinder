@@ -37,22 +37,25 @@
                     </label>
                 </div>
                 <div class="layer-item">
-                    <label>Städte</label>
-                    <div class="city-checkbox-group">
+                    <button class="accordion-toggle" id="toggle-cities-group" aria-expanded="true" aria-controls="cities-checkboxes">
+                        <span class="accordion-icon" id="cities-accordion-icon">&#9660;</span>
+                        <span>Städte</span>
+                    </button>
+                    <div class="city-checkbox-group" id="cities-checkboxes" style="display: block;">
                         <label class="city-checkbox">
-                            <input type="checkbox" id="citiesCat1"> < 10.000 Einwohner
+                            <input type="checkbox" id="citiesCat1"> < 10k Einwohner
                         </label>
                         <label class="city-checkbox">
-                            <input type="checkbox" id="citiesCat2"> 10.000 – 50.000
+                            <input type="checkbox" id="citiesCat2"> 10k – 50k
                         </label>
                         <label class="city-checkbox">
-                            <input type="checkbox" id="citiesCat3"> 50.000 – 250.000
+                            <input type="checkbox" id="citiesCat3"> 50k – 250k
                         </label>
                         <label class="city-checkbox">
-                            <input type="checkbox" id="citiesCat4"> 250.000 – 1.000.000
+                            <input type="checkbox" id="citiesCat4"> 250k – 1M
                         </label>
                         <label class="city-checkbox">
-                            <input type="checkbox" id="citiesCat5"> > 1.000.000
+                            <input type="checkbox" id="citiesCat5"> > 1M
                         </label>
                     </div>
                 </div>

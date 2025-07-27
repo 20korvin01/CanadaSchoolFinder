@@ -1,3 +1,65 @@
+/* Modernes Styling für Städte-Checkboxen */
+.city-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.5em;
+  margin-top: 0.5em;
+}
+
+.city-checkbox {
+  display: flex;
+  align-items: center;
+  background: #f5f7fa;
+  border-radius: 8px;
+  padding: 0.4em 0.8em;
+  transition: background 0.2s;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 0.2em 0;
+}
+
+.city-checkbox:hover {
+  background: #e3eaf3;
+}
+
+.city-checkbox input[type="checkbox"] {
+  accent-color: #1976d2;
+  width: 1.1em;
+  height: 1.1em;
+  margin-right: 0.7em;
+}
+/* Provinzen Checkbox explizit rot einfärben */
+.layer-item input[type="checkbox"]:first-of-type {
+  accent-color: #CD1719;
+}
+/* Accordion-Button für Städte-Gruppe */
+.accordion-toggle {
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  margin-bottom: 0.2em;
+  padding: 0.35em 0 0.35em 0;
+  width: 100%;
+  min-height: 1.5em;
+  height: 1.5em;
+  transition: color 0.2s;
+  box-shadow: none;
+}
+
+.accordion-icon {
+  font-size: 1.1em;
+  margin-right: -0.2em;
+  margin-left: 0;
+  transition: transform 0.2s;
+  color: #CD1719;
+}
 /* Linke Spalte - Layer Control Panel */
 .layer-panel {
     width: 300px;
@@ -35,6 +97,8 @@
     align-items: center;
     cursor: pointer;
     font-weight: 500;
+    min-height: 1.5em;
+    height: 1.5em;
 }
 
 .layer-item input[type="checkbox"] {

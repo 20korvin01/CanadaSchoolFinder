@@ -51,8 +51,8 @@ function getCityStyle(feature) {
   
   return {
     radius: radius,
-    fillColor: '#ff7800',
-    color: '#000',
+    fillColor: '#CD1719',
+    color: '#6e0505ff',
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8
@@ -107,7 +107,8 @@ function loadCities() {
               }
               layer.bindPopup(popupContent);
               layer.on('click', function(e) {
-                // Optional: Info-Panel
+                // Popup immer an der Feature-Position öffnen, nicht an der Klickposition
+                this.openPopup(this.getLatLng());
                 console.log('Stadt angeklickt:', name);
               });
             }
