@@ -56,7 +56,12 @@ function highlightFeature(layer) {
 
 // GeoJSON-Layer hinzufügen (data/provinces.geojson)
 fetch('./data/provinces.geojson')
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
   .then(data => {
     L.geoJSON(data, {
       style: getDefaultStyle,
@@ -76,4 +81,35 @@ fetch('./data/provinces.geojson')
   })
   .catch(error => {
     console.error('Fehler beim Laden der GeoJSON-Daten:', error);
+    console.log('Versuche alternativen Pfad...');
+    
+    // Fallback: Versuche absoluten Pfad für GitHub Pages
+    fetch('/KanadaSchoolFinder/data/provinces.geojson')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        L.geoJSON(data, {
+          style: getDefaultStyle,
+          onEachFeature: function(feature, layer) {
+            if (feature.properties && feature.properties.prov_name_en) {
+              // Popup mit Provinz-/Territoriumsname
+              layer.bindPopup(`<b>${feature.properties.prov_name_en}</b><br>${feature.properties.prov_name_fr || ''}`);
+              
+              // Click-Event für Highlighting und Info-Panel
+              layer.on('click', function(e) {
+                highlightFeature(layer);
+                showFeatureInfo(feature);
+              });
+            }
+          }
+        }).addTo(map);
+      })
+      .catch(fallbackError => {
+        console.error('Auch Fallback-Pfad fehlgeschlagen:', fallbackError);
+        alert('GeoJSON-Daten konnten nicht geladen werden. Bitte überprüfen Sie die Pfade.');
+      });
   });
