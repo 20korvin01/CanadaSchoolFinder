@@ -2,6 +2,7 @@
 .info-panel {
     width: 350px;
     background: #ffffff;
+    border-left: #CD1719 3px solid;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     transform: translateX(100%);
@@ -40,7 +41,7 @@
 }
 
 #feature-details h4 {
-    color: #2262CC;
+    color: #CD1719;
     margin-bottom: 10px;
     border-bottom: 2px solid #e0e0e0;
     padding-bottom: 5px;

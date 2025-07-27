@@ -1,3 +1,33 @@
+/* Modernes Styling für Städte-Checkboxen */
+.city-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-left: 1.5em;
+  margin-top: 0.5em;
+}
+
+.city-checkbox {
+  display: flex;
+  align-items: center;
+  background: #f5f7fa;
+  border-radius: 8px;
+  padding: 0.4em 0.8em;
+  transition: background 0.2s;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.city-checkbox:hover {
+  background: #e3eaf3;
+}
+
+.city-checkbox input[type="checkbox"] {
+  accent-color: #1976d2;
+  width: 1.1em;
+  height: 1.1em;
+  margin-right: 0.7em;
+}
 /* Reset und Basis-Styles */
 * {
     margin: 0;
@@ -25,24 +55,10 @@ body {
     position: relative;
     width: 100%;
     height: 100vh;
-    transition: margin-left 0.3s ease, margin-right 0.3s ease;
+    /* Entfernt: transition und margin-Änderungen */
 }
 
-.map-container.layer-open {
-    margin-left: 300px;
-    width: calc(100% - 300px);
-}
-
-.map-container.info-open {
-    margin-right: 350px;
-    width: calc(100% - 350px);
-}
-
-.map-container.layer-open.info-open {
-    margin-left: 300px;
-    margin-right: 350px;
-    width: calc(100% - 650px);
-}
+/* Entfernt: Alle margin-Änderungen für layer-open und info-open */
 
 #map {
     height: 100vh;
@@ -51,8 +67,8 @@ body {
 
 /* Panel Header Styles (gemeinsam für beide Panels) */
 .panel-header {
-    background: #2262CC;
-    color: white;
+    background: #eccdce;
+    color: #CD1719;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
@@ -97,10 +113,7 @@ body {
         top: 0;
     }
     
-    .map-container.layer-open,
-    .map-container.info-open {
-        margin: 0;
-    }
+    /* Entfernt: map-container margin Änderungen */
     
     .toggle-btn {
         top: 10px;

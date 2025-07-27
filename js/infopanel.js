@@ -5,7 +5,13 @@ const closeInfoBtn = document.getElementById('close-info-panel');
 // Info Panel schließen
 closeInfoBtn.addEventListener('click', function() {
   infoPanel.classList.remove('open');
-  mapContainer.classList.remove('info-open');
+  // Entfernt: mapContainer.classList.remove('info-open');
+  
+  // Highlighting des aktuellen Features entfernen
+  if (typeof clearHighlight === 'function') {
+    clearHighlight();
+  }
+  
   setTimeout(() => map.invalidateSize(), 300);
 });
 
@@ -321,6 +327,6 @@ function showFeatureInfo(feature) {
   
   // Info Panel öffnen
   infoPanel.classList.add('open');
-  mapContainer.classList.add('info-open');
+  // Entfernt: mapContainer.classList.add('info-open');
   setTimeout(() => map.invalidateSize(), 300);
 }

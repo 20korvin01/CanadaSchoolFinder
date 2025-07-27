@@ -24,6 +24,7 @@
         <!-- Linke Spalte: Layer Control -->
         <div id="layer-panel" class="layer-panel">
             <div class="panel-header">
+                <img src="img/maple-icon.svg" alt="Maple Icon" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
                 <h3>Layer Control</h3>
                 <button id="close-layer-panel" class="close-btn">
                     <i class="bi bi-x"></i>
@@ -36,14 +37,24 @@
                     </label>
                 </div>
                 <div class="layer-item">
-                    <label>
-                        <input type="checkbox"> Städte
-                    </label>
-                </div>
-                <div class="layer-item">
-                    <label>
-                        <input type="checkbox"> Flüsse
-                    </label>
+                    <label>Städte</label>
+                    <div class="city-checkbox-group">
+                        <label class="city-checkbox">
+                            <input type="checkbox" id="citiesCat1"> < 10.000 Einwohner
+                        </label>
+                        <label class="city-checkbox">
+                            <input type="checkbox" id="citiesCat2"> 10.000 – 50.000
+                        </label>
+                        <label class="city-checkbox">
+                            <input type="checkbox" id="citiesCat3"> 50.000 – 250.000
+                        </label>
+                        <label class="city-checkbox">
+                            <input type="checkbox" id="citiesCat4"> 250.000 – 1.000.000
+                        </label>
+                        <label class="city-checkbox">
+                            <input type="checkbox" id="citiesCat5"> > 1.000.000
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,6 +96,8 @@
     
     <!-- Eigene JavaScript-Dateien -->
     <script src="js/basemap.js"></script>
+    <script src="js/provinces.js"></script>
+    <script src="js/cities.js"></script>
     <script src="js/legend.js"></script>
     <script src="js/infopanel.js"></script>
 </body>
