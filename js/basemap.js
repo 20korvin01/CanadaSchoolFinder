@@ -55,7 +55,7 @@ function highlightFeature(layer) {
 }
 
 // GeoJSON-Layer hinzufügen (data/provinces.geojson)
-fetch('../data/provinces.geojson')
+fetch('./data/provinces.geojson')
   .then(response => response.json())
   .then(data => {
     L.geoJSON(data, {

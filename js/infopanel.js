@@ -12,16 +12,16 @@ closeInfoBtn.addEventListener('click', function() {
 // Bildergalerie Daten für Provinzen
 const provinceImages = {
   'Yukon': [
-    '../img/yukon/yukon9.jpg',
-    '../img/yukon/yukon1.jpg',
-    '../img/yukon/yukon2.jpg',
-    '../img/yukon/yukon3.jpg',
-    '../img/yukon/yukon4.jpg',
-    '../img/yukon/yukon5.jpg',
-    '../img/yukon/yukon6.jpg',
-    '../img/yukon/yukon7.jpg',
-    '../img/yukon/yukon10.jpg',
-    '../img/yukon/yukon8.jpg'
+    './img/yukon/yukon9.jpg',
+    './img/yukon/yukon1.jpg',
+    './img/yukon/yukon2.jpg',
+    './img/yukon/yukon3.jpg',
+    './img/yukon/yukon4.jpg',
+    './img/yukon/yukon5.jpg',
+    './img/yukon/yukon6.jpg',
+    './img/yukon/yukon7.jpg',
+    './img/yukon/yukon10.jpg',
+    './img/yukon/yukon8.jpg'
   ]
   // Weitere Provinzen können hier hinzugefügt werden
 };
@@ -167,7 +167,7 @@ function showFeatureInfo(feature) {
       <p><strong>Typ:</strong> ${props.prov_type || 'Nicht verfügbar'}</p>
       <p><strong>Provinzcode:</strong> ${props.prov_code || 'Nicht verfügbar'}</p>
       <p><strong>Jahr:</strong> ${props.year || 'Nicht verfügbar'}</p>
-      ${images.length > 0 ? `<p><strong>Bildergalerie:</strong> ${images.length} Bilder verfügbar</p>` : '<p><strong>Bildergalerie:</strong> Keine Bilder verfügbar</p>'}
+      <p><strong>Externer Link:</strong> <a href="https://www.breidenbach-education.com/" target="_blank" rel="noopener noreferrer">https://www.breidenbach-education.com/</a></p>
       <p>Weitere Informationen über diese Region werden hier angezeigt...</p>
     `;
     
