@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanada Website - Weltkarte</title>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    
+    <!-- Eigene Styles -->
+    <link rel="stylesheet" href="css/basemap.css">
+    <link rel="stylesheet" href="css/legend.css">
+    <link rel="stylesheet" href="css/infopanel.css">
+</head>
+<body>
+    <!-- Layout Container -->
+    <div class="layout-container">
+        <!-- Linke Spalte: Layer Control -->
+        <div id="layer-panel" class="layer-panel">
+            <div class="panel-header">
+                <h3>Layer Control</h3>
+                <button id="close-layer-panel" class="close-btn">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+            <div class="panel-content">
+                <div class="layer-item">
+                    <label>
+                        <input type="checkbox" checked> Provinzen
+                    </label>
+                </div>
+                <div class="layer-item">
+                    <label>
+                        <input type="checkbox"> Städte
+                    </label>
+                </div>
+                <div class="layer-item">
+                    <label>
+                        <input type="checkbox"> Flüsse
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mittlere Spalte: Karte -->
+        <div class="map-container">
+            <!-- Layer Control Toggle Button -->
+            <button id="toggle-layer-panel" class="toggle-btn">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <!-- Karten-Container -->
+            <div id="map"></div>
+        </div>
+
+        <!-- Rechte Spalte: Feature Info -->
+        <div id="info-panel" class="info-panel">
+            <div class="panel-header">
+                <h3 id="feature-title">Feature Info</h3>
+                <button id="close-info-panel" class="close-btn">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+            <div class="panel-content">
+                <div id="feature-image">
+                    <img src="" alt="Feature Bild" id="feature-img">
+                </div>
+                <div id="feature-details">
+                    <p>Klicken Sie auf eine Provinz oder ein Territorium, um Informationen anzuzeigen.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    
+    <!-- Eigene JavaScript-Dateien -->
+    <script src="js/basemap.js"></script>
+    <script src="js/legend.js"></script>
+    <script src="js/infopanel.js"></script>
+</body>
+</html>
