@@ -1,3 +1,17 @@
+// Accordion-Logik für Gewässer-Gruppe
+document.addEventListener('DOMContentLoaded', function() {
+  const watersToggle = document.getElementById('toggle-waters-group');
+  const watersCheckboxes = document.getElementById('waters-checkboxes');
+  const watersIcon = document.getElementById('waters-accordion-icon');
+  if (watersToggle && watersCheckboxes && watersIcon) {
+    watersToggle.addEventListener('click', function() {
+      const expanded = watersToggle.getAttribute('aria-expanded') === 'true';
+      watersToggle.setAttribute('aria-expanded', !expanded);
+      watersCheckboxes.style.display = expanded ? 'none' : 'block';
+      watersIcon.innerHTML = expanded ? '&#9654;' : '&#9660;';
+    });
+  }
+});
 // Panel Management für Layer Control ############################################################
 const layerPanel = document.getElementById('layer-panel');
 const mapContainer = document.querySelector('.map-container');

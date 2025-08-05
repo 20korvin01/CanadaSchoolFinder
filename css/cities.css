@@ -1,0 +1,33 @@
+/* Popup für Städte mit Info-Attribut */
+.city-popup {
+  min-width: 320px;
+  max-width: 480px;
+  background: #fff6f6;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(205,23,25,0.10), 0 1.5px 0 #f8bcbc;
+  border: 2px solid #f8bcbc;
+  padding: 0;
+}
+
+.city-popup-info {
+  padding: 9px 10px 8px 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #7a2323;
+  line-height: 1.6;
+}
+
+.city-popup-title {
+  font-size: 1.15em;
+  font-weight: 700;
+  color: #CD1719;
+  margin-bottom: 0.7em;
+  letter-spacing: 0.01em;
+}
+
+.city-popup-text {
+  font-size: 1em;
+  color: #7a2323;
+  white-space: pre-line;
+}
+
+/* Standard-Popup für Städte ohne Info bleibt Leaflet-Standard */

@@ -1,0 +1,73 @@
+/* Kopfzeile */
+.main-header {
+    width: 100%;
+    height: 10vh;
+    border-bottom: 2px solid #CD1719;
+    background: #ee6a6a;
+    color: #fff;
+    padding: 0;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(205, 23, 25, 0.08);
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: clamp(1.2em, 4.5vh, 2.2em);
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.04em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+/* Fußzeile */
+.main-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #CD1719;
+    background: #f18a8a;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #ffffff;
+    position: relative;
+    z-index: 10000;
+    width: 100%;
+    padding: 0px 20px;
+    min-height: 0;
+    height: 5vh;
+    box-sizing: border-box;
+    font-size: clamp(0.8rem, 2.2vh, 1.1rem);
+}
+
+.footer-left a {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.footer-left a:hover {
+    text-decoration: underline;
+}
+
+.footer-center {
+    text-align: center;
+    font-weight: 500;
+}
+
+.footer-right {
+    text-align: right;
+    font-size: 0.95em;
+    color: #fff;
+}
+
+.main-footer .bi-envelope {
+    font-size: clamp(1em, 2.5vh, 1.5em);
+    margin-right: 6px;
+}

@@ -14,7 +14,7 @@ body {
 /* Layout Container */
 .layout-container {
     display: flex;
-    height: 100vh;
+    height: calc(100vh - 62px - 21px); /* 62px Header + 32px Footer */
     width: 100%;
     position: relative;
 }
@@ -24,12 +24,12 @@ body {
     flex: 1;
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     /* Entfernt: transition und margin-Änderungen */
 }
 
 #map {
-    height: 100vh;
+    height: 100%;
     width: 100%;
 }
 

@@ -17,8 +17,16 @@
     <link rel="stylesheet" href="css/basemap.css">
     <link rel="stylesheet" href="css/legend.css">
     <link rel="stylesheet" href="css/infopanel.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/cities.css">
+    <link rel="stylesheet" href="css/cities.css">
+    <link rel="stylesheet" href="css/waterbodies.css">
 </head>
 <body>
+    <!-- Kopfzeile -->
+    <header class="main-header">
+        <h1>Canada School Finder</h1>
+    </header>
     <!-- Layout Container -->
     <div class="layout-container">
         <!-- Linke Spalte: Layer Control -->
@@ -33,8 +41,25 @@
             <div class="panel-content">
                 <div class="layer-item">
                     <label>
-                        <input type="checkbox" checked> Provinzen
+                        <input type="checkbox" id="provincesCheckbox" checked> Provinzen
                     </label>
+                </div>
+                <div class="layer-item">
+                    <button class="accordion-toggle" id="toggle-waters-group" aria-expanded="true" aria-controls="waters-checkboxes">
+                        <span class="accordion-icon" id="waters-accordion-icon">&#9660;</span>
+                        <span>Gewässer</span>
+                    </button>
+                    <div class="waters-checkbox-group" id="waters-checkboxes" style="display: block;">
+                        <label class="waters-checkbox">
+                            <input type="checkbox" id="lakesCheckbox"> Seen
+                        </label>
+                        <label class="waters-checkbox">
+                            <input type="checkbox" id="greatLakesCheckbox"> Große Seen
+                        </label>
+                        <label class="waters-checkbox">
+                            <input type="checkbox" id="riversCheckbox"> Flüsse
+                        </label>
+                    </div>
                 </div>
                 <div class="layer-item">
                     <button class="accordion-toggle" id="toggle-cities-group" aria-expanded="true" aria-controls="cities-checkboxes">
@@ -92,6 +117,19 @@
         </div>
     </div>
 
+    <!-- Fußzeile -->
+    <footer class="main-footer">
+        <div class="footer-left">
+            <a href="mailto:korvin.brecht@gmail.com" title="E-Mail senden"><i class="bi bi-envelope-at-fill"></i></a>
+        </div>
+        <div class="footer-center">
+            Korvin Brecht
+        </div>
+        <div class="footer-right">
+            <i class="bi bi-c-circle"></i> 2025
+        </div>
+    </footer>
+
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -101,6 +139,9 @@
     <script src="js/basemap.js"></script>
     <script src="js/provinces.js"></script>
     <script src="js/cities.js"></script>
+    <script src="js/lakes.js"></script>
+    <script src="js/great_lakes.js"></script>
+    <script src="js/rivers.js"></script>
     <script src="js/legend.js"></script>
     <script src="js/infopanel.js"></script>
 </body>

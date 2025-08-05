@@ -100,12 +100,23 @@ function loadCities() {
               const name = feature.properties.name || feature.properties.city || 'Unbekannte Stadt';
               const population = feature.properties.population || 'Unbekannt';
               const province = feature.properties.province || feature.properties.prov || '';
-              let popupContent = `<b>${name}</b>`;
-              if (province) popupContent += `<br>Provinz: ${province}`;
-              if (population !== 'Unbekannt') {
-                popupContent += `<br>Einwohner: ${population.toLocaleString()}`;
+              const info = feature.properties.info;
+              let popupContent = '';
+              if (info) {
+                popupContent = `
+                  <div class="city-popup-info">
+                    <div class="city-popup-title">${name}</div>
+                    <div class="city-popup-text">${info}</div>
+                  </div>
+                `;
+              } else {
+                popupContent = `<b>${name}</b>`;
+                if (province) popupContent += `<br>Provinz: ${province}`;
+                if (population !== 'Unbekannt') {
+                  popupContent += `<br>Einwohner: ${population.toLocaleString()}`;
+                }
               }
-              layer.bindPopup(popupContent);
+              layer.bindPopup(popupContent, { className: info ? 'city-popup' : '' });
               layer.on('click', function(e) {
                 // Popup immer an der Feature-Position öffnen, nicht an der Klickposition
                 this.openPopup(this.getLatLng());
