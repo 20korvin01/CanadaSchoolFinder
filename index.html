@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kanada Website - Weltkarte</title>
-    
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
+
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossorigin=""/>
-    
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
     <!-- Eigene Styles -->
     <link rel="stylesheet" href="css/basemap.css">
     <link rel="stylesheet" href="css/legend.css">
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/cities.css">
     <link rel="stylesheet" href="css/waterbodies.css">
 </head>
+
 <body>
     <!-- Kopfzeile -->
     <header class="main-header">
@@ -32,7 +33,8 @@
         <!-- Linke Spalte: Layer Control -->
         <div id="layer-panel" class="layer-panel">
             <div class="panel-header">
-                <img src="img/maple-icon.svg" alt="Maple Icon" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
+                <img src="img/maple-icon.svg" alt="Maple Icon"
+                    style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
                 <h3>Layer Control</h3>
                 <button id="close-layer-panel" class="close-btn">
                     <i class="bi bi-x"></i>
@@ -45,7 +47,8 @@
                     </label>
                 </div>
                 <div class="layer-item">
-                    <button class="accordion-toggle" id="toggle-waters-group" aria-expanded="true" aria-controls="waters-checkboxes">
+                    <button class="accordion-toggle" id="toggle-waters-group" aria-expanded="true"
+                        aria-controls="waters-checkboxes">
                         <span class="accordion-icon" id="waters-accordion-icon">&#9660;</span>
                         <span>Gewässer</span>
                     </button>
@@ -62,26 +65,27 @@
                     </div>
                 </div>
                 <div class="layer-item">
-                    <button class="accordion-toggle" id="toggle-cities-group" aria-expanded="true" aria-controls="cities-checkboxes">
+                    <button class="accordion-toggle" id="toggle-cities-group" aria-expanded="true"
+                        aria-controls="cities-checkboxes">
                         <span class="accordion-icon" id="cities-accordion-icon">&#9660;</span>
                         <span>Städte</span>
                     </button>
                     <div class="city-checkbox-group" id="cities-checkboxes" style="display: block;">
                         <label class="city-checkbox">
-                            <input type="checkbox" id="citiesCat1"> < 10k Einwohner
-                        </label>
-                        <label class="city-checkbox">
-                            <input type="checkbox" id="citiesCat2"> 10k – 50k
-                        </label>
-                        <label class="city-checkbox">
-                            <input type="checkbox" id="citiesCat3"> 50k – 250k
-                        </label>
-                        <label class="city-checkbox">
-                            <input type="checkbox" id="citiesCat4"> 250k – 1M
-                        </label>
-                        <label class="city-checkbox">
-                            <input type="checkbox" id="citiesCat5"> > 1M
-                        </label>
+                            <input type="checkbox" id="citiesCat1">
+                            < 10k Einwohner </label>
+                                <label class="city-checkbox">
+                                    <input type="checkbox" id="citiesCat2"> 10k – 50k
+                                </label>
+                                <label class="city-checkbox">
+                                    <input type="checkbox" id="citiesCat3"> 50k – 250k
+                                </label>
+                                <label class="city-checkbox">
+                                    <input type="checkbox" id="citiesCat4"> 250k – 1M
+                                </label>
+                                <label class="city-checkbox">
+                                    <input type="checkbox" id="citiesCat5"> > 1M
+                                </label>
                     </div>
                 </div>
             </div>
@@ -93,7 +97,7 @@
             <button id="toggle-layer-panel" class="toggle-btn">
                 <i class="bi bi-list"></i>
             </button>
-            
+
             <!-- Karten-Container -->
             <div id="map"></div>
         </div>
@@ -132,9 +136,8 @@
 
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""></script>
-    
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <!-- Eigene JavaScript-Dateien -->
     <script src="js/basemap.js"></script>
     <script src="js/provinces.js"></script>
@@ -145,4 +148,5 @@
     <script src="js/legend.js"></script>
     <script src="js/infopanel.js"></script>
 </body>
+
 </html>

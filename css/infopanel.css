@@ -9,7 +9,7 @@
     transition: transform 0.3s ease;
     position: fixed;
     right: 0;
-    top: 10vh;
+    top: max(10vh, 50px);
     height: 85vh;
     display: flex;
     flex-direction: column;
