@@ -18,7 +18,24 @@
                 "NAMEEN": "Lake Huron",
                 "NAMESP": "Lake Huron/Lac Huron",
                 "NAMEFR": "Lac Huron",
-                "area": 59922.824
+                "info": "Lake Huron ist ein beeindruckendes Gewässer mit über 59 600 km² Fläche, das im östlichen Bereich des Michigan–Huron-Systems liegt. Mit einer durchschnittlichen Tiefe von etwa 59 m (maximal 229 m) gehört es zu den tiefen Seen Nordamerikas. Seine mehr als 30 000 Inseln, insbesondere die weltgrößte Süßwasser-Insel Manitoulin, prägen das Landschaftsbild und schaffen eine einzigartige ökologische Vielfalt. Da der Wasseraustausch etwa 22 Jahre dauert, reagieren Veränderungen des Ökosystems nur langsam auf äußere Einflüsse. Lake Huron ist wassertechnisch eng verbunden mit Superior und Michigan und spielt eine zentrale Rolle im St.-Lorenz‑Seeweg. Er ist zudem wirtschaftlich relevant für Fischerei, Schifffahrt und Tourismus entlang seiner Ufer.",
+                "volume_km3": 3540,
+                "max_depth_m": 229,
+                "avg_depth_m": 59,
+                "area_km2": 59600,
+                "shore_states": [
+                    "Michigan",
+                    "Ontario"
+                ],
+                "outflow": "St. Clair River",
+                "notable_islands": [
+                    "Manitoulin Island"
+                ],
+                "economic_uses": [
+                    "Fischerei",
+                    "Tourismus",
+                    "Schifffahrt"
+                ]
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -11416,7 +11433,28 @@
                 "NAMEEN": "Lake Erie",
                 "NAMESP": "Lake Erie/Lac Érié",
                 "NAMEFR": "Lac Érié",
-                "area": 25660.147
+                "info": "Lake Erie ist der flachste der fünf Großen Seen und deckt rund 25 600 km² Fläche ab. Durch seine geringe Tiefe von im Schnitt 19 m und maximal 64 m erwärmt sich das Wasser rascher und beeinflusst das Ökosystem besonders sensibilisiert. Rund 12 Millionen Menschen (USA und Kanada zusammengerechnet) wohnen an seinen Ufern. Der See bildet eine starke wirtschaftliche Basis: Die Fischerei – vor allem der Welsbestand – und der Tourismus generieren Milliardenumsätze und tausende Arbeitsplätze pro Jahr. Historisch war Erie stark durch Umweltverschmutzung betroffen, doch umfangreiche Sanierungsprogramme haben die Wasserqualität deutlich verbessert. Heute gilt er als wichtiger Naherholungsraum mit reichem Fischbestand und attraktiven Küstenregionen.",
+                "volume_km3": 484,
+                "max_depth_m": 64,
+                "avg_depth_m": 19,
+                "area_km2": 25655,
+                "shore_states": [
+                    "Ohio",
+                    "Pennsylvania",
+                    "New York",
+                    "Ontario",
+                    "Michigan"
+                ],
+                "outflow": "Niagara River",
+                "notable_islands": [
+                    "Pelee Island",
+                    "South Bass Island"
+                ],
+                "economic_uses": [
+                    "Fischerei",
+                    "Tourismus",
+                    "Trinkwasserversorgung"
+                ]
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -14308,7 +14346,22 @@
                 "NAMEEN": "Lake Saint Clair",
                 "NAMESP": "Lake Saint Clair/Lac Sainte-Claire",
                 "NAMEFR": "Lac Sainte-Claire",
-                "area": 1126.304
+                "info": "Lake Saint Clair ist ein flacher, rund 1 100 km² großer Süßwassersee zwischen Michigan und Ontario. Mit nur etwa 3,4 m durchschnittlicher Tiefe ist er deutlich flacher als die fünf Großen Seen, doch dennoch wirtschaftlich außerordentlich produktiv. Rund ein Drittel der gesamten Sportfischerei der Großen Seen findet hier statt, bei über 150.000 registrierten Booten, was jährlich 260 Millionen Dollar generiert. Als Teil der sogenannten „Blue Economy“ bringt der See in der Region über 1,6 Milliarden Dollar ein und sichert fast 19.000 Arbeitsplätze. Er ist zudem wichtig als Verbindung zwischen Lake Huron und Lake Erie und bildet ein bedeutendes Delta am Einlauf des St. Clair River. Seine seichte Tiefe sorgt für schnelle Erwärmung im Sommer, was wiederum das lokale Ökosystem und Freizeitverhalten stark beeinflusst.",
+                "volume_km3": 3.4,
+                "max_depth_m": 6.4,
+                "avg_depth_m": 3.4,
+                "area_km2": 1114,
+                "shore_states": [
+                    "Michigan",
+                    "Ontario"
+                ],
+                "outflow": "Detroit River",
+                "notable_islands": [],
+                "economic_uses": [
+                    "Sportfischerei",
+                    "Freizeitboote",
+                    "Tourismus"
+                ]
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -14894,7 +14947,27 @@
                 "NAMEEN": "Lake Superior",
                 "NAMESP": "Lake Superior/Lac Supérieur",
                 "NAMEFR": "Lac Supérieur",
-                "area": 82240.081
+                "info": "Lake Superior ist mit über 82 100 km² Fläche der größte Süßwassersee der Welt. Er erreicht Tiefen von bis zu 406 m bei einem Durchschnitt von rund 147 m und besitzt ein nahezu gleich großes Einzugsgebiet. Mit einer extrem langen Wasserverweilzeit von etwa 191 Jahren ist er ein ausgesprochen stabiles Ökosystem. Über den St. Marys River entwässert er nach Lake Huron und ist ein integraler Bestandteil des St.-Lorenz-Schifffahrtswegs. Etwa 673 000 Menschen leben an seinen Ufern; Schifffahrt, Fischerei und Ökotourismus tragen wesentlich zur lokalen Wirtschaft bei. Die Ufer des Sees sind bekannt für ihre Wildnis, Nationalparks und die raue, unberührte Natur.",
+                "volume_km3": 12100,
+                "max_depth_m": 406,
+                "avg_depth_m": 147,
+                "area_km2": 82100,
+                "shore_states": [
+                    "Minnesota",
+                    "Wisconsin",
+                    "Michigan",
+                    "Ontario"
+                ],
+                "outflow": "St. Marys River",
+                "notable_islands": [
+                    "Isle Royale",
+                    "Apostle Islands"
+                ],
+                "economic_uses": [
+                    "Fischerei",
+                    "Tourismus",
+                    "Schifffahrt"
+                ]
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -24444,7 +24517,25 @@
                 "NAMEEN": "Lake Ontario",
                 "NAMESP": "Lake Ontario/Lac Ontario",
                 "NAMEFR": "Lac Ontario",
-                "area": 18999.65
+                "info": "Lake Ontario ist der flächenmäßig kleinste der fünf Großen Seen, misst aber dennoch über 19 000 km². Er ist deutlich tiefer als Erie; im Schnitt 86 m, mit bis zu 244 m. Die Uferzonen liegen auf rund 74 m über dem Meer, und das Wasser fließt über den Sankt‑Lorenz‑Strom in den Atlantik. Mit 13 großen Handelshäfen ist Ontario ein wichtiger Knotenpunkt im transatlantischen Verkehr. Rund 9 Millionen Menschen leben im Einzugsgebiet, darunter Großstädte wie Toronto. Tourismus, Fischerei und naturnahe Erholung – nicht zuletzt aufgrund der Nähe zu Niagara Falls und Nationalparks – tragen wesentlich zur regionalen Wirtschaft bei.",
+                "volume_km3": 1639,
+                "max_depth_m": 244,
+                "avg_depth_m": 86,
+                "area_km2": 19011,
+                "shore_states": [
+                    "New York",
+                    "Ontario"
+                ],
+                "outflow": "St. Lawrence River",
+                "notable_islands": [
+                    "Wolfe Island",
+                    "Toronto Islands"
+                ],
+                "economic_uses": [
+                    "Schifffahrt",
+                    "Tourismus",
+                    "Trinkwasserversorgung"
+                ]
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -27838,7 +27929,27 @@
                 "NAMEEN": "Lake Michigan",
                 "NAMESP": "Lake Michigan/Lac Michigan",
                 "NAMEFR": "Lac Michigan",
-                "area": 57842.901
+                "info": "Lake Michigan ist ein rein amerikanischer See mit rund 57 600 km² Fläche und zählt zu den größten Süßwasserseen der Welt. Er ist volumetrisch bedeutend (ca. 4.920 km³) und erreicht Tiefen von bis zu 281 m. Mit etwa 12 Millionen Menschen an seinen Ufern gehören Großstädte wie Chicago und Milwaukee zum Seegebiet. Besonders hervorzuheben ist seine Sportfischerei auf Salmoniden und Weißfische, die landesweit enorme Bedeutung hat. Unterwasser bietet er mit 1.500 bis 2.000 historischen Schiffswracks spannende Orte für Taucher und Schatzsucher. Aufgrund seiner Tiefe und Küstenvielfalt hat der See zudem großen Einfluss auf das regionale Klima und die Landschaft.",
+                "volume_km3": 4918,
+                "max_depth_m": 281,
+                "avg_depth_m": 85,
+                "area_km2": 57600,
+                "shore_states": [
+                    "Michigan",
+                    "Illinois",
+                    "Indiana",
+                    "Wisconsin"
+                ],
+                "outflow": "Straits of Mackinac",
+                "notable_islands": [
+                    "Beaver Island",
+                    "North Manitou Island"
+                ],
+                "economic_uses": [
+                    "Fischerei",
+                    "Schifffahrt",
+                    "Tourismus"
+                ]
             },
             "geometry": {
                 "type": "MultiPolygon",
