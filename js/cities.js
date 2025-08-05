@@ -99,14 +99,19 @@ function loadCities() {
             if (feature.properties) {
               const name = feature.properties.name || feature.properties.city || 'Unbekannte Stadt';
               const population = feature.properties.population || 'Unbekannt';
-              const province = feature.properties.province || feature.properties.prov || '';
+              const province = feature.properties.province_name || feature.properties.prov || '';
               const info = feature.properties.info;
+              const lat = feature.geometry.coordinates[1];
+              const lon = feature.geometry.coordinates[0];
               let popupContent = '';
               if (info) {
                 popupContent = `
                   <div class="city-popup-info">
                     <div class="city-popup-title">${name}</div>
-                    <div class="city-popup-text">${info}</div>
+                    <div class="city-popup-text"><span>${info}</span></div>
+                    <div class="city-popup-weather" style="margin-top:1em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em;">
+                      <span>Lade Wetterdaten ...</span>
+                    </div>
                   </div>
                 `;
               } else {
@@ -115,13 +120,77 @@ function loadCities() {
                 if (population !== 'Unbekannt') {
                   popupContent += `<br>Einwohner: ${population.toLocaleString()}`;
                 }
+                popupContent += `<div class="city-popup-weather" style="margin-top:1em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em;"><span>Lade Wetterdaten ...</span></div>`;
               }
-              layer.bindPopup(popupContent, { className: info ? 'city-popup' : '' });
               layer.on('click', function(e) {
-                // Popup immer an der Feature-Position öffnen, nicht an der Klickposition
-                this.openPopup(this.getLatLng());
-                console.log('Stadt angeklickt:', name);
+                showCityInfo({
+                  name,
+                  population,
+                  province,
+                  info,
+                  lat,
+                  lon
+                });
+                // Popup mit nur dem Stadtnamen immer mittig auf dem Marker anzeigen
+                layer.bindPopup(`<b>${name}</b>`);
+                layer.openPopup(layer.getLatLng());
               });
+// Info-Panel für Städte anzeigen (statt Popup)
+function showCityInfo(city) {
+  // Provinz-Highlight entfernen, falls aktiv
+  if (typeof clearHighlight === 'function') {
+    clearHighlight();
+  }
+  const title = document.getElementById('feature-title');
+  const details = document.getElementById('feature-details');
+  const imageContainer = document.getElementById('feature-image');
+  // Kein Bild für Städte
+  imageContainer.innerHTML = '';
+  title.textContent = city.name;
+  let infoBlock = '';
+  if (city.info) {
+    infoBlock = `<div class="province-teaser"><span>${city.info}</span></div>`;
+  }
+  let detailsHtml = `
+    <h4>${city.name}</h4>
+    ${infoBlock}
+    <div class="city-popup-weather" style="margin-bottom:1em; margin-top:0.5em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em; line-height:1.5; display:flex; flex-direction:column; gap:2px;">
+      <span><i class='bi bi-geo-alt-fill' style='color:#CD1719; margin-right:6px;'></i> <strong>Provinz:</strong> ${city.province || '-'}</span>
+      <span><i class='bi bi-people-fill' style='color:#CD1719; margin-right:6px;'></i> <strong>Einwohner:</strong> ${city.population !== 'Unbekannt' ? city.population.toLocaleString() : '-'}</span>
+    </div>
+    <div id="city-weather-block" class="city-popup-weather" style="margin-top:1em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em;">
+      <span>Lade Wetterdaten ...</span>
+    </div>
+  `;
+  details.innerHTML = detailsHtml;
+  // Info Panel öffnen
+  document.getElementById('info-panel').classList.add('open');
+  setTimeout(() => map.invalidateSize(), 300);
+  // Wetterdaten laden
+  const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true&hourly=temperature_2m,precipitation,windspeed_10m,winddirection_10m,cloudcover`;
+  fetch(weatherUrl)
+    .then(res => res.json())
+    .then(data => {
+      let html = '';
+      if (data && data.current_weather) {
+        const w = data.current_weather;
+        // Bootstrap Icons: thermometer, wind, cloud, cloud-drizzle
+        html = `<b>Aktuelles Wetter</b><br>
+          <i class='bi bi-thermometer-half' style='color:#23407a;'></i> Temperatur: ${w.temperature}°C<br>
+          <i class='bi bi-wind' style='color:#23407a;'></i> Wind: ${w.windspeed} km/h (${w.winddirection}&deg;)<br>
+          <i class='bi bi-cloud' style='color:#23407a;'></i> Bewölkung: ${data.hourly && data.hourly.cloudcover ? data.hourly.cloudcover[0] + '%' : 'k.A.'}<br>
+          <i class='bi bi-cloud-drizzle' style='color:#23407a;'></i> Niederschlag: ${data.hourly && data.hourly.precipitation ? data.hourly.precipitation[0] + ' mm' : 'k.A.'}`;
+      } else {
+        html = 'Keine Wetterdaten verfügbar.';
+      }
+      const weatherNode = document.getElementById('city-weather-block');
+      if (weatherNode) weatherNode.innerHTML = html;
+    })
+    .catch(() => {
+      const weatherNode = document.getElementById('city-weather-block');
+      if (weatherNode) weatherNode.innerHTML = 'Wetterdaten konnten nicht geladen werden.';
+    });
+}
             }
           }
         });

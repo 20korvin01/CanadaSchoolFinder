@@ -24,10 +24,17 @@
   letter-spacing: 0.01em;
 }
 
+/* Gehighlighteter Infoblock im Popup */
 .city-popup-text {
   font-size: 1em;
   color: #7a2323;
   white-space: pre-line;
+  background: #fff3d6;
+  border-left: 4px solid #f8bcbc;
+  border-radius: 7px;
+  padding: 0.7em 1em;
+  margin-bottom: 1em;
+  box-shadow: 0 1px 6px rgba(205,23,25,0.07);
 }
 
 /* Standard-Popup für Städte ohne Info bleibt Leaflet-Standard */

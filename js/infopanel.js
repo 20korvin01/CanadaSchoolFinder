@@ -334,9 +334,11 @@ function showFeatureInfo(feature) {
     details.innerHTML = `
       <h4>${provinceName}</h4>
       ${teaserText}
-      <p><strong>Französischer Name:</strong> ${props.prov_name_fr}</p>
-      <p><strong>Typ:</strong> ${props.prov_type}</p>
-      <p><strong>Provinzcode:</strong> ${props.prov_code}</p>
+      <div class="city-popup-weather" style="margin-bottom:1em; margin-top:0.5em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em; line-height:1.5; display:flex; flex-direction:column; gap:2px;">
+        <span><strong>Französischer Name:</strong> ${props.prov_name_fr}</span>
+        <span><strong>Typ:</strong> ${props.prov_type}</span>
+        <span><strong>Provinzcode:</strong> ${props.prov_code}</span>
+      </div>
       <p>Weitere Informationen über diese Region werden hier angezeigt...</p>
     `;
 
