@@ -1,3 +1,9 @@
+// Lädt die Cities-GeoJSON und speichert sie global
+fetch('data/cities.geojson')
+  .then(response => response.json())
+  .then(data => {
+    window.citiesGeojson = data;
+  });
 // Cities Layer Management ####################################################################
 
 // Layer-Objekte für jede Kategorie
@@ -135,6 +141,59 @@ function loadCities() {
                 layer.bindPopup(`<b>${name}</b>`);
                 layer.openPopup(layer.getLatLng());
               });
+            }
+          }
+        });
+      });
+
+    })
+    .catch(error => {
+      console.error('Fehler beim Laden der Cities GeoJSON-Daten:', error);
+      console.log('Versuche alternativen Pfad...');
+      
+      // Fallback: Versuche absoluten Pfad für GitHub Pages
+      fetch('/KanadaSchoolFinder/data/cities.geojson')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          citiesLayer = L.geoJSON(data, {
+            pointToLayer: function(feature, latlng) {
+              return L.circleMarker(latlng, getCityStyle(feature));
+            },
+            onEachFeature: function(feature, layer) {
+              if (feature.properties) {
+                const name = feature.properties.name || feature.properties.city || 'Unbekannte Stadt';
+                const population = feature.properties.population || 'Unbekannt';
+                const province = feature.properties.province || feature.properties.prov || '';
+                
+                let popupContent = `<b>${name}</b>`;
+                if (province) popupContent += `<br>Provinz: ${province}`;
+                if (population !== 'Unbekannt') {
+                  popupContent += `<br>Einwohner: ${population.toLocaleString()}`;
+                }
+                
+                layer.bindPopup(popupContent);
+                
+                layer.on('click', function(e) {
+                  console.log('Stadt angeklickt:', name);
+                });
+              }
+            }
+          });
+          
+          console.log('Cities Layer mit Fallback-Pfad geladen');
+        })
+        .catch(fallbackError => {
+          console.error('Auch Cities Fallback-Pfad fehlgeschlagen:', fallbackError);
+          console.warn('Cities GeoJSON-Daten konnten nicht geladen werden.');
+        });
+    });
+}
+
 // Info-Panel für Städte anzeigen (statt Popup)
 function showCityInfo(city) {
   // Provinz-Highlight entfernen, falls aktiv
@@ -191,59 +250,7 @@ function showCityInfo(city) {
       if (weatherNode) weatherNode.innerHTML = 'Wetterdaten konnten nicht geladen werden.';
     });
 }
-            }
-          }
-        });
-      });
-
-      console.log('Cities Layers nach Kategorien geladen');
-    })
-    .catch(error => {
-      console.error('Fehler beim Laden der Cities GeoJSON-Daten:', error);
-      console.log('Versuche alternativen Pfad...');
-      
-      // Fallback: Versuche absoluten Pfad für GitHub Pages
-      fetch('/KanadaSchoolFinder/data/cities.geojson')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          citiesLayer = L.geoJSON(data, {
-            pointToLayer: function(feature, latlng) {
-              return L.circleMarker(latlng, getCityStyle(feature));
-            },
-            onEachFeature: function(feature, layer) {
-              if (feature.properties) {
-                const name = feature.properties.name || feature.properties.city || 'Unbekannte Stadt';
-                const population = feature.properties.population || 'Unbekannt';
-                const province = feature.properties.province || feature.properties.prov || '';
-                
-                let popupContent = `<b>${name}</b>`;
-                if (province) popupContent += `<br>Provinz: ${province}`;
-                if (population !== 'Unbekannt') {
-                  popupContent += `<br>Einwohner: ${population.toLocaleString()}`;
-                }
-                
-                layer.bindPopup(popupContent);
-                
-                layer.on('click', function(e) {
-                  console.log('Stadt angeklickt:', name);
-                });
-              }
-            }
-          });
-          
-          console.log('Cities Layer mit Fallback-Pfad geladen');
-        })
-        .catch(fallbackError => {
-          console.error('Auch Cities Fallback-Pfad fehlgeschlagen:', fallbackError);
-          console.warn('Cities GeoJSON-Daten konnten nicht geladen werden.');
-        });
-    });
-}
+window.showCityInfo = showCityInfo;
 
 // Funktion zum Ein-/Ausblenden einer Kategorie
 function toggleCitiesCategory(cat, visible) {
@@ -282,4 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // damit die Layer nach dem Laden der Daten getoggelt werden können
     setTimeout(initializeCitiesToggle, 400);
   }, 150);
+
+// Funktion global verfügbar machen
+window.showCityInfo = showCityInfo;
 });

@@ -25,6 +25,29 @@
     flex: 1 1 auto;
     overflow-y: auto;
     min-height: 0;
+    scrollbar-width: thin;
+    scrollbar-color: #bbb #f5f5f5;
+}
+
+.info-panel .panel-content::-webkit-scrollbar {
+    width: 8px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.info-panel .panel-content::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 8px;
+    min-height: 24px;
+}
+
+.info-panel .panel-content::-webkit-scrollbar-thumb:hover {
+    background: #CD1719;
+}
+
+.info-panel .panel-content::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 8px;
 }
 
 .info-panel.open {

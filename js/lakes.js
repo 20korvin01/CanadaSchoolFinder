@@ -1,3 +1,9 @@
+// Lädt die Lakes-GeoJSON und speichert sie global
+fetch('data/lakes.geojson')
+  .then(response => response.json())
+  .then(data => {
+    window.lakesGeojson = data;
+  });
 // Checkbox-Event für Seen-Layer
 document.addEventListener('DOMContentLoaded', function() {
   setTimeout(() => {

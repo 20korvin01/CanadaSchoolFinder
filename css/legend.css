@@ -1,16 +1,10 @@
 /* Panel-Inhalt scrollbar wie im Info-Panel */
+
+/* Scrollbar exakt wie im Info-Panel */
 .layer-panel .panel-content {
     overflow-y: auto;
-    /* max-height: calc(100vh - max(10vh, 50px)); 62px entspricht ungefähr der Headerhöhe des Panels */
-    scrollbar-width: none;
-    /* Firefox: Scrollbar ausblenden */
-    -ms-overflow-style: none;
-    /* IE/Edge: Scrollbar ausblenden */
-}
-
-.layer-panel .panel-content::-webkit-scrollbar {
-    display: none;
-    /* Chrome/Safari: Scrollbar ausblenden */
+    scrollbar-width: thin;
+    scrollbar-color: #bbb #f5f5f5;
 }
 
 .layer-panel .panel-content::-webkit-scrollbar {
@@ -22,10 +16,16 @@
 .layer-panel .panel-content::-webkit-scrollbar-thumb {
     background: #bbb;
     border-radius: 8px;
+    min-height: 24px;
 }
 
 .layer-panel .panel-content::-webkit-scrollbar-thumb:hover {
-    background: #888;
+    background: #CD1719;
+}
+
+.layer-panel .panel-content::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 8px;
 }
 
 /* Panel Header bleibt oben fixiert */

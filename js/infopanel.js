@@ -316,13 +316,8 @@ function showFeatureInfo(feature) {
     const provinceName = props.prov_name_en;
     title.textContent = provinceName;
 
-    // Debug: Provinzname in Console ausgeben
-    console.log('Provinzname:', provinceName);
-    console.log('Verfügbare Provinzen:', Object.keys(provinceImages));
-
     // Bilder für die Provinz laden
     const images = provinceImages[provinceName];
-    console.log('Gefundene Bilder:', images);
 
     // Bildergalerie erstellen
     imageContainer.innerHTML = createImageGallery(images);

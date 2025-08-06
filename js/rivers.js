@@ -1,3 +1,9 @@
+// Lädt die Rivers-GeoJSON und speichert sie global
+fetch('data/rivers.geojson')
+  .then(response => response.json())
+  .then(data => {
+    window.riversGeojson = data;
+  });
 // Rivers Layer Management ####################################################################
 
 let riversLayer = null;

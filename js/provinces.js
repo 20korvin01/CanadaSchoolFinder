@@ -1,3 +1,9 @@
+// Lädt die Provinces-GeoJSON und speichert sie global
+fetch('data/provinces.geojson')
+  .then(response => response.json())
+  .then(data => {
+    window.provincesGeojson = data;
+  });
 // Provinces Layer Management ####################################################################
 
 // Variable für aktuell hervorgehobenes Feature
@@ -27,6 +33,10 @@ function getHighlightStyle(feature) {
 
 // Funktion zum Highlighten eines Features
 function highlightFeature(layer) {
+  // Remove lake highlight if present
+  if (typeof window.clearGreatLakeHighlight === 'function') {
+    window.clearGreatLakeHighlight();
+  }
   // Vorheriges Highlight entfernen
   if (highlightedLayer && highlightedLayer !== layer) {
     highlightedLayer.setStyle(getDefaultStyle());
