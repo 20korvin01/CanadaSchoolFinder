@@ -217,6 +217,9 @@ function showCityInfo(city) {
       <span><i class='bi bi-geo-alt-fill' style='color:#CD1719; margin-right:6px;'></i> <strong>Provinz:</strong> ${city.province || '-'}</span>
       <span><i class='bi bi-people-fill' style='color:#CD1719; margin-right:6px;'></i> <strong>Einwohner:</strong> ${city.population !== 'Unbekannt' ? city.population.toLocaleString() : '-'}</span>
     </div>
+    <div id="city-time-block" class="city-popup-weather" style="margin-top:0.7em; margin-bottom:0.7em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em;">
+      <span>Lade Uhrzeit ...</span>
+    </div>
     <div id="city-weather-block" class="city-popup-weather" style="margin-top:1em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em;">
       <span>Lade Wetterdaten ...</span>
     </div>
@@ -225,6 +228,53 @@ function showCityInfo(city) {
   // Info Panel öffnen
   document.getElementById('info-panel').classList.add('open');
   setTimeout(() => map.invalidateSize(), 300);
+  // Uhrzeit laden (Stadt und Berlin parallel)
+  const timeUrl = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&timezone=auto`;
+  const berlinUrl = 'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.405&timezone=auto';
+  // Platzhalter anzeigen, bis beide Daten da sind
+  const timeNode = document.getElementById('city-time-block');
+  if (timeNode) timeNode.innerHTML = '<div style="font-weight:bold; font-size:1.08em; margin-bottom:0.3em;">Aktuelle Uhrzeit</div><div><i class="bi bi-clock-fill" style="color:#23407a; margin-right:6px;"></i> ...</div><div><i class="bi bi-globe2" style="color:#23407a; margin-right:6px;"></i> ...</div><div><i class="bi bi-arrow-left-right" style="color:#23407a; margin-right:6px;"></i> ...</div>';
+  Promise.all([
+    fetch(timeUrl).then(res => res.json()),
+    fetch(berlinUrl).then(res => res.json())
+  ]).then(([data, berlin]) => {
+    let html = '';
+    if (
+      data && typeof data.utc_offset_seconds === 'number' && data.timezone &&
+      berlin && typeof berlin.utc_offset_seconds === 'number'
+    ) {
+      // Aktuelle UTC-Zeit holen
+      const now = new Date();
+      const utcMillis = now.getTime() + (now.getTimezoneOffset() * 60000);
+      // Stadt
+      const localMillis = utcMillis + (data.utc_offset_seconds * 1000);
+      const localDate = new Date(localMillis);
+      const hhmm = localDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const tz = data.timezone;
+      const abbr = data.timezone_abbreviation ? ` (${data.timezone_abbreviation})` : '';
+      // Berlin
+      const berlinMillis = utcMillis + (berlin.utc_offset_seconds * 1000);
+      //const berlinDate = new Date(berlinMillis);
+      // Zeitverschiebung
+      const diffH = Math.round((data.utc_offset_seconds - berlin.utc_offset_seconds) / 3600);
+      let diffStr = '';
+      if (diffH > 0) diffStr = `+${diffH} Stunden`;
+      else if (diffH < 0) diffStr = `${diffH} Stunden`;
+      else diffStr = '0 Stunden';
+      html = `
+        <div style="font-weight:bold; font-size:1.08em; margin-bottom:0.3em;">Aktuelle Uhrzeit</div>
+        <div><i class='bi bi-clock-fill' style='color:#23407a; margin-right:6px;'></i> ${hhmm} Uhr</div>
+        <div><i class='bi bi-globe2' style='color:#23407a; margin-right:6px;'></i> ${tz}${abbr}</div>
+        <div><i class='bi bi-arrow-left-right' style='color:#23407a; margin-right:6px;'></i> Zu Deutschland: ${diffStr}</div>
+      `;
+    } else {
+      html = 'Keine Zeitdaten verfügbar.';
+    }
+    if (timeNode) timeNode.innerHTML = html;
+  }).catch(() => {
+    if (timeNode) timeNode.innerHTML = 'Uhrzeit konnte nicht geladen werden.';
+  });
+
   // Wetterdaten laden
   const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true&hourly=temperature_2m,precipitation,windspeed_10m,winddirection_10m,cloudcover`;
   fetch(weatherUrl)
@@ -235,10 +285,10 @@ function showCityInfo(city) {
         const w = data.current_weather;
         // Bootstrap Icons: thermometer, wind, cloud, cloud-drizzle
         html = `<b>Aktuelles Wetter</b><br>
-          <i class='bi bi-thermometer-half' style='color:#23407a;'></i> Temperatur: ${w.temperature}°C<br>
-          <i class='bi bi-wind' style='color:#23407a;'></i> Wind: ${w.windspeed} km/h (${w.winddirection}&deg;)<br>
-          <i class='bi bi-cloud' style='color:#23407a;'></i> Bewölkung: ${data.hourly && data.hourly.cloudcover ? data.hourly.cloudcover[0] + '%' : 'k.A.'}<br>
-          <i class='bi bi-cloud-drizzle' style='color:#23407a;'></i> Niederschlag: ${data.hourly && data.hourly.precipitation ? data.hourly.precipitation[0] + ' mm' : 'k.A.'}`;
+          <i class='bi bi-thermometer-half' style='color:#23407a; margin-right:6px;'></i> Temperatur: ${w.temperature}°C<br>
+          <i class='bi bi-wind' style='color:#23407a; margin-right:6px;'></i> Wind: ${w.windspeed} km/h (${w.winddirection}&deg;)<br>
+          <i class='bi bi-cloud' style='color:#23407a; margin-right:6px;'></i> Bewölkung: ${data.hourly && data.hourly.cloudcover ? data.hourly.cloudcover[0] + '%' : 'k.A.'}<br>
+          <i class='bi bi-cloud-drizzle' style='color:#23407a; margin-right:6px;'></i> Niederschlag: ${data.hourly && data.hourly.precipitation ? data.hourly.precipitation[0] + ' mm' : 'k.A.'}`;
       } else {
         html = 'Keine Wetterdaten verfügbar.';
       }
