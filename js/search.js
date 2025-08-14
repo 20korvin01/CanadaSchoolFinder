@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.lakesLayer) map.removeLayer(window.lakesLayer);
         if (window.greatLakesLayer) map.removeLayer(window.greatLakesLayer);
         if (window.riversLayer) map.removeLayer(window.riversLayer);
+        if (window.borealZonesLayer) map.removeLayer(window.borealZonesLayer);
         if (window.citiesLayers) {
             for (let i = 1; i <= 5; i++) {
                 const layer = window.citiesLayers['cat' + i];
@@ -189,7 +190,8 @@ function searchGeojson(query, searchInput) {
         { name: 'provinces', data: window.provincesGeojson, attr: 'prov_name_en' },
         { name: 'lakes', data: window.lakesGeojson, attr: 'NAME' },
         { name: 'great_lakes', data: window.greatLakesGeojson, attr: 'NAMEEN' },
-        { name: 'rivers', data: window.riversGeojson, attr: 'NAME' }
+        { name: 'rivers', data: window.riversGeojson, attr: 'NAME' },
+        { name: 'boreal_zones', data: window.borealZonesGeojson, attr: 'NAME' }
     ];
 
     let anyDataLoaded = false;
@@ -265,6 +267,10 @@ function searchGeojson(query, searchInput) {
                     fillColor = '#2196f3';
                     fillOpacity = 0.7;
                     pane = 'overlayPane';
+                } else if (feature._searchType === 'boreal_zones') {
+                    fillColor = '#a6c66c';
+                    fillOpacity = 0.7;
+                    pane = 'overlayPane';
                 }
                 return {
                     color: '#197d30', // grüne Umrandung
@@ -314,6 +320,16 @@ function searchGeojson(query, searchInput) {
                     });
                 } else if (feature._searchType === 'rivers') {
                     popup = `<b>${feature.properties.NAME}</b>`;
+                }
+                if (feature._searchType === 'boreal_zones') {
+                    layer.on('click', function() {
+                        if (typeof showBorealZoneInfo === 'function') {
+                            showBorealZoneInfo(feature);
+                        } else {
+                            alert('Info-Panel-Funktion für boreale Zonen nicht gefunden!');
+                        }
+                    });
+                    return;
                 }
                 layer.bindPopup(popup);
             }

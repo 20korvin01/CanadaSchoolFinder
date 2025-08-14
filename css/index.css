@@ -1,3 +1,9 @@
+/* Responsive Header Schriftgröße */
+@media (max-width: 600px) {
+    .main-header h1 {
+        font-size: 1.2rem !important;
+    }
+}
 /* Layer-Control-Panel scrollbar */
 #layer-panel .panel-content {
   max-height: 70vh;
@@ -35,10 +41,10 @@
     justify-content: space-between;
     align-items: center;
     border-top: 2px solid #CD1719;
-    background: #CD1719;
+    background: #ffffff;
     font-family: inherit;
     font-size: 0.95rem;
-    color: #ffffff;
+    color: #4d4d4d;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -53,7 +59,7 @@
 }
 
 .footer-left a {
-    color: #ffffff;
+    color: #4d4d4d;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -73,7 +79,7 @@
 .footer-right {
     text-align: right;
     font-size: 0.95em;
-    color: #ffffff;
+    color: #4d4d4d;
 }
 
 .main-footer .bi-envelope {

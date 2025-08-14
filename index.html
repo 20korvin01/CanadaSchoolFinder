@@ -26,9 +26,11 @@
 <body>
     <!-- Kopfzeile -->
     <header class="main-header">
-    <img src="img/flag-icon.svg" alt="Kanada Flagge" style="width:32px; height:32px; vertical-align:middle; margin-right:50px;">
-    <h1 style="display:inline-block; vertical-align:middle; margin-right:8px;">CANADA SCHOOL FINDER</h1>
-    <i class="bi bi-mortarboard-fill" style="font-size:2rem; vertical-align:middle; margin-left:50px;"></i>
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:nowrap; min-width:0;">
+            <img src="img/flag-icon.svg" alt="Kanada Flagge" style="width:32px; height:32px; flex-shrink:0;">
+            <h1 style="font-size:2rem; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-shrink:1;">CANADA SCHOOL FINDER</h1>
+            <i class="bi bi-mortarboard-fill" style="font-size:2rem; flex-shrink:0;"></i>
+        </div>
     </header>
     <!-- Layout Container -->
     <div class="layout-container">
@@ -51,6 +53,11 @@
                 <div class="layer-item">
                     <label>
                         <input type="checkbox" id="provincesCheckbox" checked> Provinzen und Territorien
+                    </label>
+                </div>
+                <div class="layer-item">
+                    <label>
+                        <input type="checkbox" id="borealZonesCheckbox"> Boreale Zonen
                     </label>
                 </div>
                 <div class="layer-item">
@@ -152,6 +159,7 @@
     <script src="js/lakes.js"></script>
     <script src="js/great_lakes.js"></script>
     <script src="js/rivers.js"></script>
+    <script src="js/boreal_zones.js"></script>
     <script src="js/legend.js"></script>
     <script src="js/infopanel.js"></script>
     <script src="js/search.js"></script>

@@ -248,6 +248,11 @@ const provinceImages = {
 };
 // Provinz-Info im Info-Panel anzeigen
 function showProvinceInfo(feature) {
+  // Boreal-Zonen-Highlight entfernen, falls aktiv
+  if (window.currentBorealHighlight) {
+    window.currentBorealHighlight.setStyle(window.getBorealZoneStyle ? getBorealZoneStyle(window.currentBorealHighlight.feature) : {});
+    window.currentBorealHighlight = null;
+  }
   const title = document.getElementById('feature-title');
   const details = document.getElementById('feature-details');
   const imageContainer = document.getElementById('feature-image');
