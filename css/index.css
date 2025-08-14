@@ -9,8 +9,8 @@
     height: 10vh;
     min-height: 50px;
     border-bottom: 2px solid #CD1719;
-    background: #ee6a6a;
-    color: #fff;
+    background: #ffffff;
+    color: #CD1719;
     padding: 0;
     text-align: center;
     box-shadow: 0 2px 8px rgba(205, 23, 25, 0.08);
@@ -35,7 +35,7 @@
     justify-content: space-between;
     align-items: center;
     border-top: 2px solid #CD1719;
-    background: #f18a8a;
+    background: #CD1719;
     font-family: inherit;
     font-size: 0.95rem;
     color: #ffffff;
@@ -73,7 +73,7 @@
 .footer-right {
     text-align: right;
     font-size: 0.95em;
-    color: #fff;
+    color: #ffffff;
 }
 
 .main-footer .bi-envelope {

@@ -308,7 +308,7 @@ let highlightedLayer = null;
 function getDefaultStyle(feature) {
   return {
     color: '#ce5f5fff',
-    weight: 2,
+    weight: 1,
     opacity: 0.8,
     fillOpacity: 0.3,
     fillColor: '#d48282'
@@ -319,7 +319,7 @@ function getDefaultStyle(feature) {
 function getHighlightStyle(feature) {
   return {
     color: '#cc2424ff',
-    weight: 3,
+    weight: 1,
     opacity: 1,
     fillOpacity: 0.6,
     fillColor: '#c52727ff'

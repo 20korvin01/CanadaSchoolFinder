@@ -27,8 +27,8 @@ function getGreatLakeStyle(feature) {
 function getGreatLakeHighlightStyle(feature) {
   return {
     color: '#23407a',
-    weight: 3,
-    fillColor: '#b3e5fc',
+    weight: 1,
+    fillColor: '#425e94ff',
     fillOpacity: 0.95,
     opacity: 1
   };

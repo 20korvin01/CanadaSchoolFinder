@@ -36,10 +36,10 @@ function getLakeStyle(feature) {
 
 function getLakeHighlightStyle() {
   return {
-    color: '#0d47a1',
+    color: '#23407a',
     weight: 1,
-    fillColor: '#42a5f5',
-    fillOpacity: 0.85,
+    fillColor: '#425e94ff',
+    fillOpacity: 0.95,
     opacity: 1
   };
 }

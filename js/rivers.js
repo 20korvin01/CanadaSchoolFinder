@@ -4,6 +4,7 @@ fetch('data/rivers.geojson')
   .then(data => {
     window.riversGeojson = data;
   });
+
 // Rivers Layer Management ####################################################################
 
 let riversLayer = null;
@@ -19,6 +20,17 @@ function getRiverStyle(feature) {
   };
 }
 
+// Highlight-Style für Flüsse
+function getRiverHighlightStyle() {
+  return {
+    color: '#23407a',
+    weight: 1,
+    fillColor: '#425e94ff',
+    fillOpacity: 0.95,
+    opacity: 1
+  };
+}
+
 function onEachRiverFeature(feature, layer) {
   if (feature.properties) {
     const name = feature.properties.name || feature.properties.NAME || 'Unbekannter Fluss';
@@ -27,6 +39,15 @@ function onEachRiverFeature(feature, layer) {
     if (length) popupContent += `<br>Länge: ${length}`;
     layer.bindPopup(popupContent);
   }
+
+  // Highlight-Style bei Klick
+  layer.on('click', function() {
+    const originalStyle = layer.options;
+    layer.setStyle(getRiverHighlightStyle());
+    setTimeout(() => {
+      layer.setStyle(getRiverStyle(feature));
+    }, 1200);
+  });
 }
 
 function loadRivers() {
