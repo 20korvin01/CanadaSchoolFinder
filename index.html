@@ -28,7 +28,9 @@
     <header class="main-header">
         <div style="display:flex; align-items:center; gap:12px; flex-wrap:nowrap; min-width:0;">
             <img src="img/flag-icon.svg" alt="Kanada Flagge" style="width:32px; height:32px; flex-shrink:0;">
-            <h1 style="font-size:2rem; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-shrink:1;">CANADA SCHOOL FINDER</h1>
+            <h1
+                style="font-size:2rem; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-shrink:1;">
+                CANADA SCHOOL FINDER</h1>
             <i class="bi bi-mortarboard-fill" style="font-size:2rem; flex-shrink:0;"></i>
         </div>
     </header>
@@ -107,10 +109,18 @@
 
         <!-- Mittlere Spalte: Karte -->
         <div class="map-container">
-            <!-- Layer Control Toggle Button -->
-            <button id="toggle-layer-panel" class="toggle-btn">
-                <i class="bi bi-list"></i>
-            </button>
+            <!-- Layer Control Toggle Button Wrapper -->
+            <div id="toggle-layer-panel-wrapper"
+                style="position:absolute; top:18px; left:18px; z-index:1001; transition:left 0.3s cubic-bezier(.4,0,.2,1);">
+                <div class="map-btn-group">
+                        <button id="reset-map-view-btn" class="toggle-btn" data-tooltip="Zur Ausgangsansicht springen">
+                            <i class="bi bi-pin-map-fill"></i>
+                        </button>
+                        <button id="toggle-layer-panel" class="toggle-btn" data-tooltip="Topographische Ebenen ein-/ausblenden">
+                            <i class="bi bi-images"></i>
+                        </button>
+                </div>
+            </div>
 
             <!-- Karten-Container -->
             <div id="map"></div>
@@ -163,6 +173,8 @@
     <script src="js/legend.js"></script>
     <script src="js/infopanel.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/schools-panel.js"></script>
+    <script src="js/topography-panel.js"></script>
 </body>
 
 </html>
