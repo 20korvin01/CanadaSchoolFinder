@@ -285,14 +285,14 @@ function searchGeojson(query, searchInput) {
                 if (feature._searchType === 'cities') {
                     // Kein Popup, nur Info-Panel öffnen
                     layer.on('click', function() {
-                        if (typeof showCityInfo === 'function') {
+                        if (typeof window.showCityInfo === 'function') {
                             const name = feature.properties.name || feature.properties.city_ascii || feature.properties.city || 'Unbekannte Stadt';
                             const population = feature.properties.population || 'Unbekannt';
                             const province = feature.properties.province_name || feature.properties.prov || '';
                             const info = feature.properties.info;
                             const lat = feature.geometry && feature.geometry.coordinates ? feature.geometry.coordinates[1] : null;
                             const lon = feature.geometry && feature.geometry.coordinates ? feature.geometry.coordinates[0] : null;
-                            showCityInfo({ name, population, province, info, lat, lon });
+                            window.showCityInfo({ name, population, province, info, lat, lon });
                         } else {
                             alert('Info-Panel-Funktion für Städte nicht gefunden!');
                         }
@@ -301,8 +301,8 @@ function searchGeojson(query, searchInput) {
                 } else if (feature._searchType === 'provinces') {
                     popup = `<b>${feature.properties.prov_name_en}</b>`;
                     layer.on('click', function() {
-                        if (typeof showFeatureInfo === 'function') {
-                            showFeatureInfo(feature);
+                        if (typeof window.showProvinceInfo === 'function') {
+                            window.showProvinceInfo(feature);
                         } else {
                             alert('Info-Panel-Funktion für Provinzen nicht gefunden!');
                         }
@@ -312,8 +312,8 @@ function searchGeojson(query, searchInput) {
                 } else if (feature._searchType === 'great_lakes') {
                     popup = `<b>${feature.properties.NAMEEN}</b>`;
                     layer.on('click', function() {
-                        if (typeof showGreatLakeInfo === 'function') {
-                            showGreatLakeInfo(feature);
+                        if (typeof window.showGreatLakeInfo === 'function') {
+                            window.showGreatLakeInfo(feature);
                         } else {
                             alert('Info-Panel-Funktion für große Seen nicht gefunden!');
                         }
@@ -323,8 +323,8 @@ function searchGeojson(query, searchInput) {
                 }
                 if (feature._searchType === 'boreal_zones') {
                     layer.on('click', function() {
-                        if (typeof showBorealZoneInfo === 'function') {
-                            showBorealZoneInfo(feature);
+                        if (typeof window.showBorealZoneInfo === 'function') {
+                            window.showBorealZoneInfo(feature);
                         } else {
                             alert('Info-Panel-Funktion für boreale Zonen nicht gefunden!');
                         }

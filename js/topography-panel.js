@@ -1,5 +1,3 @@
-// Topographie-Panel: Logik für Provinzen, Boreale Zonen, Gewässer und Städte
-
 // Accordion-Logik für Gewässer-Gruppe
 function setupWatersAccordion() {
   const watersToggle = document.getElementById('toggle-waters-group');
@@ -23,15 +21,9 @@ function setupCitiesAccordion() {
   if (toggleCitiesBtn && citiesCheckboxes && citiesAccordionIcon) {
     toggleCitiesBtn.addEventListener('click', function() {
       const expanded = toggleCitiesBtn.getAttribute('aria-expanded') === 'true';
-      if (expanded) {
-        citiesCheckboxes.style.display = 'none';
-        toggleCitiesBtn.setAttribute('aria-expanded', 'false');
-        citiesAccordionIcon.style.transform = 'rotate(-90deg)';
-      } else {
-        citiesCheckboxes.style.display = 'block';
-        toggleCitiesBtn.setAttribute('aria-expanded', 'true');
-        citiesAccordionIcon.style.transform = 'rotate(0deg)';
-      }
+      toggleCitiesBtn.setAttribute('aria-expanded', !expanded);
+      citiesCheckboxes.style.display = expanded ? 'none' : 'block';
+      citiesAccordionIcon.innerHTML = expanded ? '&#9654;' : '&#9660;';
     });
   }
 }

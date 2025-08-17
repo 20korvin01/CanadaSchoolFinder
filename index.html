@@ -15,7 +15,7 @@
 
     <!-- Eigene Styles -->
     <link rel="stylesheet" href="css/basemap.css">
-    <link rel="stylesheet" href="css/legend.css">
+    <link rel="stylesheet" href="css/layer-panel.css">
     <link rel="stylesheet" href="css/infopanel.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/cities.css">
@@ -37,12 +37,24 @@
     <!-- Layout Container -->
     <div class="layout-container">
         <!-- Linke Spalte: Layer Control -->
-        <div id="layer-panel" class="layer-panel">
+    <div id="education-panel" class="layer-panel">
+        <div class="panel-header">
+            <i class="bi bi-mortarboard-fill" style="font-size: 1.5rem; margin-right: 8px;"></i>
+            <h3>Bildung</h3>
+            <button id="close-education-panel" class="close-btn">
+                <i class="bi bi-x"></i>
+            </button>
+        </div>
+        <div class="panel-content">
+            <!-- Hier können später Education-spezifische Inhalte eingefügt werden -->
+            <p>Hier erscheinen Informationen zu Bildungseinrichtungen.</p>
+        </div>
+    </div>
+    <div id="topography-panel" class="layer-panel">
             <div class="panel-header">
-                <img src="img/maple-icon.svg" alt="Maple Icon"
-                    style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
-                <h3>Legende</h3>
-                <button id="close-layer-panel" class="close-btn">
+                <i class="bi bi-images" style="font-size: 1.5rem; margin-right: 8px;"></i>
+                <h3>Topographie</h3>
+                <button id="close-topography-panel" class="close-btn">
                     <i class="bi bi-x"></i>
                 </button>
             </div>
@@ -63,12 +75,12 @@
                     </label>
                 </div>
                 <div class="layer-item">
-                    <button class="accordion-toggle" id="toggle-waters-group" aria-expanded="true"
+                    <button class="accordion-toggle" id="toggle-waters-group" aria-expanded="false"
                         aria-controls="waters-checkboxes">
-                        <span class="accordion-icon" id="waters-accordion-icon">&#9660;</span>
+                        <span class="accordion-icon" id="waters-accordion-icon">&#9654;</span>
                         <span>Gewässer</span>
                     </button>
-                    <div class="waters-checkbox-group" id="waters-checkboxes" style="display: block;">
+                    <div class="waters-checkbox-group" id="waters-checkboxes" style="display: none;">
                         <label class="waters-checkbox">
                             <input type="checkbox" id="greatLakesCheckbox"> Great Lakes
                         </label>
@@ -81,12 +93,12 @@
                     </div>
                 </div>
                 <div class="layer-item">
-                    <button class="accordion-toggle" id="toggle-cities-group" aria-expanded="true"
+                    <button class="accordion-toggle" id="toggle-cities-group" aria-expanded="false"
                         aria-controls="cities-checkboxes">
-                        <span class="accordion-icon" id="cities-accordion-icon">&#9660;</span>
+                        <span class="accordion-icon" id="cities-accordion-icon">&#9654;</span>
                         <span>Städte</span>
                     </button>
-                    <div class="city-checkbox-group" id="cities-checkboxes" style="display: block;">
+                    <div class="city-checkbox-group" id="cities-checkboxes" style="display: none;">
                         <label class="city-checkbox">
                             <input type="checkbox" id="citiesCat1">
                             < 10k Einwohner </label>
@@ -116,7 +128,10 @@
                         <button id="reset-map-view-btn" class="toggle-btn" data-tooltip="Zur Ausgangsansicht springen">
                             <i class="bi bi-pin-map-fill"></i>
                         </button>
-                        <button id="toggle-layer-panel" class="toggle-btn" data-tooltip="Topographische Ebenen ein-/ausblenden">
+                        <button id="toggle-education-panel" class="toggle-btn" data-tooltip="Kartenebene Bildung ein-/ausblenden">
+                            <i class="bi bi-mortarboard-fill"></i>
+                        </button>
+                        <button id="toggle-topography-panel" class="toggle-btn" data-tooltip="Kartenebene Topographie ein-/ausblenden">
                             <i class="bi bi-images"></i>
                         </button>
                 </div>
@@ -164,17 +179,17 @@
 
     <!-- Eigene JavaScript-Dateien -->
     <script src="js/basemap.js"></script>
+    <script src="js/infopanel.js"></script>
+    <script src="js/layer-panel.js"></script>
+    <script src="js/topography-panel.js"></script>
+    <script src="js/education-panel.js"></script>
     <script src="js/provinces.js"></script>
     <script src="js/cities.js"></script>
     <script src="js/lakes.js"></script>
     <script src="js/great_lakes.js"></script>
     <script src="js/rivers.js"></script>
     <script src="js/boreal_zones.js"></script>
-    <script src="js/legend.js"></script>
-    <script src="js/infopanel.js"></script>
     <script src="js/search.js"></script>
-    <script src="js/schools-panel.js"></script>
-    <script src="js/topography-panel.js"></script>
 </body>
 
 </html>

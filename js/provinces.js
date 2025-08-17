@@ -380,11 +380,42 @@ function loadProvinces() {
           if (feature.properties && feature.properties.prov_name_en) {
             // Popup mit Provinz-/Territoriumsname
             layer.bindPopup(`<b>${feature.properties.prov_name_en}</b><br>${feature.properties.prov_name_fr || ''}`);
-            
+
             // Click-Event für Highlighting und Info-Panel
             layer.on('click', function(e) {
               highlightFeature(layer);
               showProvinceInfo(feature);
+            });
+
+            // Tooltip-Design wie Basemap-Buttons
+            let tooltipDiv;
+            layer.on('mouseover', function(e) {
+              if (!tooltipDiv) {
+                tooltipDiv = document.createElement('div');
+                tooltipDiv.className = 'province-tooltip';
+                tooltipDiv.innerHTML = `<i class='bi bi-geo-alt-fill' style='margin-right:7px;'></i>${feature.properties.prov_name_en}`;
+                document.body.appendChild(tooltipDiv);
+              }
+              tooltipDiv.style.display = 'block';
+              tooltipDiv.style.position = 'fixed';
+              tooltipDiv.style.zIndex = '9999';
+              tooltipDiv.style.background = '#CD1719';
+              tooltipDiv.style.color = 'white';
+              tooltipDiv.style.padding = '8px 16px';
+              tooltipDiv.style.borderRadius = '8px';
+              tooltipDiv.style.fontSize = '1.05em';
+              tooltipDiv.style.boxShadow = '0 2px 8px rgba(0,0,0,0.18)';
+              tooltipDiv.style.pointerEvents = 'none';
+              // Position Tooltip bei Mausbewegung
+              function moveTooltip(ev) {
+                tooltipDiv.style.left = (ev.clientX + 16) + 'px';
+                tooltipDiv.style.top = (ev.clientY + 12) + 'px';
+              }
+              document.addEventListener('mousemove', moveTooltip);
+              layer.on('mouseout', function() {
+                tooltipDiv.style.display = 'none';
+                document.removeEventListener('mousemove', moveTooltip);
+              });
             });
           }
         }

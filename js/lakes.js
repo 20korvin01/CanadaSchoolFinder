@@ -64,6 +64,37 @@ function onEachLakeFeature(feature, layer) {
     const area = feature.properties.area ? `${feature.properties.area.toLocaleString()} km²` : 'Unbekannt';
     let popupContent = `<b>${name}</b><br>Fläche: ${area}`;
     layer.bindPopup(popupContent);
+
+    // Tooltip-Logik im blauen Farbschema
+    let tooltipDiv;
+    layer.on('mouseover', function(e) {
+      if (!tooltipDiv) {
+        tooltipDiv = document.createElement('div');
+        tooltipDiv.className = 'lake-tooltip';
+        tooltipDiv.innerHTML = `<i class='bi bi-droplet' style='margin-right:7px;'></i>${name}`;
+        document.body.appendChild(tooltipDiv);
+      }
+      tooltipDiv.style.display = 'block';
+      tooltipDiv.style.position = 'fixed';
+      tooltipDiv.style.zIndex = '9999';
+      tooltipDiv.style.background = '#23407a';
+      tooltipDiv.style.color = 'white';
+      tooltipDiv.style.padding = '8px 16px';
+      tooltipDiv.style.borderRadius = '8px';
+      tooltipDiv.style.fontSize = '1.05em';
+      tooltipDiv.style.boxShadow = '0 2px 8px rgba(0,0,0,0.18)';
+      tooltipDiv.style.pointerEvents = 'none';
+      // Position Tooltip bei Mausbewegung
+      function moveTooltip(ev) {
+        tooltipDiv.style.left = (ev.clientX + 16) + 'px';
+        tooltipDiv.style.top = (ev.clientY + 12) + 'px';
+      }
+      document.addEventListener('mousemove', moveTooltip);
+      layer.on('mouseout', function() {
+        tooltipDiv.style.display = 'none';
+        document.removeEventListener('mousemove', moveTooltip);
+      });
+    });
   }
   layer.on({
     click: function(e) {
