@@ -347,16 +347,29 @@ function highlightFeature(layer) {
   highlightedLayer = layer;
 }
 
-// Funktion zum Entfernen des Highlights
-function clearHighlight() {
-  if (highlightedLayer) {
-    highlightedLayer.setStyle(getDefaultStyle());
-    highlightedLayer = null;
-  }
-  
-  // Alle Popups schließen
-  map.closePopup();
+// Gemeinsame Tooltip-Funktion für Provinzen
+function createProvinceTooltip(feature, layer) {
+  let tooltipDiv;
+  layer.on('mouseover', function(e) {
+    if (!tooltipDiv) {
+      tooltipDiv = document.createElement('div');
+      tooltipDiv.className = 'province-tooltip';
+      tooltipDiv.innerHTML = `<i class='bi bi-geo-alt-fill' style='margin-right:7px;'></i>${feature.properties.prov_name_en}`;
+      document.body.appendChild(tooltipDiv);
+    }
+  tooltipDiv.style.display = 'block';
+    function moveTooltip(ev) {
+      tooltipDiv.style.left = (ev.clientX + 16) + 'px';
+      tooltipDiv.style.top = (ev.clientY + 12) + 'px';
+    }
+    document.addEventListener('mousemove', moveTooltip);
+    layer.on('mouseout', function() {
+      tooltipDiv.style.display = 'none';
+      document.removeEventListener('mousemove', moveTooltip);
+    });
+  });
 }
+window.createProvinceTooltip = createProvinceTooltip;
 
 // Dynamischer Basis-Pfad für lokale Nutzung und GitHub Pages
 const basePath = window.location.hostname === '20korvin01.github.io' ? '/KanadaSchoolFinder' : '';
@@ -387,36 +400,10 @@ function loadProvinces() {
               showProvinceInfo(feature);
             });
 
-            // Tooltip-Design wie Basemap-Buttons
-            let tooltipDiv;
-            layer.on('mouseover', function(e) {
-              if (!tooltipDiv) {
-                tooltipDiv = document.createElement('div');
-                tooltipDiv.className = 'province-tooltip';
-                tooltipDiv.innerHTML = `<i class='bi bi-geo-alt-fill' style='margin-right:7px;'></i>${feature.properties.prov_name_en}`;
-                document.body.appendChild(tooltipDiv);
-              }
-              tooltipDiv.style.display = 'block';
-              tooltipDiv.style.position = 'fixed';
-              tooltipDiv.style.zIndex = '9999';
-              tooltipDiv.style.background = '#CD1719';
-              tooltipDiv.style.color = 'white';
-              tooltipDiv.style.padding = '8px 16px';
-              tooltipDiv.style.borderRadius = '8px';
-              tooltipDiv.style.fontSize = '1.05em';
-              tooltipDiv.style.boxShadow = '0 2px 8px rgba(0,0,0,0.18)';
-              tooltipDiv.style.pointerEvents = 'none';
-              // Position Tooltip bei Mausbewegung
-              function moveTooltip(ev) {
-                tooltipDiv.style.left = (ev.clientX + 16) + 'px';
-                tooltipDiv.style.top = (ev.clientY + 12) + 'px';
-              }
-              document.addEventListener('mousemove', moveTooltip);
-              layer.on('mouseout', function() {
-                tooltipDiv.style.display = 'none';
-                document.removeEventListener('mousemove', moveTooltip);
-              });
-            });
+            // Use centralized tooltip function for provinces
+            if (typeof window.createProvinceTooltip === 'function') {
+              window.createProvinceTooltip(feature, layer);
+            }
           }
         }
       }).addTo(map);

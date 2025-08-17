@@ -4,7 +4,7 @@
   max-width: 480px;
   background: #fff6f6;
   border-radius: 12px;
-  box-shadow: 0 4px 18px rgba(205,23,25,0.10), 0 1.5px 0 #f8bcbc;
+  box-shadow: 0 4px 18px rgba(205, 23, 25, 0.10), 0 1.5px 0 #f8bcbc;
   border: 2px solid #f8bcbc;
   padding: 0;
 }
@@ -34,7 +34,5 @@
   border-radius: 7px;
   padding: 0.7em 1em;
   margin-bottom: 1em;
-  box-shadow: 0 1px 6px rgba(205,23,25,0.07);
+  box-shadow: 0 1px 6px rgba(205, 23, 25, 0.07);
 }
-
-/* Standard-Popup für Städte ohne Info bleibt Leaflet-Standard */

@@ -30,3 +30,30 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+
+// Funktion zum Entfernen des Highlights =========================================================================
+function clearHighlight() {
+  if (highlightedLayer) {
+    highlightedLayer.setStyle(getDefaultStyle());
+    highlightedLayer = null;
+  }
+  // Boreal-Zonen-Highlight entfernen, falls aktiv
+  if (window.currentBorealHighlight) {
+    window.currentBorealHighlight.setStyle(window.getBorealZoneStyle ? getBorealZoneStyle(window.currentBorealHighlight.feature) : {});
+    window.currentBorealHighlight = null;
+  }
+  // Great Lakes Highlight entfernen
+  if (typeof window.clearGreatLakeHighlight === 'function') {
+    window.clearGreatLakeHighlight();
+  }
+  // Andere Seen Highlight entfernen
+  if (typeof window.lakesLayer !== 'undefined' && typeof window.highlightedLake !== 'undefined' && window.highlightedLake) {
+    try {
+      window.lakesLayer.resetStyle(window.highlightedLake);
+    } catch (e) {}
+    window.highlightedLake = null;
+  }
+  // Alle Popups schließen
+  map.closePopup();
+}
