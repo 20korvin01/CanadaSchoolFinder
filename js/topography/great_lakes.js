@@ -8,6 +8,8 @@ fetch('data/great_lakes.geojson')
 
 // Variable für aktuell hervorgehobenen See
 let highlightedLakeLayer = null;
+// Variable für temporäres Hover-Highlight (soll nicht mit Klick-Highlight kollidieren)
+let tooltipHoverLake = null;
 
 // Dynamischer Basis-Pfad für lokale Nutzung und GitHub Pages
 const greatLakesBasePath = window.location.hostname === '20korvin01.github.io' ? '/KanadaSchoolFinder' : '';
@@ -82,23 +84,52 @@ function onEachGreatLakeFeature(feature, layer) {
 function createGreatLakeTooltip(feature, layer) {
   let tooltipDiv;
   const name = feature.properties.NAMESP || feature.properties.NAME || 'Unbekannter See';
-  layer.on('mouseover', function(e) {
+
+  function ensureTooltip() {
     if (!tooltipDiv) {
       tooltipDiv = document.createElement('div');
       tooltipDiv.className = 'lake-tooltip';
       tooltipDiv.innerHTML = `<i class='bi bi-droplet-fill' style='margin-right:7px;'></i>${name}`;
       document.body.appendChild(tooltipDiv);
     }
-  tooltipDiv.style.display = 'block';
+  }
+
+  layer.on('mouseover', function(e) {
+    ensureTooltip();
+    tooltipDiv.style.display = 'block';
+
     function moveTooltip(ev) {
-      tooltipDiv.style.left = (ev.clientX + 16) + 'px';
-      tooltipDiv.style.top = (ev.clientY + 12) + 'px';
+      const clientX = ev.originalEvent ? ev.originalEvent.clientX : (ev.clientX || 0);
+      const clientY = ev.originalEvent ? ev.originalEvent.clientY : (ev.clientY || 0);
+      tooltipDiv.style.left = (clientX + 16) + 'px';
+      tooltipDiv.style.top = (clientY + 12) + 'px';
     }
-    document.addEventListener('mousemove', moveTooltip);
-    layer.on('mouseout', function() {
-      tooltipDiv.style.display = 'none';
-      document.removeEventListener('mousemove', moveTooltip);
-    });
+
+    // Attach move handler to the layer for consistent updates while hovering
+    layer.on('mousemove', moveTooltip);
+
+    // Reset previous hover highlight if it's different and not the clicked highlight
+    if (tooltipHoverLake && tooltipHoverLake !== layer && tooltipHoverLake !== highlightedLakeLayer) {
+      try { tooltipHoverLake.setStyle(getGreatLakeStyle()); } catch (err) {}
+    }
+
+    // Apply hover highlight unless this is already the clicked highlight
+    if (highlightedLakeLayer !== layer) {
+      try { layer.setStyle(getGreatLakeHighlightStyle()); } catch (err) {}
+    }
+    tooltipHoverLake = layer;
+  });
+
+  layer.on('mouseout', function() {
+    if (tooltipDiv) tooltipDiv.style.display = 'none';
+    layer.off('mousemove');
+
+    if (tooltipHoverLake === layer) {
+      tooltipHoverLake = null;
+      if (highlightedLakeLayer !== layer) {
+        try { layer.setStyle(getGreatLakeStyle()); } catch (err) {}
+      }
+    }
   });
 }
 window.createGreatLakeTooltip = createGreatLakeTooltip;

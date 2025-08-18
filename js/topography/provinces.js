@@ -87,165 +87,49 @@ function addGalleryEventListeners() {
     }
   });
 }
-// Galerie-Bilder für Provinzen (aus infopanel.js verschoben)
+// Galerie-Bilder für Provinzen (local paths removed — use `img_urls` in GeoJSON instead)
 const provinceImages = {
-  "Alberta": [
-    './img/alberta/alberta1.jpeg',
-    './img/alberta/alberta2.jpeg',
-    './img/alberta/alberta3.jpg',
-    './img/alberta/alberta4.jpg',
-    './img/alberta/alberta5.jpg',
-    './img/alberta/alberta6.jpeg',
-    './img/alberta/alberta7.jpeg',
-    './img/alberta/alberta8.jpg',
-    './img/alberta/alberta9.jpg',
-    './img/alberta/alberta10.jpeg'
-  ],
-  "Manitoba": [
-    './img/manitoba/manitoba1.jpeg',
-    './img/manitoba/manitoba2.jpg',
-    './img/manitoba/manitoba3.jpg',
-    './img/manitoba/manitoba4.jpg',
-    './img/manitoba/manitoba5.jpeg',
-    './img/manitoba/manitoba6.jpeg',
-    './img/manitoba/manitoba7.jpg',
-    './img/manitoba/manitoba8.jpg',
-    './img/manitoba/manitoba9.jpeg',
-    './img/manitoba/manitoba10.jpeg'
-  ],
-  "Newfoundland and Labrador": [
-    './img/newfoundland_labrador/newfoundland_labrador1.jpeg',
-    './img/newfoundland_labrador/newfoundland_labrador2.jpg',
-    './img/newfoundland_labrador/newfoundland_labrador3.jpg',
-    './img/newfoundland_labrador/newfoundland_labrador4.jpg',
-    './img/newfoundland_labrador/newfoundland_labrador5.jpeg',
-    './img/newfoundland_labrador/newfoundland_labrador6.jpeg',
-    './img/newfoundland_labrador/newfoundland_labrador7.jpg',
-    './img/newfoundland_labrador/newfoundland_labrador8.jpg',
-    './img/newfoundland_labrador/newfoundland_labrador9.jpeg',
-    './img/newfoundland_labrador/newfoundland_labrador10.jpeg'
-  ],
-  "New Brunswick": [
-    './img/new_brunswick/new_brunswick1.jpeg',
-    './img/new_brunswick/new_brunswick2.jpg',
-    './img/new_brunswick/new_brunswick3.jpg',
-    './img/new_brunswick/new_brunswick4.jpg',
-    './img/new_brunswick/new_brunswick5.jpeg',
-    './img/new_brunswick/new_brunswick6.jpg',
-    './img/new_brunswick/new_brunswick7.jpg',
-    './img/new_brunswick/new_brunswick8.jpg',
-    './img/new_brunswick/new_brunswick9.jpg',
-    './img/new_brunswick/new_brunswick10.jpg'
-  ],
-  "Nova Scotia": [
-    './img/nova_scotia/nova_scotia1.jpeg',
-    './img/nova_scotia/nova_scotia2.jpg',
-    './img/nova_scotia/nova_scotia3.jpg',
-    './img/nova_scotia/nova_scotia4.jpg',
-    './img/nova_scotia/nova_scotia5.jpeg',
-    './img/nova_scotia/nova_scotia6.jpeg',
-    './img/nova_scotia/nova_scotia7.jpg',
-    './img/nova_scotia/nova_scotia8.jpg',
-    './img/nova_scotia/nova_scotia9.jpeg',
-    './img/nova_scotia/nova_scotia10.jpg'
-  ],
-  "Ontario": [
-    './img/ontario/ontario1.jpeg',
-    './img/ontario/ontario2.jpg',
-    './img/ontario/ontario3.jpg',
-    './img/ontario/ontario4.jpg',
-    './img/ontario/ontario5.jpeg',
-    './img/ontario/ontario6.jpeg',
-    './img/ontario/ontario7.jpg',
-    './img/ontario/ontario8.jpg',
-    './img/ontario/ontario9.jpeg',
-    './img/ontario/ontario10.jpeg'
-  ],
-  "Prince Edward Island": [
-    './img/prince_edward_island/prince_edward_island1.jpeg',
-    './img/prince_edward_island/prince_edward_island2.jpg',
-    './img/prince_edward_island/prince_edward_island3.jpg',
-    './img/prince_edward_island/prince_edward_island4.jpg',
-    './img/prince_edward_island/prince_edward_island5.jpeg',
-    './img/prince_edward_island/prince_edward_island6.jpeg',
-    './img/prince_edward_island/prince_edward_island7.jpg',
-    './img/prince_edward_island/prince_edward_island8.jpg',
-    './img/prince_edward_island/prince_edward_island9.jpeg',
-    './img/prince_edward_island/prince_edward_island10.jpeg'
-  ],
-  "Quebec": [
-    './img/quebec/quebec1.jpeg',
-    './img/quebec/quebec2.jpg',
-    './img/quebec/quebec3.jpg',
-    './img/quebec/quebec4.jpg',
-    './img/quebec/quebec5.jpeg',
-    './img/quebec/quebec6.jpeg',
-    './img/quebec/quebec7.jpg',
-    './img/quebec/quebec8.jpg',
-    './img/quebec/quebec9.jpg',
-    './img/quebec/quebec10.jpg'
-  ],
-  "Saskatchewan": [
-    './img/saskatchewan/saskatchewan1.jpeg',
-    './img/saskatchewan/saskatchewan2.jpg',
-    './img/saskatchewan/saskatchewan3.jpg',
-    './img/saskatchewan/saskatchewan4.jpg',
-    './img/saskatchewan/saskatchewan5.jpg',
-    './img/saskatchewan/saskatchewan6.jpg',
-    './img/saskatchewan/saskatchewan7.jpg',
-    './img/saskatchewan/saskatchewan8.jpg',
-    './img/saskatchewan/saskatchewan9.jpg',
-    './img/saskatchewan/saskatchewan10.jpg'
-  ],
-  "British Columbia": [
-    './img/british_columbia/bc1.jpeg',
-    './img/british_columbia/bc2.jpg',
-    './img/british_columbia/bc3.jpg',
-    './img/british_columbia/bc4.jpg',
-    './img/british_columbia/bc5.jpeg',
-    './img/british_columbia/bc6.jpeg',
-    './img/british_columbia/bc7.jpg',
-    './img/british_columbia/bc8.jpg',
-    './img/british_columbia/bc9.jpeg',
-    './img/british_columbia/bc10.jpeg'
-  ],
-  "Nunavut": [
-    './img/nunavut/nunavut1.jpeg',
-    './img/nunavut/nunavut2.jpg',
-    './img/nunavut/nunavut3.png',
-    './img/nunavut/nunavut4.jpg',
-    './img/nunavut/nunavut5.jpeg',
-    './img/nunavut/nunavut6.jpeg',
-    './img/nunavut/nunavut7.jpg',
-    './img/nunavut/nunavut8.png',
-    './img/nunavut/nunavut9.jpeg',
-    './img/nunavut/nunavut10.jpg'
-  ],
-  'Yukon': [
-    './img/yukon/yukon9.jpg',
-    './img/yukon/yukon1.jpg',
-    './img/yukon/yukon2.jpg',
-    './img/yukon/yukon3.jpg',
-    './img/yukon/yukon4.jpg',
-    './img/yukon/yukon5.jpg',
-    './img/yukon/yukon6.jpg',
-    './img/yukon/yukon7.jpg',
-    './img/yukon/yukon10.jpg',
-    './img/yukon/yukon8.jpg'
-  ],
-  'Northwest Territories': [
-    './img/northwest_territories/nwt1.jpeg',
-    './img/northwest_territories/nwt2.png',
-    './img/northwest_territories/nwt3.jpg',
-    './img/northwest_territories/nwt4.jpg',
-    './img/northwest_territories/nwt5.jpg',
-    './img/northwest_territories/nwt6.jpg',
-    './img/northwest_territories/nwt7.jpg',
-    './img/northwest_territories/nwt8.jpg',
-    './img/northwest_territories/nwt9.jpg',
-    './img/northwest_territories/nwt10.jpg'
-  ],
+  "Alberta": [],
+  "Manitoba": [],
+  "Newfoundland and Labrador": [],
+  "New Brunswick": [],
+  "Nova Scotia": [],
+  "Ontario": [],
+  "Prince Edward Island": [],
+  "Quebec": [],
+  "Saskatchewan": [],
+  "British Columbia": [],
+  "Nunavut": [],
+  'Yukon': [],
+  'Northwest Territories': []
 };
+
+// Utility: sample up to `count` random items from an array (Fisher-Yates shuffle)
+function sampleRandom(arr, count = 10) {
+  if (!Array.isArray(arr) || arr.length === 0) return [];
+  const copy = arr.slice();
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, Math.min(count, copy.length));
+}
+
+// Preload images and return only the URLs that successfully load
+function preloadImages(urls, timeout = 8000) {
+  if (!Array.isArray(urls) || urls.length === 0) return Promise.resolve([]);
+  const loaders = urls.map(url => new Promise(resolve => {
+    const img = new Image();
+    let settled = false;
+    const t = setTimeout(() => {
+      if (!settled) { settled = true; resolve(null); }
+    }, timeout);
+    img.onload = () => { if (!settled) { settled = true; clearTimeout(t); resolve(url); } };
+    img.onerror = () => { if (!settled) { settled = true; clearTimeout(t); resolve(null); } };
+    img.src = url;
+  }));
+  return Promise.all(loaders).then(results => results.filter(Boolean));
+}
 // Provinz-Info im Info-Panel anzeigen
 function showProvinceInfo(feature) {
   // Boreal-Zonen-Highlight entfernen, falls aktiv
@@ -262,8 +146,42 @@ function showProvinceInfo(feature) {
     title.textContent = provinceName;
     // Bilder für die Provinz laden (aus infopanel.js)
     if (typeof provinceImages !== 'undefined') {
-      const images = provinceImages[provinceName];
-      imageContainer.innerHTML = window.createImageGallery ? createImageGallery(images) : '';
+      // Ensure we always have a usable localImages array (may be empty)
+      const localImages = Array.isArray(provinceImages[provinceName]) ? provinceImages[provinceName] : [];
+      // If the GeoJSON feature contains an `img_urls` array, sample from it and preload
+      const remoteUrls = Array.isArray(props.img_urls) ? props.img_urls : null;
+      if (remoteUrls && remoteUrls.length > 0) {
+        const sampled = sampleRandom(remoteUrls, 10);
+        const tryImages = (sampled && sampled.length > 0) ? sampled : localImages;
+        // Show a large loading placeholder immediately (same container size as gallery main image)
+        imageContainer.innerHTML = `
+          <div class="image-gallery">
+            <div class="gallery-main" style="display:flex;align-items:center;justify-content:center;min-height:260px;">
+              <div style="text-align:center;color:#666;">
+                <svg width="64" height="64" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <circle cx="25" cy="25" r="20" stroke="#CD1719" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="31.4 31.4">
+                    <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite" />
+                  </circle>
+                </svg>
+                <div style="margin-top:8px;font-size:0.95em;">Bilder werden geladen...</div>
+              </div>
+            </div>
+          </div>`;
+
+        // Preload and use only images that actually load; fallback to local images if none
+        preloadImages(tryImages).then(loaded => {
+          const finalImages = (loaded && loaded.length > 0) ? loaded : localImages;
+          if (!finalImages || finalImages.length === 0) {
+            imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
+          } else {
+            imageContainer.innerHTML = window.createImageGallery ? createImageGallery(finalImages) : '';
+            if (window.addGalleryEventListeners) setTimeout(() => { addGalleryEventListeners(); }, 100);
+          }
+        });
+      } else {
+        // No remote URLs; use local images (may be empty)
+        imageContainer.innerHTML = window.createImageGallery ? createImageGallery(localImages) : '';
+      }
     }
     // Info-Text aus GeoJSON-Attribut 'info'
     const infoText = props.info ? `<div class="province-teaser">${props.info}</div>` : '';
@@ -308,6 +226,8 @@ fetch('data/provinces.geojson')
 
 // Variable für aktuell hervorgehobenes Feature
 let highlightedLayer = null;
+// Variable für temporäres Hover-Highlight (soll nicht mit Klick-Highlight kollidieren)
+let tooltipHoverLayer = null;
 
 // Standard-Style für Provinzen
 function getDefaultStyle(feature) {
@@ -350,23 +270,57 @@ function highlightFeature(layer) {
 // Gemeinsame Tooltip-Funktion für Provinzen
 function createProvinceTooltip(feature, layer) {
   let tooltipDiv;
-  layer.on('mouseover', function(e) {
+  // Create tooltip element lazily and reuse
+  function ensureTooltip() {
     if (!tooltipDiv) {
       tooltipDiv = document.createElement('div');
       tooltipDiv.className = 'province-tooltip';
       tooltipDiv.innerHTML = `<i class='bi bi-geo-alt-fill' style='margin-right:7px;'></i>${feature.properties.prov_name_en}`;
       document.body.appendChild(tooltipDiv);
     }
-  tooltipDiv.style.display = 'block';
+  }
+
+  // Mouseover: show tooltip and apply transient highlight (unless feature is the clicked highlight)
+  layer.on('mouseover', function(e) {
+    ensureTooltip();
+    tooltipDiv.style.display = 'block';
+
+    // Positioning using Leaflet event originalEvent for accurate cursor coords
     function moveTooltip(ev) {
-      tooltipDiv.style.left = (ev.clientX + 16) + 'px';
-      tooltipDiv.style.top = (ev.clientY + 12) + 'px';
+      const clientX = ev.originalEvent ? ev.originalEvent.clientX : (ev.clientX || 0);
+      const clientY = ev.originalEvent ? ev.originalEvent.clientY : (ev.clientY || 0);
+      tooltipDiv.style.left = (clientX + 16) + 'px';
+      tooltipDiv.style.top = (clientY + 12) + 'px';
     }
-    document.addEventListener('mousemove', moveTooltip);
-    layer.on('mouseout', function() {
-      tooltipDiv.style.display = 'none';
-      document.removeEventListener('mousemove', moveTooltip);
-    });
+
+    // Attach move handler to the layer so it updates while hovering
+    layer.on('mousemove', moveTooltip);
+
+    // If there's a previous hover highlight that's not the clicked highlight, reset it
+    if (tooltipHoverLayer && tooltipHoverLayer !== layer && tooltipHoverLayer !== highlightedLayer) {
+      try { tooltipHoverLayer.setStyle(getDefaultStyle()); } catch (err) {}
+    }
+
+    // Apply highlight style if this layer isn't the persistent (clicked) highlight
+    if (highlightedLayer !== layer) {
+      try { layer.setStyle(getHighlightStyle()); } catch (err) {}
+    }
+    tooltipHoverLayer = layer;
+  });
+
+  // Mouseout: hide tooltip and restore transient hover style (but keep clicked highlight)
+  layer.on('mouseout', function() {
+    if (tooltipDiv) tooltipDiv.style.display = 'none';
+    // Remove any layer-local mousemove listeners by copying a no-op; Leaflet will replace handler on new listeners
+    layer.off('mousemove');
+
+    if (tooltipHoverLayer === layer) {
+      tooltipHoverLayer = null;
+      // Restore default style only if this layer is not the permanently highlighted one
+      if (highlightedLayer !== layer) {
+        try { layer.setStyle(getDefaultStyle()); } catch (err) {}
+      }
+    }
   });
 }
 window.createProvinceTooltip = createProvinceTooltip;
