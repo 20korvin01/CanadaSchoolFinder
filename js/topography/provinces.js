@@ -14,9 +14,11 @@ function createImageGallery(images) {
   currentImageIndex = 0;
   return `
     <div class="image-gallery">
-      <div class="gallery-main">
-        <img id="gallery-main-img" src="${images[0]}" alt="Galerie Bild" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-        <div style="display: none; text-align: center; padding: 50px; color: #666;">
+      <div class="gallery-main" style="position:relative;">
+  <img id="gallery-main-img" src="${images[0]}" alt="Galerie Bild" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+  <!-- Small copyright/open-link button that opens the current image in a new tab -->
+  <a id="image-link" href="${images[0]}" target="_blank" rel="noopener noreferrer" title="Open image in new tab" aria-label="Open image in new tab" style="position:absolute; left:8px; bottom:12px; background:transparent; padding:0; margin:0; font-size:1em; color:#ffffff; text-decoration:none; line-height:1;">©</a>
+        <div style="display: none; text-align: center; padding: 50px; color: #ffffffff;">
           <i class="bi bi-exclamation-triangle" style="font-size: 2em;"></i>
           <p>Bild konnte nicht geladen werden</p>
         </div>
@@ -46,10 +48,17 @@ function updateGalleryImage(index) {
   currentImageIndex = index;
   const mainImg = document.getElementById('gallery-main-img');
   const indicators = document.querySelectorAll('.indicator');
+  const imageLink = document.getElementById('image-link');
   if (mainImg) {
     mainImg.style.opacity = '0';
     setTimeout(() => {
       mainImg.src = currentImages[index];
+      // Keep the copyright/open-link button in sync with the currently shown image
+      if (imageLink) {
+        imageLink.href = currentImages[index] || '';
+        // Hide the link if there's no valid URL
+        imageLink.style.display = currentImages[index] ? 'inline-block' : 'none';
+      }
       mainImg.style.opacity = '1';
     }, 150);
   }
@@ -155,8 +164,8 @@ function showProvinceInfo(feature) {
         const tryImages = (sampled && sampled.length > 0) ? sampled : localImages;
         // Show a large loading placeholder immediately (same container size as gallery main image)
         imageContainer.innerHTML = `
-          <div class="image-gallery">
-            <div class="gallery-main" style="display:flex;align-items:center;justify-content:center;min-height:260px;">
+      <div class="image-gallery">
+        <div class="gallery-main" style="position:relative; display:flex;align-items:center;justify-content:center;min-height:260px;">
               <div style="text-align:center;color:#666;">
                 <svg width="64" height="64" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <circle cx="25" cy="25" r="20" stroke="#CD1719" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="31.4 31.4">
@@ -168,15 +177,42 @@ function showProvinceInfo(feature) {
             </div>
           </div>`;
 
-        // Preload and use only images that actually load; fallback to local images if none
+        // Preload and use only images that actually load; fallback to local images if none.
+        // Ensure we always provide exactly 10 image URLs to the gallery by merging
+        // loaded remote images with local fallbacks and cycling if necessary.
         preloadImages(tryImages).then(loaded => {
-          const finalImages = (loaded && loaded.length > 0) ? loaded : localImages;
-          if (!finalImages || finalImages.length === 0) {
+          const loadedImages = Array.isArray(loaded) ? loaded.filter(Boolean) : [];
+          // Start with successfully loaded remote images, then append local images (no duplicates)
+          const merged = [];
+          const pushUnique = (url) => {
+            if (!url) return;
+            try {
+              // normalize simple strings
+              const s = String(url);
+              if (!merged.includes(s)) merged.push(s);
+            } catch (e) {
+              // ignore non-string entries
+            }
+          };
+          loadedImages.forEach(pushUnique);
+          (localImages || []).forEach(pushUnique);
+
+          // If still empty, show 'no images' message
+          if (merged.length === 0) {
             imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
-          } else {
-            imageContainer.innerHTML = window.createImageGallery ? createImageGallery(finalImages) : '';
-            if (window.addGalleryEventListeners) setTimeout(() => { addGalleryEventListeners(); }, 100);
+            return;
           }
+
+          // If we have fewer than 10 unique images, cycle existing ones to reach 10
+          const imagesToUse = [];
+          let i = 0;
+          while (imagesToUse.length < 10) {
+            imagesToUse.push(merged[i % merged.length]);
+            i++;
+          }
+
+          imageContainer.innerHTML = window.createImageGallery ? createImageGallery(imagesToUse) : '';
+          if (window.addGalleryEventListeners) setTimeout(() => { addGalleryEventListeners(); }, 100);
         });
       } else {
         // No remote URLs; use local images (may be empty)
