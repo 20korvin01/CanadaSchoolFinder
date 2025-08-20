@@ -131,7 +131,7 @@ function loadCities() {
               layer.on('click', function(e) {
                 // Pass image URLs from common property names (img_urls, url, img_ruls) to the info panel so the gallery can use them
                 const img_urls = Array.isArray(feature.properties && feature.properties.img_urls) ? feature.properties.img_urls
-                  : Array.isArray(feature.properties && feature.properties.url) ? feature.properties.url
+                  : Array.isArray(feature.properties && feature.properties.img_urls) ? feature.properties.img_urls
                   : Array.isArray(feature.properties && feature.properties.img_ruls) ? feature.properties.img_ruls
                   : null;
                 showCityInfo({
@@ -239,8 +239,7 @@ function showCityInfo(city) {
   const title = document.getElementById('feature-title');
   const details = document.getElementById('feature-details');
   const imageContainer = document.getElementById('feature-image');
-  // Bilder für die Stadt (aus Feature-Eigenschaft `img_urls`) — lade bis zu 10 zufällige und zeige nur erfolgreich geladene
-  const localImages = []; // no bundled local city images; prefer img_urls from GeoJSON
+  // Bilder für die Stadt (nur img_urls aus GeoJSON verwenden)
   imageContainer.innerHTML = `
     <div class="image-gallery">
       <div class="gallery-main" style="display:flex;align-items:center;justify-content:center;min-height:260px;">
@@ -255,24 +254,36 @@ function showCityInfo(city) {
       </div>
     </div>`;
 
-  // Decide which URLs to try: prefer provided img_urls, else check `url` or `img_ruls`, then fallback to empty localImages
+  // Decide which URLs to try: prefer provided img_urls, else check `url` or `img_ruls`.
   const remoteUrls = Array.isArray(city.img_urls) ? city.img_urls
-    : Array.isArray(city.url) ? city.url
+    : Array.isArray(city.img_urls) ? city.img_urls
     : Array.isArray(city.img_ruls) ? city.img_ruls
     : null;
-  const tryUrls = remoteUrls && remoteUrls.length > 0 ? sampleRandom(remoteUrls, 10) : localImages;
-  // Preload and display only successfully loaded images; if none, show placeholder
-  preloadImages(tryUrls).then(loaded => {
-    const finalImages = (loaded && loaded.length > 0) ? loaded : localImages;
-    if (!finalImages || finalImages.length === 0) {
-      imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
-    } else {
-      imageContainer.innerHTML = typeof createImageGallery === 'function' ? createImageGallery(finalImages) : '';
-      if (typeof addGalleryEventListeners === 'function') setTimeout(() => { addGalleryEventListeners(); }, 100);
-    }
-  }).catch(() => {
+  const tryUrls = remoteUrls && remoteUrls.length > 0 ? sampleRandom(remoteUrls, 10) : null;
+
+  if (tryUrls && tryUrls.length > 0) {
+      // Preload and display only successfully loaded images; if none, show placeholder
+      preloadImages(tryUrls).then(loaded => {
+        const loadedImages = Array.isArray(loaded) ? loaded.filter(Boolean) : [];
+        if (!loadedImages || loadedImages.length === 0) {
+          imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
+        } else {
+          // Ensure exactly 10 images by cycling the successfully loaded ones if needed
+          const imagesToUse = [];
+          let i = 0;
+          while (imagesToUse.length < 10) {
+            imagesToUse.push(loadedImages[i % loadedImages.length]);
+            i++;
+          }
+          imageContainer.innerHTML = typeof createImageGallery === 'function' ? createImageGallery(imagesToUse) : '';
+          if (typeof addGalleryEventListeners === 'function') setTimeout(() => { addGalleryEventListeners(); }, 100);
+        }
+      }).catch(() => {
+        imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
+      });
+  } else {
     imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
-  });
+  }
   title.textContent = city.name;
   let infoBlock = '';
   if (city.info) {

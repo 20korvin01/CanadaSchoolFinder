@@ -226,12 +226,12 @@ function showProvinceInfo(feature) {
       ${infoText}
       <div class="city-popup-weather" style="margin-bottom:1em; margin-top:0.5em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em; line-height:1.5; display:flex; flex-direction:column; gap:6px;">
         <span><i class='bi bi-translate' style='color:#23407a; margin-right:6px;'></i> <strong>Franz. Name:</strong> ${props.prov_name_fr}</span>
-  <span><i class='bi bi-geo' style='color:#23407a; margin-right:6px;'></i> <strong>Verwaltungseinheit:</strong> ${props.prov_type}</span>
+  <span><i class='bi bi-geo-fill' style='color:#23407a; margin-right:6px;'></i> <strong>Verwaltungseinheit:</strong> ${props.prov_type}</span>
         <span><i class='bi bi-building' style='color:#23407a; margin-right:6px;'></i> <strong>Hauptstadt:</strong> ${props.capital || '-'}</span>
                 ${(() => {
                   const type = (props.prov_type || '').toLowerCase();
                   // Prüfe auf 'territory' oder 'territory / territoire'
-                  const isTerritory = type.includes('territory');
+                  const isTerritory = type.includes('territorium');
                   if (isTerritory && props.commissioner) {
                     return `<span><i class='bi bi-file-person-fill' style='color:#23407a; margin-right:6px;'></i> <strong>Kommissar:</strong> ${props.commissioner}</span>`;
                   } else if (!isTerritory && props.governor) {
@@ -240,7 +240,8 @@ function showProvinceInfo(feature) {
                     return '';
                   }
                 })()}
-                <span><i class='bi bi-people-fill' style='color:#23407a; margin-right:6px;'></i> <strong>Bevölkerung:</strong> ${props.population ? props.population.toLocaleString() : '-'}</span>
+          <span><i class='bi bi-people-fill' style='color:#23407a; margin-right:6px;'></i> <strong>Bevölkerung:</strong> ${props.population ? props.population.toLocaleString() : '-'}</span>
+          <span><i class='bi bi-aspect-ratio' style='color:#23407a; margin-right:6px;'></i> <strong>Fläche:</strong> ${props.area_km2 ? props.area_km2.toLocaleString() + ' km²' : '-'}</span>
       </div>
     `;
     // Galerie-Event-Listener

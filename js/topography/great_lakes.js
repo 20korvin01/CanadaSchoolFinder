@@ -140,9 +140,51 @@ function showGreatLakeInfo(feature) {
   const details = document.getElementById('feature-details');
   const imageContainer = document.getElementById('feature-image');
 
+  // Bilder-Galerie (verwende ausschließlich img_urls aus GeoJSON)
   imageContainer.innerHTML = '';
-
   const props = feature.properties;
+  const remoteUrls = Array.isArray(props && props.img_urls) ? props.img_urls : null;
+  if (remoteUrls && remoteUrls.length > 0) {
+    const tryImages = sampleRandom(remoteUrls, 10);
+
+    // Show a loading placeholder of the same size as the gallery
+    imageContainer.innerHTML = `
+      <div class="image-gallery">
+        <div class="gallery-main" style="position:relative; display:flex;align-items:center;justify-content:center;min-height:260px;">
+          <div style="text-align:center;color:#666;">
+            <svg width="64" height="64" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="25" cy="25" r="20" stroke="#CD1719" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="31.4 31.4">
+                <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite" />
+              </circle>
+            </svg>
+            <div style="margin-top:8px;font-size:0.95em;">Bilder werden geladen...</div>
+          </div>
+        </div>
+      </div>`;
+
+    // Preload and display only successfully loaded images
+    preloadImages(tryImages).then(loaded => {
+      const loadedImages = Array.isArray(loaded) ? loaded.filter(Boolean) : [];
+      if (!loadedImages || loadedImages.length === 0) {
+        imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
+      } else {
+        // Ensure exactly 10 images by cycling the successfully loaded ones if needed
+        const imagesToUse = [];
+        let i = 0;
+        while (imagesToUse.length < 10) {
+          imagesToUse.push(loadedImages[i % loadedImages.length]);
+          i++;
+        }
+        imageContainer.innerHTML = window.createImageGallery ? createImageGallery(imagesToUse) : '';
+        if (window.addGalleryEventListeners) setTimeout(() => { addGalleryEventListeners(); }, 100);
+      }
+    }).catch(() => {
+      imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
+    });
+  } else {
+    // No remote URLs; show placeholder or empty gallery
+    imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
+  }
   const name = props.NAMESP || props.NAME || 'Unbekannter See';
   title.textContent = name;
 

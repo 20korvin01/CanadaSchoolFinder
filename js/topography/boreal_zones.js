@@ -27,6 +27,93 @@ function getBorealZoneStyle(feature) {
   };
 }
 
+// Info-Panel für Boreal Zone (global, vor Verwendung)
+window.showBorealZoneInfo = function showBorealZoneInfo(feature) {
+  // Provinz-Highlight entfernen, falls aktiv
+  if (window.highlightedLayer && window.getDefaultStyle) {
+    window.highlightedLayer.setStyle(window.getDefaultStyle(window.highlightedLayer.feature));
+    window.highlightedLayer = null;
+  }
+  // Highlight der vorherigen borealen Zone entfernen
+  if (window.currentBorealHighlight) {
+    window.currentBorealHighlight.setStyle(getBorealZoneStyle(window.currentBorealHighlight.feature));
+    window.currentBorealHighlight = null;
+  }
+  const title = document.getElementById('feature-title');
+  const details = document.getElementById('feature-details');
+  const imageContainer = document.getElementById('feature-image');
+  if (imageContainer) imageContainer.innerHTML = '';
+  if (feature.properties) {
+    const props = feature.properties;
+    if (title) title.textContent = props.NAME;
+    let infoBlock = '';
+    if (props.DESCRIPTION) {
+      infoBlock = `<div class="province-teaser">${props.DESCRIPTION}</div>`;
+    }
+    if (details) {
+      details.innerHTML = `
+        <h4>${props.NAME || 'Unbekannte Zone'}</h4>
+        ${infoBlock}
+      `;
+    }
+  }
+  const infoPanelEl = document.getElementById('info-panel');
+  if (infoPanelEl) infoPanelEl.classList.add('open');
+  setTimeout(() => map.invalidateSize(), 300);
+};
+
+// Gemeinsame Tooltip-Funktion für Boreal Zones (global, vor Verwendung)
+function createBorealTooltip(feature, layer) {
+  let tooltipDiv;
+  // When hovering, show tooltip and apply temporary orange highlight.
+  layer.on('mouseover', function(e) {
+    // create tooltip element if needed
+    if (!tooltipDiv) {
+      tooltipDiv = document.createElement('div');
+      tooltipDiv.className = 'boreal-tooltip';
+      tooltipDiv.innerHTML = `<i class='bi bi-tree-fill' style='margin-right:7px;'></i>${feature.properties ? feature.properties.NAME : ''}`;
+      document.body.appendChild(tooltipDiv);
+    }
+    tooltipDiv.style.display = 'block';
+
+    // apply hover highlight only if this feature isn't the currently clicked/selected one
+    try {
+      if (!window.currentBorealHighlight || window.currentBorealHighlight !== layer) {
+        layer.setStyle({
+          fillColor: '#ff9900ff',
+          fillOpacity: 0.8,
+          opacity: 1,
+          color: undefined,
+          weight: 0
+        });
+      }
+    } catch (err) {
+      console.warn('Failed to set hover style for boreal zone', err);
+    }
+
+    function moveTooltip(ev) {
+      tooltipDiv.style.left = (ev.clientX + 16) + 'px';
+      tooltipDiv.style.top = (ev.clientY + 12) + 'px';
+    }
+    document.addEventListener('mousemove', moveTooltip);
+
+    // on mouseout remove tooltip and revert style if not selected
+    layer.on('mouseout', function() {
+      if (tooltipDiv) tooltipDiv.style.display = 'none';
+      document.removeEventListener('mousemove', moveTooltip);
+      try {
+        if (!window.currentBorealHighlight || window.currentBorealHighlight !== layer) {
+          // revert to default style for this feature
+          layer.setStyle(getBorealZoneStyle(feature));
+        }
+      } catch (err) {
+        console.warn('Failed to revert boreal zone style on mouseout', err);
+      }
+    });
+  });
+}
+window.createBorealTooltip = createBorealTooltip;
+
 function onEachBorealZoneFeature(feature, layer) {
   if (feature.properties) {
     let isHighlighted = false;
@@ -69,66 +156,13 @@ function onEachBorealZoneFeature(feature, layer) {
     observer.observe(infoPanel, { attributes: true });
 
     // Tooltip-Logik im dunkelgrünen Farbschema
-    // Use centralized tooltip function
-    if (typeof window.createBorealTooltip === 'function') {
-      window.createBorealTooltip(feature, layer);
+    // Use centralized tooltip function (defined globally above)
+    try {
+      createBorealTooltip(feature, layer);
+    } catch (e) {
+      console.warn('createBorealTooltip failed', e);
     }
   }
-// Info-Panel für Boreal Zone anzeigen
-window.showBorealZoneInfo = function showBorealZoneInfo(feature) {
-  // Provinz-Highlight entfernen, falls aktiv
-  if (window.highlightedLayer && window.getDefaultStyle) {
-    window.highlightedLayer.setStyle(window.getDefaultStyle(window.highlightedLayer.feature));
-    window.highlightedLayer = null;
-  }
-  // Highlight der vorherigen borealen Zone entfernen
-  if (window.currentBorealHighlight) {
-    window.currentBorealHighlight.setStyle(getBorealZoneStyle(window.currentBorealHighlight.feature));
-    window.currentBorealHighlight = null;
-  }
-  const title = document.getElementById('feature-title');
-  const details = document.getElementById('feature-details');
-  const imageContainer = document.getElementById('feature-image');
-  imageContainer.innerHTML = '';
-  if (feature.properties) {
-    const props = feature.properties;
-    title.textContent = props.NAME;
-    let infoBlock = '';
-    if (props.DESCRIPTION) {
-      infoBlock = `<div class="province-teaser">${props.DESCRIPTION}</div>`;
-    }
-      details.innerHTML = `
-        <h4>${props.NAME || 'Unbekannte Zone'}</h4>
-        ${infoBlock}
-      `;
-  }
-  document.getElementById('info-panel').classList.add('open');
-  setTimeout(() => map.invalidateSize(), 300);
-}
-
-// Gemeinsame Tooltip-Funktion für Boreal Zones
-function createBorealTooltip(feature, layer) {
-  let tooltipDiv;
-  layer.on('mouseover', function(e) {
-    if (!tooltipDiv) {
-      tooltipDiv = document.createElement('div');
-      tooltipDiv.className = 'boreal-tooltip';
-      tooltipDiv.innerHTML = `<i class='bi bi-tree-fill' style='margin-right:7px;'></i>${feature.properties.NAME}`;
-      document.body.appendChild(tooltipDiv);
-    }
-  tooltipDiv.style.display = 'block';
-    function moveTooltip(ev) {
-      tooltipDiv.style.left = (ev.clientX + 16) + 'px';
-      tooltipDiv.style.top = (ev.clientY + 12) + 'px';
-    }
-    document.addEventListener('mousemove', moveTooltip);
-    layer.on('mouseout', function() {
-      tooltipDiv.style.display = 'none';
-      document.removeEventListener('mousemove', moveTooltip);
-    });
-  });
-}
-window.createBorealTooltip = createBorealTooltip;
 }
 
 function loadBorealZones() {
