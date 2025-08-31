@@ -101,6 +101,37 @@ document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('search-geojson');
         if (!searchInput) return;
 
+        const clearBtn = document.getElementById('search-clear-btn');
+
+        // Helfer: entferne Such-Layer und setze UI zurück (wiederverwendet beim Leeren)
+        function clearSearchAndRestore() {
+            searchInput.value = '';
+            searchInput.style.backgroundColor = '';
+            if (window.searchResultLayer) {
+                map.removeLayer(window.searchResultLayer);
+                window.searchResultLayer = null;
+            }
+            if (window.searchHighlightLayer) {
+                map.removeLayer(window.searchHighlightLayer);
+                window.searchHighlightLayer = null;
+            }
+            // Checkboxen wiederherstellen und Layer synchronisieren
+            if (savedCheckboxStates) {
+                getAllLayerCheckboxes().forEach((cb, idx) => {
+                    cb.checked = savedCheckboxStates[idx];
+                    // change-Event auslösen, damit Layer wirklich hinzugefügt/entfernt werden
+                    cb.dispatchEvent(new Event('change', { bubbles: true }));
+                });
+                setAllMainLayersVisible(true);
+                savedCheckboxStates = null;
+            } else {
+                setAllMainLayersVisible(true);
+            }
+            if (clearBtn) clearBtn.style.display = 'none';
+            // focus wieder auf das Eingabefeld
+            try { searchInput.focus(); } catch (e) {}
+        }
+
         // Suche nur bei Enter-Taste
         searchInput.addEventListener('keydown', function (e) {
             if (e.key === 'Enter') {
@@ -125,6 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else {
                         setAllMainLayersVisible(true);
                     }
+                    if (clearBtn) clearBtn.style.display = 'none';
                     return;
                 }
                 // Checkboxen-Status speichern und alle deaktivieren
@@ -139,35 +171,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Alle Layer entfernen, unabhängig vom Checkbox-Status
                 removeAllMainLayers();
                 searchGeojson(query, searchInput);
+                if (clearBtn) clearBtn.style.display = 'inline-flex';
             }
         });
 
         // Entferne Such-Layer sofort beim Leeren des Feldes
         searchInput.addEventListener('input', function (e) {
             if (e.target.value.trim().length === 0) {
-                searchInput.style.backgroundColor = '';
-                if (window.searchResultLayer) {
-                    map.removeLayer(window.searchResultLayer);
-                    window.searchResultLayer = null;
-                }
-                if (window.searchHighlightLayer) {
-                    map.removeLayer(window.searchHighlightLayer);
-                    window.searchHighlightLayer = null;
-                }
-                // Checkboxen wiederherstellen und Layer synchronisieren
-                if (savedCheckboxStates) {
-                    getAllLayerCheckboxes().forEach((cb, idx) => {
-                        cb.checked = savedCheckboxStates[idx];
-                        // change-Event auslösen, damit Layer wirklich hinzugefügt/entfernt werden
-                        cb.dispatchEvent(new Event('change', { bubbles: true }));
-                    });
-                    setAllMainLayersVisible(true); // Layer entsprechend Checkboxen anzeigen
-                    savedCheckboxStates = null;
-                } else {
-                    setAllMainLayersVisible(true);
-                }
+                // use helper to avoid duplicating restore logic
+                clearSearchAndRestore();
+            } else {
+                // show clear button when there is content
+                if (clearBtn) clearBtn.style.display = 'inline-flex';
             }
         });
+
+        // Clear button behavior
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function () {
+                clearSearchAndRestore();
+            });
+        }
     });
 });
 
@@ -370,7 +394,13 @@ function searchGeojson(query, searchInput) {
                     layer.bindPopup(`<b>${cityName}</b>`);
                     layer.on('click', function () {
                         if (typeof window.showCityInfo === 'function') {
-                            window.showCityInfo({ name: cityName, population, province, info, lat, lon });
+                                // Try to pass any image URLs available on the feature so the info panel
+                                // can show the gallery (property names used across GeoJSONs: img_urls, url, img_ruls)
+                                const img_urls = Array.isArray(feature.properties && feature.properties.img_urls) ? feature.properties.img_urls
+                                    : Array.isArray(feature.properties && feature.properties.url) ? feature.properties.url
+                                    : Array.isArray(feature.properties && feature.properties.img_ruls) ? feature.properties.img_ruls
+                                    : null;
+                                window.showCityInfo({ name: cityName, population, province, info, lat, lon, img_urls });
                             // showCityInfo may call clearHighlight() which closes popups.
                             // Open the popup shortly after to ensure it remains visible.
                             setTimeout(() => { try { layer.openPopup(); } catch (e) {} }, 30);

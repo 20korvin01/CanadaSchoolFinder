@@ -62,8 +62,13 @@
             <div class="panel-content">
                 <!-- Suchelement -->
                 <div class="layer-item" style="margin-bottom: 12px;">
-                    <input type="text" id="search-geojson" placeholder="Suche..."
-                        style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc;">
+                    <div class="search-input-wrapper" style="position:relative;">
+                        <input type="text" id="search-geojson" placeholder="Suche..."
+                            style="width: 100%; padding: 6px 28px 6px 6px; border-radius: 4px; border: 1px solid #ccc;">
+                        <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="Suche löschen" title="Eingabe löschen" style="display:none;">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="layer-item">
                     <label>

@@ -221,6 +221,12 @@ function showProvinceInfo(feature) {
     }
     // Info-Text aus GeoJSON-Attribut 'info'
     const infoText = props.info ? `<div class="province-teaser">${props.info}</div>` : '';
+    // Bevölkerung: auf 100 runden für Anzeige
+    let displayPopulation = '-';
+    if (props.population || props.population === 0) {
+      const pn = Number(props.population);
+      if (!isNaN(pn)) displayPopulation = (Math.round(pn / 100) * 100).toLocaleString();
+    }
     details.innerHTML = `
       <h4>${provinceName}</h4>
       ${infoText}
@@ -240,7 +246,7 @@ function showProvinceInfo(feature) {
                     return '';
                   }
                 })()}
-          <span><i class='bi bi-people-fill' style='color:#23407a; margin-right:6px;'></i> <strong>Bevölkerung:</strong> ${props.population ? props.population.toLocaleString() : '-'}</span>
+          <span><i class='bi bi-people-fill' style='color:#23407a; margin-right:6px;'></i> <strong>Bevölkerung:</strong> ${displayPopulation}</span>
           <span><i class='bi bi-aspect-ratio' style='color:#23407a; margin-right:6px;'></i> <strong>Fläche:</strong> ${props.area_km2 ? props.area_km2.toLocaleString() + ' km²' : '-'}</span>
       </div>
     `;

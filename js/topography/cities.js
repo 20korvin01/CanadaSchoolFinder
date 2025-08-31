@@ -105,6 +105,12 @@ function loadCities() {
             if (feature.properties) {
               const name = feature.properties.name || feature.properties.city || 'Unbekannte Stadt';
               const population = feature.properties.population || 'Unbekannt';
+              // Anzeige: auf 100 runden
+              let displayPopulationStr = '-';
+              if (population !== 'Unbekannt' && population != null) {
+                const pNum = Number(population);
+                if (!isNaN(pNum)) displayPopulationStr = (Math.round(pNum / 100) * 100).toLocaleString();
+              }
               const province = feature.properties.province_name || feature.properties.prov || '';
               const info = feature.properties.info;
               const lat = feature.geometry.coordinates[1];
@@ -123,9 +129,7 @@ function loadCities() {
               } else {
                 popupContent = `<b>${name}</b>`;
                 if (province) popupContent += `<br>Provinz: ${province}`;
-                if (population !== 'Unbekannt') {
-                  popupContent += `<br>Einwohner: ${population.toLocaleString()}`;
-                }
+                popupContent += `<br>Einwohner: ${displayPopulationStr}`;
                 popupContent += `<div class="city-popup-weather" style="margin-top:1em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em;"><span>Lade Wetterdaten ...</span></div>`;
               }
               layer.on('click', function(e) {
@@ -180,13 +184,15 @@ function loadCities() {
                 const name = feature.properties.name || feature.properties.city || 'Unbekannte Stadt';
                 const population = feature.properties.population || 'Unbekannt';
                 const province = feature.properties.province || feature.properties.prov || '';
-                
+                // Anzeige: auf 100 runden
+                let displayPopulationStr = '-';
+                if (population !== 'Unbekannt' && population != null) {
+                  const pNum = Number(population);
+                  if (!isNaN(pNum)) displayPopulationStr = (Math.round(pNum / 100) * 100).toLocaleString();
+                }
                 let popupContent = `<b>${name}</b>`;
                 if (province) popupContent += `<br>Provinz: ${province}`;
-                if (population !== 'Unbekannt') {
-                  popupContent += `<br>Einwohner: ${population.toLocaleString()}`;
-                }
-                
+                popupContent += `<br>Einwohner: ${displayPopulationStr}`;
                 layer.bindPopup(popupContent);
                 
                 layer.on('click', function(e) {
@@ -240,61 +246,98 @@ function showCityInfo(city) {
   const details = document.getElementById('feature-details');
   const imageContainer = document.getElementById('feature-image');
   // Bilder für die Stadt (nur img_urls aus GeoJSON verwenden)
-  imageContainer.innerHTML = `
-    <div class="image-gallery">
-      <div class="gallery-main" style="display:flex;align-items:center;justify-content:center;min-height:260px;">
-        <div style="text-align:center;color:#666;">
-          <svg width="64" height="64" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="25" cy="25" r="20" stroke="#CD1719" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="31.4 31.4">
-              <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite" />
-            </circle>
-          </svg>
-          <div style="margin-top:8px;font-size:0.95em;">Bilder werden geladen...</div>
-        </div>
-      </div>
-    </div>`;
-
-  // Decide which URLs to try: prefer provided img_urls, else check `url` or `img_ruls`.
+  // Entscheide welche URLs verwendet werden: bevorzugt img_urls, sonst url oder img_ruls
   const remoteUrls = Array.isArray(city.img_urls) ? city.img_urls
-    : Array.isArray(city.img_urls) ? city.img_urls
+    : Array.isArray(city.url) ? city.url
     : Array.isArray(city.img_ruls) ? city.img_ruls
     : null;
   const tryUrls = remoteUrls && remoteUrls.length > 0 ? sampleRandom(remoteUrls, 10) : null;
 
   if (tryUrls && tryUrls.length > 0) {
-      // Preload and display only successfully loaded images; if none, show placeholder
-      preloadImages(tryUrls).then(loaded => {
-        const loadedImages = Array.isArray(loaded) ? loaded.filter(Boolean) : [];
-        if (!loadedImages || loadedImages.length === 0) {
-          imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
-        } else {
-          // Ensure exactly 10 images by cycling the successfully loaded ones if needed
-          const imagesToUse = [];
-          let i = 0;
-          while (imagesToUse.length < 10) {
-            imagesToUse.push(loadedImages[i % loadedImages.length]);
-            i++;
-          }
-          imageContainer.innerHTML = typeof createImageGallery === 'function' ? createImageGallery(imagesToUse) : '';
-          if (typeof addGalleryEventListeners === 'function') setTimeout(() => { addGalleryEventListeners(); }, 100);
-        }
-      }).catch(() => {
+    // Zeige temporäre Lade-Galerie bis Bilder geladen sind
+    imageContainer.style.display = '';
+    imageContainer.innerHTML = `
+      <div class="image-gallery">
+        <div class="gallery-main" style="display:flex;align-items:center;justify-content:center;min-height:260px;">
+          <div style="text-align:center;color:#666;">
+            <svg width="64" height="64" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="25" cy="25" r="20" stroke="#CD1719" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="31.4 31.4">
+                <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite" />
+              </circle>
+            </svg>
+            <div style="margin-top:8px;font-size:0.95em;">Bilder werden geladen...</div>
+          </div>
+        </div>
+      </div>`;
+
+    // Preload and display only successfully loaded images; if none, show placeholder
+    preloadImages(tryUrls).then(loaded => {
+      const loadedImages = Array.isArray(loaded) ? loaded.filter(Boolean) : [];
+      if (!loadedImages || loadedImages.length === 0) {
         imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
-      });
+      } else {
+        // Ensure exactly 10 images by cycling the successfully loaded ones if needed
+        const imagesToUse = [];
+        let i = 0;
+        while (imagesToUse.length < 10) {
+          imagesToUse.push(loadedImages[i % loadedImages.length]);
+          i++;
+        }
+        imageContainer.innerHTML = typeof createImageGallery === 'function' ? createImageGallery(imagesToUse) : '';
+        if (typeof addGalleryEventListeners === 'function') setTimeout(() => { addGalleryEventListeners(); }, 100);
+      }
+    }).catch(() => {
+      imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
+    });
   } else {
-    imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
+    // Keine Bild-URLs vorhanden: Bild-Container leer lassen und ausblenden
+    imageContainer.innerHTML = '';
+    imageContainer.style.display = 'none';
   }
   title.textContent = city.name;
   let infoBlock = '';
   if (city.info) {
     infoBlock = `<div class="province-teaser"><span>${city.info}</span></div>`;
   }
+  // Berechne Entfernung zur festen Position in Deutschland (WGS84)
+  const germanyLat = 51.163;
+  const germanyLon = 10.447;
+  function haversineDistanceKm(lat1, lon1, lat2, lon2) {
+    const toRad = deg => deg * Math.PI / 180;
+    const R = 6371; // Erdradius in km
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+              Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+  }
+
+  let distanceKm = null;
+  if (typeof city.lat === 'number' && typeof city.lon === 'number') {
+    distanceKm = haversineDistanceKm(city.lat, city.lon, germanyLat, germanyLon);
+  } else if (city.lat && city.lon) {
+    // fallback if strings
+    const latNum = Number(city.lat);
+    const lonNum = Number(city.lon);
+    if (!isNaN(latNum) && !isNaN(lonNum)) distanceKm = haversineDistanceKm(latNum, lonNum, germanyLat, germanyLon);
+  }
+  // Auf 100 km runden, wie gewünscht
+  const roundedDistance = (distanceKm === null) ? null : Math.round(distanceKm / 100) * 100;
+
   let detailsHtml = `
     <h4>${city.name}</h4>
     ${infoBlock}
     <div class="city-popup-weather" style="margin-bottom:1em; margin-top:0.5em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em; line-height:1.5; display:flex; flex-direction:column; gap:2px;">
       <span><i class='bi bi-geo-alt-fill' style='color:#CD1719; margin-right:6px;'></i> <strong>Provinz:</strong> ${city.province || '-'}</span>
-      <span><i class='bi bi-people-fill' style='color:#CD1719; margin-right:6px;'></i> <strong>Einwohner:</strong> ${city.population !== 'Unbekannt' ? city.population.toLocaleString() : '-'}</span>
+      <span><i class='bi bi-people-fill' style='color:#CD1719; margin-right:6px;'></i> <strong>Einwohner:</strong> ${(() => {
+        const pop = city.population !== undefined ? city.population : 'Unbekannt';
+        if (pop === 'Unbekannt' || pop === null) return '-';
+        const pn = Number(pop);
+        return isNaN(pn) ? '-' : (Math.round(pn / 100) * 100).toLocaleString();
+      })()}</span>
+      <span><i class='bi bi-signpost-2-fill' style='color:#CD1719; margin-right:6px;'></i> <strong>Entfernung zu DE:</strong> ${roundedDistance !== null ? roundedDistance.toLocaleString() + ' km' : '-'}</span>
     </div>
     <div id="city-time-block" class="city-popup-weather" style="margin-top:0.7em; margin-bottom:0.7em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em;">
       <span>Lade Uhrzeit ...</span>

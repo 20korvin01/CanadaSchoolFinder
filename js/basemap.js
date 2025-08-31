@@ -6,8 +6,8 @@ const cartoLight = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/
 });
 
 // Ausgangsposition der Karte (beim Laden)
-const initialMapCenter = [61.65198, -101.51328];
-const initialMapZoom = 3;
+const initialMapCenter = [57.72738, -101.90918];
+const initialMapZoom = 4;
 
 // Map initialisieren mit Standardlayer
 const map = L.map('map', {

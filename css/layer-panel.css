@@ -160,3 +160,25 @@
     margin-right: 4px;
     color: #CD1719;
 }
+
+/* Search clear (X) button inside the search input */
+.search-input-wrapper { position: relative; }
+.search-clear-btn {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #666;
+    padding: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+}
+.search-clear-btn:hover { background: rgba(0,0,0,0.06); color: #000; }
+.search-clear-btn:focus { outline: 2px solid #CD1719; outline-offset: 2px; }
