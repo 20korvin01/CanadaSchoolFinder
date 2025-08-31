@@ -12,7 +12,7 @@ let highlightedLakeLayer = null;
 let tooltipHoverLake = null;
 
 // Dynamischer Basis-Pfad für lokale Nutzung und GitHub Pages
-const greatLakesBasePath = window.location.hostname === '20korvin01.github.io' ? '/KanadaSchoolFinder' : '';
+const greatLakesBasePath = window.location.hostname === '20korvin01.github.io' ? '/CanadaSchoolFinder' : '';
 
 // Standard-Style für Seen
 function getGreatLakeStyle(feature) {

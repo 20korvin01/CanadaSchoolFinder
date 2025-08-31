@@ -10,7 +10,7 @@ fetch('data/rivers.geojson')
 let riversLayer = null;
 
 // Dynamischer Basis-Pfad für lokale Nutzung und GitHub Pages
-const riversBasePath = window.location.hostname === '20korvin01.github.io' ? '/KanadaSchoolFinder' : '';
+const riversBasePath = window.location.hostname === '20korvin01.github.io' ? '/CanadaSchoolFinder' : '';
 
 function getRiverStyle(feature) {
   return {

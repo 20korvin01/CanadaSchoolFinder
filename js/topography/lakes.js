@@ -22,7 +22,7 @@ let lakesLayer = null;
 let highlightedLake = null;
 
 // Dynamischer Basis-Pfad für lokale Nutzung und GitHub Pages
-const lakesBasePath = window.location.hostname === '20korvin01.github.io' ? '/KanadaSchoolFinder' : '';
+const lakesBasePath = window.location.hostname === '20korvin01.github.io' ? '/CanadaSchoolFinder' : '';
 
 function getLakeStyle(feature) {
   return {

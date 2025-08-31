@@ -369,7 +369,7 @@ function createProvinceTooltip(feature, layer) {
 window.createProvinceTooltip = createProvinceTooltip;
 
 // Dynamischer Basis-Pfad für lokale Nutzung und GitHub Pages
-const basePath = window.location.hostname === '20korvin01.github.io' ? '/KanadaSchoolFinder' : '';
+const basePath = window.location.hostname === '20korvin01.github.io' ? '/CanadaSchoolFinder' : '';
 
 // Provinces Layer Variable
 let provincesLayer = null;
@@ -410,7 +410,7 @@ function loadProvinces() {
       console.log('Versuche alternativen Pfad...');
       
       // Fallback: Versuche absoluten Pfad für GitHub Pages
-      fetch('/KanadaSchoolFinder/data/provinces.geojson')
+      fetch('/CanadaSchoolFinder/data/provinces.geojson')
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

@@ -66,7 +66,7 @@ function getCityStyle(feature) {
 }
 
 // Dynamischer Basis-Pfad für lokale Nutzung und GitHub Pages
-const citiesBasePath = window.location.hostname === '20korvin01.github.io' ? '/KanadaSchoolFinder' : '';
+const citiesBasePath = window.location.hostname === '20korvin01.github.io' ? '/CanadaSchoolFinder' : '';
 
 // Funktion zum Laden der Städte (angepasst für Kategorien)
 function loadCities() {
@@ -167,7 +167,7 @@ function loadCities() {
       console.log('Versuche alternativen Pfad...');
       
       // Fallback: Versuche absoluten Pfad für GitHub Pages
-      fetch('/KanadaSchoolFinder/data/cities.geojson')
+      fetch('/CanadaSchoolFinder/data/cities.geojson')
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

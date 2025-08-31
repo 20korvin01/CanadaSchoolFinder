@@ -7,7 +7,7 @@ fetch('data/boreal_zones.geojson')
 
 let borealZonesLayer = null;
 
-const borealZonesBasePath = window.location.hostname === '20korvin01.github.io' ? '/KanadaSchoolFinder' : '';
+const borealZonesBasePath = window.location.hostname === '20korvin01.github.io' ? '/CanadaSchoolFinder' : '';
 
 // Farben für die verschiedenen TYPEs
 const borealZoneColors = {
