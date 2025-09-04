@@ -1,5 +1,5 @@
 // Lädt die Lakes-GeoJSON und speichert sie global
-fetch('data/lakes.geojson')
+fetch('data/topography/lakes.geojson')
   .then(response => response.json())
   .then(data => {
     window.lakesGeojson = data;
@@ -105,7 +105,7 @@ function createLakeTooltip(feature, layer) {
 window.createLakeTooltip = createLakeTooltip;
 
 function loadLakes() {
-  fetch(`${lakesBasePath}/data/lakes.geojson`)
+  fetch(`${lakesBasePath}/data/topography/lakes.geojson`)
     .then(response => response.json())
     .then(data => {
       lakesLayer = L.geoJSON(data, {

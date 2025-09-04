@@ -1,5 +1,5 @@
 // Lädt die Great Lakes-GeoJSON und speichert sie global
-fetch('data/great_lakes.geojson')
+fetch('data/topography/great_lakes.geojson')
   .then(response => response.json())
   .then(data => {
     window.greatLakesGeojson = data;
@@ -190,7 +190,7 @@ function showGreatLakeInfo(feature) {
 
   let infoBlock = '';
   if (props.info) {
-    infoBlock = `<div class="province-teaser" style="font-size:0.93em;">${props.info}</div>`;
+    infoBlock = `<div class="feature-teaser" style="font-size:0.93em;">${props.info}</div>`;
   }
 
   const attributeMap = [
@@ -268,7 +268,7 @@ function showGreatLakeInfo(feature) {
 let greatLakesLayer = null;
 
 function loadGreatLakes() {
-  fetch(`${greatLakesBasePath}/data/great_lakes.geojson`)
+  fetch(`${greatLakesBasePath}/data/topography/great_lakes.geojson`)
     .then(response => {
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       return response.json();

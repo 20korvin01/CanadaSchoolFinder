@@ -1,3 +1,31 @@
+// Accordion-Logik für Basemap-Gruppe
+function setupBasemapAccordion() {
+  const basemapToggle = document.getElementById('toggle-basemap-group');
+  const basemapRadioGroup = document.getElementById('basemap-radio-group');
+  const basemapIcon = document.getElementById('basemap-accordion-icon');
+  if (basemapToggle && basemapRadioGroup && basemapIcon) {
+    basemapToggle.addEventListener('click', function() {
+      const expanded = basemapToggle.getAttribute('aria-expanded') === 'true';
+      basemapToggle.setAttribute('aria-expanded', !expanded);
+      basemapRadioGroup.style.display = expanded ? 'none' : 'block';
+      basemapIcon.innerHTML = expanded ? '&#9654;' : '&#9660;';
+    });
+  }
+}
+
+// Event-Handler für Basemap-Wechsel
+function setupBasemapRadios() {
+  const radios = document.getElementsByName('basemap');
+  radios.forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      if (this.checked) {
+        if (typeof window.setBasemap === 'function') {
+          window.setBasemap(this.value);
+        }
+      }
+    });
+  });
+}
 // Accordion-Logik für Gewässer-Gruppe
 function setupWatersAccordion() {
   const watersToggle = document.getElementById('toggle-waters-group');
@@ -31,7 +59,7 @@ function setupCitiesAccordion() {
 // Checkbox Event Listeners für Layer Control
 function setupLayerCheckboxes() {
   // Provinzen Checkbox
-  const provincesCheckbox = document.querySelector('.layer-item input[type="checkbox"]');
+  const provincesCheckbox = document.getElementById('provincesCheckbox');
   if (provincesCheckbox) {
     provincesCheckbox.addEventListener('change', function() {
       if (typeof toggleProvinces === 'function') {
@@ -54,4 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
   setupWatersAccordion();
   setupCitiesAccordion();
   setupLayerCheckboxes();
+  setupBasemapAccordion();
+  setupBasemapRadios();
 });

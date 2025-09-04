@@ -1,0 +1,64 @@
+/* Boarding Schools Panel Styles */
+.boarding-schools-panel {
+	margin-top: 18px;
+	padding: 10px;
+	border: 1px solid #e0eafc;
+	border-radius: 8px;
+	background: #f5faff;
+}
+
+.boarding-schools-checkbox-label {
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+	color: #1766cd;
+	margin-bottom: 10px;
+	font-size: 1.08em;
+}
+.boarding-schools-checkbox-label input[type="checkbox"] {
+	accent-color: #1766cd;
+	margin-right: 10px;
+	transform: scale(1.2);
+}
+
+.boarding-schools-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.boarding-school-item {
+	background: #e0eafc;
+	border-radius: 7px;
+	margin-bottom: 10px;
+	padding: 10px 12px;
+	box-shadow: 0 1px 4px rgba(23,102,205,0.07);
+	transition: background 0.2s;
+}
+.boarding-school-item:hover {
+	background: #c7dbfa;
+}
+.school-name {
+	font-weight: bold;
+	color: #1766cd;
+	font-size: 1.08em;
+	margin-bottom: 2px;
+}
+.school-city {
+	color: #1766cd;
+	font-size: 0.98em;
+	margin-bottom: 2px;
+}
+.school-highlights {
+	color: #1a3a6b;
+	font-size: 0.95em;
+	margin-bottom: 4px;
+}
+.school-link {
+	color: #1766cd;
+	text-decoration: underline;
+	font-size: 0.95em;
+	transition: color 0.2s;
+}
+.school-link:hover {
+	color: #0d3c7b;
+}

@@ -1,0 +1,480 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.67590012495486,
+          45.44826809168454
+        ]
+      },
+      "properties": {
+        "school": "Ashbury College",
+        "city": "Ottawa",
+        "province": "Ontario",
+        "airport": "Ottawa",
+        "n_enrolment": 750,
+        "n_boarders": 110,
+        "grades": "4–8 und 9–12",
+        "fees": "52.500 € (Tuition + Boarding)",
+        "target_group": "Akademisch; Interesse an Politik + Weltgeschehen",
+        "info": null,
+        "location_info": "Stadtrand von Ottawa, im Botschaftsviertel",
+        "highlights": "IB + OSSC - Lage im Botschaftsviertel;  super akadem. Netzwerk; viele kanad. Boarders; Skifahren am WO-Ende mgl.",
+        "diploma": "OSSD, IB, Ashbury Dipl.",
+        "gender": "Co-ed",
+        "size": "5 ha",
+        "duration": null,
+        "website": "www.ashbury.ca",
+        "class_size": "17",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Traditionell;  Stadtschule, sehr offen; IB World Sch. + Round Square Sch.; modern/High Tech",
+        "n_nationalities": "60 (40 im Boarding)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.7199934745048,
+          50.09873379808883
+        ]
+      },
+      "properties": {
+        "school": "Athol Murray College of Notre Dame",
+        "city": "Regina",
+        "province": "Saskatchewan",
+        "airport": null,
+        "n_enrolment": 300,
+        "n_boarders": 255,
+        "grades": "9 – 12",
+        "fees": "37.833 € (School Fee)",
+        "target_group": "Hockey-/Sportbegeistert; Schulisch-akademisch zweitrangig",
+        "info": null,
+        "location_info": "nahe Regina (Hauptstadt v Saskatchewan)",
+        "highlights": "Exzellent für Hockey! (weltweit renommiert)",
+        "diploma": "OSSD",
+        "gender": "Co-ed",
+        "size": null,
+        "duration": null,
+        "website": "https://www.notredame.ca/",
+        "class_size": "16",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Fokus liegt auf Hockey; christliches Wertesystem; über 85 % Boarders",
+        "n_nationalities": "12 (viele Kanadier)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8420975819502,
+          45.371348729395855
+        ]
+      },
+      "properties": {
+        "school": "Bishop’s College School",
+        "city": "Sherbrooke",
+        "province": "Québec",
+        "airport": "Montréal",
+        "n_enrolment": 250,
+        "n_boarders": 210,
+        "grades": "7 – 12",
+        "fees": "50.327 € (School Fee) + 2.793 € (Registr.)",
+        "target_group": "Gut für Kombi von Engl.+Franz",
+        "info": null,
+        "location_info": "nahe Universitätsstadt Sherbrooke, ca. 1,5 h östl. v Montreal",
+        "highlights": "IB Programm - Skifahren in der Nähe",
+        "diploma": "IB, QCSSD, NBSSD",
+        "gender": "Co-ed",
+        "size": "100 ha",
+        "duration": null,
+        "website": "www.bishopscollegeschool.com",
+        "class_size": "15",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Gelegen in Québec, aber komplett englischsprachig; historischer Flair +  top modern",
+        "n_nationalities": "35 (60 % Kanadier)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.55515516994606,
+          48.654507787964306
+        ]
+      },
+      "properties": {
+        "school": "Brentwood College School",
+        "city": "Mill Bay",
+        "province": "British Columbia",
+        "airport": "Victoria",
+        "n_enrolment": 550,
+        "n_boarders": 460,
+        "grades": "9 – 12",
+        "fees": "62.040 € (School Fee) +  3.100 € (Registr.)",
+        "target_group": "weniger akademisch PLUS stark in Sport + Technik > ganzheitlich",
+        "info": null,
+        "location_info": "auf Vancouver Island, ca. 45 min nördl. von Victoria",
+        "highlights": "Rudern - Tennis ganzjährig.  Nachmittags Drei-Sparten-Profil (Fokus: Kunst-Sport-Technik)",
+        "diploma": "BC Dogwood Dipl.",
+        "gender": "Co-ed",
+        "size": "31 ha",
+        "duration": "One year only",
+        "website": "https://www.brentwood.ca/",
+        "class_size": "16",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Landschule, ganzheitl. Konzept; \"Wow\"-Schule; unter topp drei Internaten;  6-Tage-Konzept",
+        "n_nationalities": "50"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.47740743862983,
+          45.88207088375139
+        ]
+      },
+      "properties": {
+        "school": "Collège Saint-Bernard",
+        "city": "Drummondville",
+        "province": "Quebec",
+        "airport": "Montréal",
+        "n_enrolment": 1200,
+        "n_boarders": 80,
+        "grades": "1 – 11 (Ende Sek.)",
+        "fees": "19.455 € (Boarding) + 2.930 € (School Fee)",
+        "target_group": "frz. sprachig; leistungsstark",
+        "info": null,
+        "location_info": "in Drummondsville, zw. Montréal + Québec Stadt, am Fluss",
+        "highlights": "Fokusfächer (\"Concentrations\" je nach Klassenstufe; Preis unschlagbar; tolles Sports/Arts Programme",
+        "diploma": "PEI (bereitet auf IB vor)",
+        "gender": "Co-ed",
+        "size": "weitläufig",
+        "duration": null,
+        "website": "www.csb.qc.ca",
+        "class_size": null,
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Einziges frz. sprachiges Internat!, rundum großartig, weltoffenes Konzept; nur 5 Tage Internat"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.4134232581374,
+          43.72034991707308
+        ]
+      },
+      "properties": {
+        "school": "Havergal College",
+        "city": "Toronto",
+        "province": "Ontario",
+        "airport": "Toronto",
+        "n_enrolment": 1000,
+        "n_boarders": 50,
+        "grades": "1 – 12",
+        "fees": "49.585 € (School Fee) + 5.895 € (Regist.)",
+        "target_group": "Mädchen; akademisch + vielseitig Interessiert; selbstständig + selbstbewusst",
+        "info": null,
+        "location_info": "mitten in Toronto, aber  9 ha Gelände",
+        "highlights": " Campus Higtech (verglaste Räume etc.)  + traditionell; Boarders halb kanadisch/international",
+        "diploma": "OSSD, AP Capstone Dipl",
+        "gender": "Girls only",
+        "size": "9 ha",
+        "duration": null,
+        "website": "www.havergal.on.ca",
+        "class_size": "kleine Klassen",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Stadtschule, akademisch stark + toll in Sport; Round Square Schl. ; Schule riesig, aber kleines Internat",
+        "n_nationalities": "16"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.13677153414527,
+          44.983170610126045
+        ]
+      },
+      "properties": {
+        "school": "King’s-Edgehill School",
+        "city": "Windsor",
+        "province": "Nova Scotia",
+        "airport": "Halifax",
+        "n_enrolment": 350,
+        "n_boarders": 220,
+        "grades": "6 – 12",
+        "fees": "45.052 € (School Fee) + 1.552 € (Registr.)",
+        "target_group": "Akademisch, aber jeder willkommen, der lernen will",
+        "info": null,
+        "location_info": "Nova Scotia, ca. 45 Min. nördl von Halifax; 26 ha Parklandschaft",
+        "highlights": "Großes Sportprogramm, Skigebiet 10 min entfernt, Skifahren unter der Woche; Summer Camp davor",
+        "diploma": "IB",
+        "gender": "Co-ed",
+        "size": "26 ha",
+        "duration": null,
+        "website": "www.kes.ns.ca",
+        "class_size": "13",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Älteste Privatschule; sehr traditionell, alt ehrwürdig (Harry Potter); warmherzig/unkompliziert; IB World School",
+        "n_nationalities": "viele versch."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.26544247228733,
+          44.439498007904284
+        ]
+      },
+      "properties": {
+        "school": "Lakefield College School",
+        "city": "Lakefield",
+        "province": "Ontario",
+        "airport": "Toronto",
+        "n_enrolment": 430,
+        "n_boarders": 295,
+        "grades": "9 – 12",
+        "fees": "54.215 € (School Fee) + 3290 € (Registr. + Appl.)",
+        "target_group": "Fokus auf Akademisch + Gemeinschaft",
+        "info": null,
+        "location_info": "Ländlich, ca 1,5 h nordöstl. V. Toronto, mitten in Natur/am See",
+        "highlights": "Es wird bewertet, wie Schüler in Gemeinschaft lernen > früh angeleitet; Soziales steht im Fokus",
+        "diploma": "OSSD",
+        "gender": "Co-ed",
+        "size": "127 ha",
+        "duration": "One year only",
+        "website": "https://www.lcs.on.ca/",
+        "class_size": "14",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Größter Campus aller Schulen (130 ha); Vorzeigeschule der Round Square School",
+        "n_nationalities": "40"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.72023533795966,
+          48.78443628877501
+        ]
+      },
+      "properties": {
+        "school": "Queen Margaret’s School",
+        "city": "Duncan",
+        "province": "British Columbia",
+        "airport": "Victoria",
+        "n_enrolment": 510,
+        "n_boarders": 100,
+        "grades": "1 – 12",
+        "fees": "46.045 € (School Fee) + 1.862 € (Registr.)",
+        "target_group": "weniger akademisch, Reiten!",
+        "info": null,
+        "location_info": "auf Vancouver Island, ca. 60 min nördlich v Victoria",
+        "highlights": "Reiten, ganzheitliches Konzept, kleine Klassen, super Gemeinschaft, stark im Outdoor, viele Ausflüge",
+        "diploma": "BC Dogwood Dipl. ????",
+        "gender": "Co-ed",
+        "size": "11 ha",
+        "duration": null,
+        "website": "www.qms.bc.ca",
+        "class_size": "18",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Reiterschule! Unkompliziert, keine IB-Schule (> einfacher); einzige Semesterschule der Internate",
+        "n_nationalities": "30"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.63691011258913,
+          45.25179635319696
+        ]
+      },
+      "properties": {
+        "school": "Rosseau Lake College",
+        "city": "Rosseau",
+        "province": "Ontario",
+        "airport": "Toronto",
+        "n_enrolment": 140,
+        "n_boarders": 100,
+        "grades": "7 – 8 und 9 – 12",
+        "fees": "48.792 € (Tuition) + 2.483 € (Enrolment)",
+        "target_group": "gut für ADHS oder anderem individueller Förderung",
+        "info": null,
+        "location_info": "2 h nördl. von Toronto, wunderschön am See; Campus 21 ha",
+        "highlights": "Gut für alternativere Lernbedingungen, top für Outdoor (\"Classrooms without walls\"",
+        "diploma": "OSSD",
+        "gender": "Co-ed",
+        "size": "21 ha",
+        "duration": null,
+        "website": "https://www.rosseaulakecollege.com/",
+        "class_size": "18",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Winzige Schule,  Outdoor-Education!; Gemeinschaftsgefühl, familiär; hoher Boarding-Anteil",
+        "n_nationalities": "20"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.6370596923807,
+          48.65555663197201
+        ]
+      },
+      "properties": {
+        "school": "Shawnigan Lake School",
+        "city": "Shawnigan Lake",
+        "province": "British Columbia",
+        "airport": "Victoria",
+        "n_enrolment": 550,
+        "n_boarders": 470,
+        "grades": "8 – 12",
+        "fees": "62.070 € (School Fee) + 4.345 € (Registr.)",
+        "target_group": "weniger akademisch, Spaß, Sport, Outdoor > eher für ruhigere Schüler (vgl. zu Brentwood)",
+        "info": null,
+        "location_info": "auf Vancouver Island; 15 min entfernt v. Brentwood, mitten im Wald/am See",
+        "highlights": " Inspirierende Lernkulisse, individuelle Förderung, ganzheitlicher Ansatz",
+        "diploma": "BC Dogwood Dipl., AP Capstone",
+        "gender": "Co-ed",
+        "size": "150 ha",
+        "duration": "One year only",
+        "website": "www.shawnigan.ca",
+        "class_size": "16",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "\"Harry Potter\",  6-Tage-Konzept (vgl. Brentwood); größte Internatsschule (meisten Boarders); NUR GANZJÄHRIG; manchmal kurzfristig 6 Monate Plätze, kommt spät",
+        "n_nationalities": "30 (72 % CAN/USA)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.47642761565712,
+          44.01383064246269
+        ]
+      },
+      "properties": {
+        "school": "St. Andrew’s College",
+        "city": "Aurora",
+        "province": "Ontario",
+        "airport": "Toronto",
+        "n_enrolment": 650,
+        "n_boarders": 260,
+        "grades": "5–12",
+        "fees": "50,140 € (School Fee) + 3.103 € (Registr.)",
+        "target_group": "Jungs; akademisch stark + sozial + sportl.",
+        "info": null,
+        "location_info": "ca. 30 min außerhalb von Toronto",
+        "highlights": "fantastische Shule; Social Clubs, Art, Drama, Music, Athletics",
+        "diploma": "OSSD",
+        "gender": "Boys only",
+        "size": "44 ha",
+        "duration": "One year only",
+        "website": "www.sac.on.ca",
+        "class_size": "17",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "legt Wert auf Tradition; großer Anteil Boarders (= Gegenteil von Havergal",
+        "n_nationalities": "30"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.19907839601828,
+          49.24699374274627
+        ]
+      },
+      "properties": {
+        "school": "St. George’s School",
+        "city": "Vancouver",
+        "province": "British Columbia",
+        "airport": "Vancouver",
+        "n_enrolment": 1100,
+        "n_boarders": 110,
+        "grades": "1 – 12",
+        "fees": "62.070 € (School Fee) + 2.043 € (Registr. + Appl.)",
+        "target_group": "Jungs; stark akademisch",
+        "info": null,
+        "location_info": "zentral in Vancouver, 10 min. zum Pazifik, 20 min. zur Innenstadt",
+        "highlights": "Internat ist kleine tolle Gemeinschaft mit super Aktivitäten, fantastische Lage!",
+        "diploma": "BC Dogwood Dipl + 20 AP-Kurse",
+        "gender": "Boys only",
+        "size": "25 ha",
+        "duration": null,
+        "website": "www.stgeorges.bc.ca",
+        "class_size": "kleine Klassen",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Stadtschule; High Tech, riesiger Campus; riesige Schule, aber kleines Internat; sehr international",
+        "n_nationalities": "20 im Boarding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.32833403213604,
+          48.4521262122391
+        ]
+      },
+      "properties": {
+        "school": "St. Michaels University School",
+        "city": "Victoria",
+        "province": "British Columbia",
+        "airport": "Victoria",
+        "n_enrolment": 1000,
+        "n_boarders": 260,
+        "grades": "1 – 12",
+        "fees": "56.480 € (School Fee) +  2.172 € (Registr.)",
+        "target_group": "Starker akademischer Fokus; Rudern!",
+        "info": null,
+        "location_info": "In Victoria auf Vancouver Island",
+        "highlights": "Rudern + akademisch top",
+        "diploma": "BC Dogwood Dipl., AP Capstone (27 AP-Kurse)",
+        "gender": "Co-ed",
+        "size": "7,6 ha",
+        "duration": "One year only",
+        "website": "www.smus.ca",
+        "class_size": "17",
+        "nationalities": null,
+        "extra_curricular": null,
+        "short_info": "Stadtschule, offeneres Konzept; vergleichbar mit Brentwood, manchmal kurzfristig auch f. 6 Monate",
+        "n_nationalities": "25"
+      }
+    }
+  ]
+}

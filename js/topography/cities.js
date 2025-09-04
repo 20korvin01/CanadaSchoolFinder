@@ -1,5 +1,5 @@
 // Lädt die Cities-GeoJSON und speichert sie global
-fetch('data/cities.geojson')
+fetch('data/topography/cities.geojson')
   .then(response => response.json())
   .then(data => {
     window.citiesGeojson = data;
@@ -70,7 +70,7 @@ const citiesBasePath = window.location.hostname === '20korvin01.github.io' ? '/C
 
 // Funktion zum Laden der Städte (angepasst für Kategorien)
 function loadCities() {
-  fetch(`${citiesBasePath}/data/cities.geojson`)
+  fetch(`${citiesBasePath}/data/topography/cities.geojson`)
     .then(response => {
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       return response.json();
@@ -167,7 +167,7 @@ function loadCities() {
       console.log('Versuche alternativen Pfad...');
       
       // Fallback: Versuche absoluten Pfad für GitHub Pages
-      fetch('/CanadaSchoolFinder/data/cities.geojson')
+      fetch('/CanadaSchoolFinder/data/topography/cities.geojson')
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -297,7 +297,7 @@ function showCityInfo(city) {
   title.textContent = city.name;
   let infoBlock = '';
   if (city.info) {
-    infoBlock = `<div class="province-teaser"><span>${city.info}</span></div>`;
+    infoBlock = `<div class="feature-teaser"><span>${city.info}</span></div>`;
   }
   // Berechne Entfernung zur festen Position in Deutschland (WGS84)
   const germanyLat = 51.163;

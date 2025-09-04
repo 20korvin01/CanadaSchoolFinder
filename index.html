@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="css/cities.css">
     <link rel="stylesheet" href="css/waterbodies.css">
     <link rel="stylesheet" href="css/tooltips.css">
+    <link rel="stylesheet" href="css/boarding_schools.css">
 </head>
 
 <body>
@@ -72,6 +73,19 @@
                         <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="Suche löschen" title="Eingabe löschen" style="display:none;">
                             <i class="bi bi-x"></i>
                         </button>
+                    </div>
+                </div>
+                <!-- Basemap Auswahl -->
+                <div class="layer-item">
+                    <button class="accordion-toggle" id="toggle-basemap-group" aria-expanded="false" aria-controls="basemap-radio-group">
+                        <span class="accordion-icon" id="basemap-accordion-icon">&#9654;</span>
+                        <span>Hintergrundkarte</span>
+                    </button>
+                    <div class="basemap-radio-group" id="basemap-radio-group" style="display: none; margin-left: 16px;">
+                        <label class="basemap-radio"><input type="radio" name="basemap" value="cartoLight" checked> Carto Light</label>
+                        <label class="basemap-radio"><input type="radio" name="basemap" value="stadiaStamenTerrain"> Stamen Terrain</label>
+                        <label class="basemap-radio"><input type="radio" name="basemap" value="osm"> OpenStreetMap</label>
+                        <label class="basemap-radio"><input type="radio" name="basemap" value="esriWorldImagery"> Satellit (Esri)</label>
                     </div>
                 </div>
                 <div class="layer-item">
@@ -192,6 +206,8 @@
     <script src="js/infopanel.js"></script>
     <script src="js/layer-panel.js"></script>
     <script src="js/education/education-panel.js"></script>
+    <script src="js/education/boarding_schools.js"></script>
+    <script src="js/education/education-search.js"></script>
     <script src="js/topography/topography-panel.js"></script>
     <script src="js/topography/provinces.js"></script>
     <script src="js/topography/cities.js"></script>

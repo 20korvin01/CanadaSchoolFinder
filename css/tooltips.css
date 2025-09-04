@@ -10,6 +10,19 @@
 	display: none;
 }
 
+.boarding-school-tooltip {
+	position: fixed;
+	z-index: 9999;
+	color: white;
+	padding: 8px 16px;
+	border-radius: 8px;
+	font-size: 1.05em;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+	pointer-events: none;
+	display: none;
+	background: #1766cd;
+}
+
 .city-tooltip, .province-tooltip {
 	background: #CD1719;
 }
@@ -28,6 +41,9 @@
 
 /* small helper: spacing for icons inside tooltips */
 .city-tooltip i, .lake-tooltip i, .river-tooltip i, .province-tooltip i, .boreal-tooltip i {
+	margin-right: 7px;
+}
+.boarding-school-tooltip i {
 	margin-right: 7px;
 }
 

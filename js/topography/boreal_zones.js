@@ -1,5 +1,5 @@
 // Lädt die Boreal Zones GeoJSON und speichert sie global
-fetch('data/boreal_zones.geojson')
+fetch('data/topography/boreal_zones.geojson')
   .then(response => response.json())
   .then(data => {
     window.borealZonesGeojson = data;
@@ -48,7 +48,7 @@ window.showBorealZoneInfo = function showBorealZoneInfo(feature) {
     if (title) title.textContent = props.NAME;
     let infoBlock = '';
     if (props.DESCRIPTION) {
-      infoBlock = `<div class="province-teaser">${props.DESCRIPTION}</div>`;
+      infoBlock = `<div class="feature-teaser">${props.DESCRIPTION}</div>`;
     }
     if (details) {
       details.innerHTML = `
@@ -166,7 +166,7 @@ function onEachBorealZoneFeature(feature, layer) {
 }
 
 function loadBorealZones() {
-  fetch(`${borealZonesBasePath}/data/boreal_zones.geojson`)
+  fetch(`${borealZonesBasePath}/data/topography/boreal_zones.geojson`)
     .then(response => response.json())
     .then(data => {
       borealZonesLayer = L.geoJSON(data, {

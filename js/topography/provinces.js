@@ -220,7 +220,7 @@ function showProvinceInfo(feature) {
       }
     }
     // Info-Text aus GeoJSON-Attribut 'info'
-    const infoText = props.info ? `<div class="province-teaser">${props.info}</div>` : '';
+    const infoText = props.info ? `<div class="feature-teaser">${props.info}</div>` : '';
     // Bevölkerung: auf 100 runden für Anzeige
     let displayPopulation = '-';
     if (props.population || props.population === 0) {
@@ -260,7 +260,7 @@ function showProvinceInfo(feature) {
   setTimeout(() => map.invalidateSize(), 300);
 }
 // Lädt die Provinces-GeoJSON und speichert sie global
-fetch('data/provinces.geojson')
+fetch('data/topography/provinces.geojson')
   .then(response => response.json())
   .then(data => {
     window.provincesGeojson = data;
@@ -376,7 +376,7 @@ let provincesLayer = null;
 
 // Funktion zum Laden der Provinzen
 function loadProvinces() {
-  fetch(`${basePath}/data/provinces.geojson`)
+  fetch(`${basePath}/data/topography/provinces.geojson`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -410,7 +410,7 @@ function loadProvinces() {
       console.log('Versuche alternativen Pfad...');
       
       // Fallback: Versuche absoluten Pfad für GitHub Pages
-      fetch('/CanadaSchoolFinder/data/provinces.geojson')
+      fetch('/CanadaSchoolFinder/data/topography/provinces.geojson')
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

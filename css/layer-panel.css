@@ -1,3 +1,33 @@
+/* Modernes Styling für Basemap-Radio-Optionen */
+.basemap-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.5em;
+    margin-top: 0.5em;
+}
+
+.basemap-radio {
+    display: flex;
+    align-items: center;
+    background: #f5f7fa;
+    border-radius: 8px;
+    padding: 0.4em 0.8em;
+    transition: background 0.2s;
+    cursor: pointer;
+    font-size: 1em;
+    margin: 0.15em 0;
+}
+
+.basemap-radio:hover {
+    background: #e3eaf3;
+}
+
+.basemap-radio input[type="radio"] {
+    accent-color: #CD1719;
+    width: 1.1em;
+    height: 1.1em;
+    margin-right: 0.7em;
+}
 /* Panel-Inhalt scrollbar wie im Info-Panel */
 
 /* Scrollbar exakt wie im Info-Panel */

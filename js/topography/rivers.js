@@ -1,5 +1,5 @@
 // Lädt die Rivers-GeoJSON und speichert sie global
-fetch('data/rivers.geojson')
+fetch('data/topography/rivers.geojson')
   .then(response => response.json())
   .then(data => {
     window.riversGeojson = data;
@@ -81,7 +81,7 @@ function createRiverTooltip(feature, layer) {
 window.createRiverTooltip = createRiverTooltip;
 
 function loadRivers() {
-  fetch(`${riversBasePath}/data/rivers.geojson`)
+  fetch(`${riversBasePath}/data/topography/rivers.geojson`)
     .then(response => response.json())
     .then(data => {
       riversLayer = L.geoJSON(data, {
