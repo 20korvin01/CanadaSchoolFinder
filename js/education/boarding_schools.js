@@ -41,42 +41,36 @@ function showBoardingSchoolInfo(properties) {
 	const remoteUrls = Array.isArray(properties.img_urls) ? properties.img_urls : null;
 	if (imageContainer) {
 			if (remoteUrls && remoteUrls.length > 0) {
-					const tryImages = typeof window.sampleRandom === 'function' ? sampleRandom(remoteUrls, 10) : remoteUrls.slice(0, 10);
-					imageContainer.innerHTML = `
-						<div class="image-gallery">
-							<div class="gallery-main" style="position:relative; display:flex;align-items:center;justify-content:center;min-height:260px;">
-								<div style="text-align:center;color:#666;">
-									<svg width="64" height="64" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-										<circle cx="25" cy="25" r="20" stroke="#1766cd" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="31.4 31.4">
-											<animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite" />
-										</circle>
-									</svg>
-									<div style="margin-top:8px;font-size:0.95em;">Bilder werden geladen...</div>
-								</div>
+				const tryImages = remoteUrls;
+				imageContainer.innerHTML = `
+					<div class="image-gallery">
+						<div class="gallery-main" style="position:relative; display:flex;align-items:center;justify-content:center;min-height:260px;">
+							<div style="text-align:center;color:#666;">
+								<svg width="64" height="64" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+									<circle cx="25" cy="25" r="20" stroke="#1766cd" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="31.4 31.4">
+										<animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite" />
+									</circle>
+								</svg>
+								<div style="margin-top:8px;font-size:0.95em;">Bilder werden geladen...</div>
 							</div>
-						</div>`;
-					if (typeof window.preloadImages === 'function') {
-							preloadImages(tryImages).then(loaded => {
-									const loadedImages = Array.isArray(loaded) ? loaded.filter(Boolean) : [];
-									if (!loadedImages || loadedImages.length === 0) {
-											imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
-									} else {
-											// Immer 10 Bilder, ggf. zyklisch auffüllen
-											const imagesToUse = [];
-											let i = 0;
-											while (imagesToUse.length < 10) {
-													imagesToUse.push(loadedImages[i % loadedImages.length]);
-													i++;
-											}
-											imageContainer.innerHTML = typeof window.createImageGallery === 'function' ? createImageGallery(imagesToUse) : '';
-											if (typeof window.addGalleryEventListeners === 'function') setTimeout(() => { addGalleryEventListeners(); }, 100);
-									}
-							}).catch(() => {
-									imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Keine Bilder verfügbar</div></div>`;
-							});
-					}
+						</div>
+					</div>`;
+				if (typeof window.preloadImages === 'function') {
+					preloadImages(tryImages).then(loaded => {
+						const loadedImages = Array.isArray(loaded) ? loaded.filter(Boolean) : [];
+						if (!loadedImages || loadedImages.length === 0) {
+							imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Noch keine Bilder vorhanden</div></div>`;
+						} else {
+							// Zeige genau so viele Bilder wie vorhanden
+							imageContainer.innerHTML = typeof window.createImageGallery === 'function' ? createImageGallery(loadedImages) : '';
+							if (typeof window.addGalleryEventListeners === 'function') setTimeout(() => { addGalleryEventListeners(); }, 100);
+						}
+					}).catch(() => {
+						imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Noch keine Bilder vorhanden</div></div>`;
+					});
+				}
 			} else {
-					imageContainer.innerHTML = '';
+				imageContainer.innerHTML = `<div style="text-align:center;padding:20px;color:#666;"><i class="bi bi-image" style="font-size:2em;margin-bottom:8px;"></i><div>Noch keine Bilder vorhanden</div></div>`;
 			}
 	}
 
