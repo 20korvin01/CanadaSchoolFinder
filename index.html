@@ -44,10 +44,15 @@
 
         <!-- Education Panel -->
         <div id="education-panel" class="layer-panel">
-            <div class="panel-header">
-                <i class="bi bi-mortarboard-fill" style="font-size: 1.5rem; margin-right: 8px;"></i>
-                <h3>Bildung</h3>
-                <button id="close-education-panel" class="close-btn"><i class="bi bi-x"></i></button>
+            <div class="panel-header" style="display:flex; align-items:center; position:relative;">
+                <span style="display:flex; align-items:center; min-width:32px; justify-content:flex-start;">
+                    <i class="bi bi-mortarboard-fill" style="font-size: 1.5rem;"></i>
+                </span>
+                <h3 style="flex:1; text-align:center; margin:0; font-weight:500;">Bildung</h3>
+                <button id="close-education-panel" class="close-btn"
+                    style="background:transparent; border:none; box-shadow:none; padding:0; min-width:32px; display:flex; align-items:center; justify-content:flex-end; cursor:pointer;">
+                    <i class="bi bi-x" style="font-size:1.5em; color:#fff; font-weight:400; line-height:1;"></i>
+                </button>
             </div>
             <div class="panel-content">
                 <p>Hier erscheinen Informationen zu Bildungseinrichtungen.</p>
@@ -56,10 +61,15 @@
 
         <!-- Topography Panel -->
         <div id="topography-panel" class="layer-panel">
-            <div class="panel-header">
-                <i class="bi bi-globe-americas" style="font-size: 1.5rem; margin-right: 8px;"></i>
-                <h3>Topografie</h3>
-                <button id="close-topography-panel" class="close-btn"><i class="bi bi-x"></i></button>
+            <div class="panel-header" style="display:flex; align-items:center; position:relative;">
+                <span style="display:flex; align-items:center; min-width:32px; justify-content:flex-start;">
+                    <i class="bi bi-globe-americas" style="font-size: 1.5rem;"></i>
+                </span>
+                <h3 style="flex:1; text-align:center; margin:0; font-weight:500;">Topografie</h3>
+                <button id="close-topography-panel" class="close-btn"
+                    style="background:transparent; border:none; box-shadow:none; padding:0; min-width:32px; display:flex; align-items:center; justify-content:flex-end; cursor:pointer;">
+                    <i class="bi bi-x" style="font-size:1.5em; color:#fff; font-weight:400; line-height:1;"></i>
+                </button>
             </div>
             <div class="panel-content">
                 <!-- Suche -->
@@ -148,7 +158,9 @@
         <div id="info-panel" class="info-panel">
             <div class="panel-header">
                 <h3 id="feature-title">Feature Info</h3>
-                <button id="close-info-panel" class="close-btn"><i class="bi bi-x"></i></button>
+                <button id="close-info-panel" class="close-btn" style="background:transparent; border:none; box-shadow:none; padding:0; margin-left:auto; cursor:pointer;">
+                    <i class="bi bi-x" style="font-size:1.5em; color:#fff; font-weight:400; line-height:1;"></i>
+                </button>
             </div>
             <div class="panel-content">
                 <div id="feature-image"><img src="" alt="Feature Bild" id="feature-img"></div>

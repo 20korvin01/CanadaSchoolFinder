@@ -123,6 +123,10 @@ function onEachBorealZoneFeature(feature, layer) {
       if (typeof window.clearHighlight === 'function') {
         window.clearHighlight();
       }
+      // Great Lake Highlight entfernen, falls vorhanden
+      if (typeof window.clearGreatLakeHighlight === 'function') {
+        window.clearGreatLakeHighlight();
+      }
       // Vorheriges Boreal-Highlight entfernen
       if (window.currentBorealHighlight && window.currentBorealHighlight !== layer) {
         window.currentBorealHighlight.setStyle(getBorealZoneStyle(window.currentBorealHighlight.feature));

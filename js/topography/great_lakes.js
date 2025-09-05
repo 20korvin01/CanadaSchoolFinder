@@ -8,7 +8,6 @@ fetch('data/topography/great_lakes.geojson')
 
 // Variable für aktuell hervorgehobenen See
 let highlightedLakeLayer = null;
-// Variable für temporäres Hover-Highlight (soll nicht mit Klick-Highlight kollidieren)
 let tooltipHoverLake = null;
 
 // Dynamischer Basis-Pfad für lokale Nutzung und GitHub Pages
@@ -42,8 +41,16 @@ function highlightGreatLake(layer) {
   if (typeof window.clearHighlight === 'function') {
     window.clearHighlight();
   }
+  // Boreal-Zonen-Highlight entfernen, falls vorhanden
+  if (window.currentBorealHighlight && typeof window.getBorealZoneStyle === 'function') {
+    try {
+      window.currentBorealHighlight.setStyle(getBorealZoneStyle(window.currentBorealHighlight.feature));
+    } catch (e) {}
+    window.currentBorealHighlight = null;
+  }
+  // Vorheriges Highlight entfernen
   if (highlightedLakeLayer && highlightedLakeLayer !== layer) {
-    highlightedLakeLayer.setStyle(getGreatLakeStyle());
+    clearGreatLakeHighlight();
   }
   layer.setStyle(getGreatLakeHighlightStyle());
   highlightedLakeLayer = layer;
@@ -54,9 +61,7 @@ function clearGreatLakeHighlight() {
   if (highlightedLakeLayer) {
     try {
       highlightedLakeLayer.setStyle(getGreatLakeStyle());
-    } catch (e) {
-      // Layer wurde evtl. bereits entfernt
-    }
+    } catch (e) {}
     highlightedLakeLayer = null;
   }
   map.closePopup();

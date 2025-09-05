@@ -11,4 +11,15 @@ closeInfoBtn.addEventListener('click', function() {
   if (typeof clearHighlight === 'function') {
     clearHighlight();
   }
+  // Great Lake Highlight entfernen
+  if (typeof window.clearGreatLakeHighlight === 'function') {
+    window.clearGreatLakeHighlight();
+  }
+  // Boreal-Zonen-Highlight entfernen
+  if (window.currentBorealHighlight && typeof window.getBorealZoneStyle === 'function') {
+    try {
+      window.currentBorealHighlight.setStyle(getBorealZoneStyle(window.currentBorealHighlight.feature));
+    } catch (e) {}
+    window.currentBorealHighlight = null;
+  }
 });

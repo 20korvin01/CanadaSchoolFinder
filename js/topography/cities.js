@@ -133,6 +133,17 @@ function loadCities() {
                 popupContent += `<div class="city-popup-weather" style="margin-top:1em; padding:0.7em 1em; background:#f5f7fa; border-radius:8px; color:#333; font-size:0.98em;"><span>Lade Wetterdaten ...</span></div>`;
               }
               layer.on('click', function(e) {
+                // Great Lake Highlight entfernen, falls vorhanden
+                if (typeof window.clearGreatLakeHighlight === 'function') {
+                  window.clearGreatLakeHighlight();
+                }
+                // Boreal-Zonen-Highlight entfernen, falls vorhanden
+                if (window.currentBorealHighlight && typeof window.getBorealZoneStyle === 'function') {
+                  try {
+                    window.currentBorealHighlight.setStyle(getBorealZoneStyle(window.currentBorealHighlight.feature));
+                  } catch (e) {}
+                  window.currentBorealHighlight = null;
+                }
                 // Pass image URLs from common property names (img_urls, url, img_ruls) to the info panel so the gallery can use them
                 const img_urls = Array.isArray(feature.properties && feature.properties.img_urls) ? feature.properties.img_urls
                   : Array.isArray(feature.properties && feature.properties.img_urls) ? feature.properties.img_urls
@@ -387,7 +398,7 @@ function showCityInfo(city) {
         <div style="font-weight:bold; font-size:1.08em; margin-bottom:0.3em;">Aktuelle Uhrzeit</div>
         <div><i class='bi bi-clock-fill' style='color:#23407a; margin-right:6px;'></i> ${hhmm} Uhr</div>
         <div><i class='bi bi-globe2' style='color:#23407a; margin-right:6px;'></i> ${tz}${abbr}</div>
-        <div><i class='bi bi-arrow-left-right' style='color:#23407a; margin-right:6px;'></i> Zu Deutschland: ${diffStr}</div>
+        <div><i class='bi bi-arrow-left-right' style='color:#23407a; margin-right:6px;"></i> Zu Deutschland: ${diffStr}</div>
       `;
     } else {
       html = 'Keine Zeitdaten verfügbar.';

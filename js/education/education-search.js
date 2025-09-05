@@ -14,6 +14,108 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
+	// Layer-Management analog zu topography-search.js
+	function removeAllMainLayers() {
+		if (window.provincesLayer) map.removeLayer(window.provincesLayer);
+		if (window.lakesLayer) map.removeLayer(window.lakesLayer);
+		if (window.greatLakesLayer) map.removeLayer(window.greatLakesLayer);
+		if (window.riversLayer) map.removeLayer(window.riversLayer);
+		if (window.borealZonesLayer) map.removeLayer(window.borealZonesLayer);
+		if (window.citiesLayers) {
+			for (let i = 1; i <= 5; i++) {
+				const layer = window.citiesLayers['cat' + i];
+				if (layer) map.removeLayer(layer);
+			}
+		}
+		// Boarding Schools Layer entfernen
+		if (window.boardingSchoolsLayer) map.removeLayer(window.boardingSchoolsLayer);
+		if (window.hostfamilySchoolsLayer) map.removeLayer(window.hostfamilySchoolsLayer);
+	}
+
+	function setAllMainLayersVisible(visible) {
+		const provincesCheckbox = document.getElementById('provincesCheckbox');
+		if (window.provincesLayer && provincesCheckbox) {
+			if (visible && provincesCheckbox.checked) {
+				map.addLayer(window.provincesLayer);
+			} else {
+				map.removeLayer(window.provincesLayer);
+			}
+		}
+		const lakesCheckbox = document.getElementById('lakesCheckbox');
+		if (window.lakesLayer && lakesCheckbox) {
+			if (visible && lakesCheckbox.checked) {
+				map.addLayer(window.lakesLayer);
+			} else {
+				map.removeLayer(window.lakesLayer);
+			}
+		}
+		const greatLakesCheckbox = document.getElementById('greatLakesCheckbox');
+		if (window.greatLakesLayer && greatLakesCheckbox) {
+			if (visible && greatLakesCheckbox.checked) {
+				map.addLayer(window.greatLakesLayer);
+			} else {
+				map.removeLayer(window.greatLakesLayer);
+			}
+		}
+		const riversCheckbox = document.getElementById('riversCheckbox');
+		if (window.riversLayer && riversCheckbox) {
+			if (visible && riversCheckbox.checked) {
+				map.addLayer(window.riversLayer);
+			} else {
+				map.removeLayer(window.riversLayer);
+			}
+		}
+		for (let i = 1; i <= 5; i++) {
+			const catCheckbox = document.getElementById('citiesCat' + i);
+			const layer = window.citiesLayers && window.citiesLayers['cat' + i];
+			if (layer && catCheckbox) {
+				if (visible && catCheckbox.checked) {
+					map.addLayer(layer);
+				} else {
+					map.removeLayer(layer);
+				}
+			}
+		}
+		// Boarding Schools Layer wieder anzeigen, falls vorhanden und Checkbox aktiv
+		const boardingCheckbox = document.getElementById('boardingSchoolsCheckbox');
+		if (window.boardingSchoolsLayer && boardingCheckbox) {
+			if (visible && boardingCheckbox.checked) {
+				map.addLayer(window.boardingSchoolsLayer);
+			} else {
+				map.removeLayer(window.boardingSchoolsLayer);
+			}
+		}
+		const hostfamilyCheckbox = document.getElementById('hostfamilySchoolsCheckbox');
+		if (window.hostfamilySchoolsLayer && hostfamilyCheckbox) {
+			if (visible && hostfamilyCheckbox.checked) {
+				map.addLayer(window.hostfamilySchoolsLayer);
+			} else {
+				map.removeLayer(window.hostfamilySchoolsLayer);
+			}
+		}
+	}
+
+	function getAllLayerCheckboxes() {
+		const ids = [
+			'provincesCheckbox',
+			'borealZonesCheckbox',
+			'lakesCheckbox',
+			'greatLakesCheckbox',
+			'riversCheckbox',
+			'citiesCat1',
+			'citiesCat2',
+			'citiesCat3',
+			'citiesCat4',
+			'citiesCat5',
+			'boardingSchoolsCheckbox',
+			'hostfamilySchoolsCheckbox'
+		];
+		return ids.map(id => document.getElementById(id)).filter(cb => cb);
+	}
+
+	// Status der Checkboxen zwischenspeichern
+	let savedCheckboxStates = null;
+
 	// Suchelement holen
 	const searchInput = document.getElementById('search-boarding-schools');
 	const clearBtn = document.getElementById('search-boarding-clear-btn');
@@ -26,6 +128,17 @@ document.addEventListener('DOMContentLoaded', function () {
 			searchInput.value = '';
 			searchInput.style.backgroundColor = '';
 			removeBoardingSchoolsSearchLayer();
+			// Checkboxen wiederherstellen und Layer synchronisieren
+			if (savedCheckboxStates) {
+				getAllLayerCheckboxes().forEach((cb, idx) => {
+					cb.checked = savedCheckboxStates[idx];
+					cb.dispatchEvent(new Event('change', { bubbles: true }));
+				});
+				setAllMainLayersVisible(true);
+				savedCheckboxStates = null;
+			} else {
+				setAllMainLayersVisible(true);
+			}
 			clearBtn.style.display = 'none';
 			try { searchInput.focus(); } catch (e) {}
 		});
@@ -38,9 +151,30 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (query.length === 0) {
 				searchInput.style.backgroundColor = '';
 				removeBoardingSchoolsSearchLayer();
+				// Checkboxen wiederherstellen und Layer synchronisieren
+				if (savedCheckboxStates) {
+					getAllLayerCheckboxes().forEach((cb, idx) => {
+						cb.checked = savedCheckboxStates[idx];
+						cb.dispatchEvent(new Event('change', { bubbles: true }));
+					});
+					setAllMainLayersVisible(true);
+					savedCheckboxStates = null;
+				} else {
+					setAllMainLayersVisible(true);
+				}
 				if (clearBtn) clearBtn.style.display = 'none';
 				return;
 			}
+			// Checkboxen-Status speichern und alle deaktivieren
+			if (!savedCheckboxStates) {
+				savedCheckboxStates = getAllLayerCheckboxes().map(cb => cb.checked);
+			}
+			getAllLayerCheckboxes().forEach(cb => {
+				cb.checked = false;
+				cb.dispatchEvent(new Event('change', { bubbles: true }));
+			});
+			// Alle Layer entfernen, unabhängig vom Checkbox-Status
+			removeAllMainLayers();
 			searchBoardingSchools(query, searchInput);
 			if (clearBtn) clearBtn.style.display = 'inline-flex';
 		}
@@ -51,6 +185,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (e.target.value.trim().length === 0) {
 			searchInput.style.backgroundColor = '';
 			removeBoardingSchoolsSearchLayer();
+			// Checkboxen wiederherstellen und Layer synchronisieren
+			if (savedCheckboxStates) {
+				getAllLayerCheckboxes().forEach((cb, idx) => {
+					cb.checked = savedCheckboxStates[idx];
+					cb.dispatchEvent(new Event('change', { bubbles: true }));
+				});
+				setAllMainLayersVisible(true);
+				savedCheckboxStates = null;
+			} else {
+				setAllMainLayersVisible(true);
+			}
 			if (clearBtn) clearBtn.style.display = 'none';
 		} else {
 			if (clearBtn) clearBtn.style.display = 'inline-flex';

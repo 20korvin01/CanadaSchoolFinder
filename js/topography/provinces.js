@@ -269,8 +269,17 @@ fetch('data/topography/provinces.geojson')
 
 // Variable für aktuell hervorgehobenes Feature
 let highlightedLayer = null;
-// Variable für temporäres Hover-Highlight (soll nicht mit Klick-Highlight kollidieren)
 let tooltipHoverLayer = null;
+
+// Funktion zum Entfernen des Highlights
+function clearHighlight() {
+  if (highlightedLayer) {
+    try {
+      highlightedLayer.setStyle(getDefaultStyle());
+    } catch (e) {}
+    highlightedLayer = null;
+  }
+}
 
 // Standard-Style für Provinzen
 function getDefaultStyle(feature) {
@@ -302,9 +311,8 @@ function highlightFeature(layer) {
   }
   // Vorheriges Highlight entfernen
   if (highlightedLayer && highlightedLayer !== layer) {
-    highlightedLayer.setStyle(getDefaultStyle());
+    clearHighlight();
   }
-
   // Neues Feature highlighten
   layer.setStyle(getHighlightStyle());
   highlightedLayer = layer;

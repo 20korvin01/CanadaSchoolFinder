@@ -140,6 +140,17 @@ function addBoardingSchoolsLayer() {
 						if (typeof clearHighlight === 'function') {
 							clearHighlight();
 						}
+						// Great Lake Highlight entfernen
+						if (typeof window.clearGreatLakeHighlight === 'function') {
+							window.clearGreatLakeHighlight();
+						}
+						// Boreal-Zonen-Highlight entfernen
+						if (window.currentBorealHighlight && typeof window.getBorealZoneStyle === 'function') {
+							try {
+								window.currentBorealHighlight.setStyle(getBorealZoneStyle(window.currentBorealHighlight.feature));
+							} catch (e) {}
+							window.currentBorealHighlight = null;
+						}
 						showBoardingSchoolInfo(feature.properties);
 						// Popup nach Öffnen des Info-Panels erneut anzeigen
 						setTimeout(() => { try { layer.openPopup(layer.getLatLng()); } catch (e) {} }, 30);
