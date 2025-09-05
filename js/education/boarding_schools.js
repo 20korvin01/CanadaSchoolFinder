@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	if (!panelContent) return;
 	panelContent.innerHTML = '';
 
-	// Suchfeld ganz oben einfügen (analog zum Topographie-Panel)
+	// Suchfeld ganz oben einfügen (analog zum Topografie-Panel)
 	const searchItem = document.createElement('div');
 	searchItem.className = 'layer-item';
 	searchItem.style.marginBottom = '12px';

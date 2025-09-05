@@ -1,6 +1,6 @@
 .city-tooltip, .lake-tooltip, .river-tooltip, .province-tooltip, .boreal-tooltip {
 	position: fixed;
-	z-index: 9999;
+	z-index: 99999 !important;
 	color: white;
 	padding: 8px 16px;
 	border-radius: 8px;
@@ -12,7 +12,7 @@
 
 .boarding-school-tooltip {
 	position: fixed;
-	z-index: 9999;
+	z-index: 20000 !important;
 	color: white;
 	padding: 8px 16px;
 	border-radius: 8px;

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canada School Finder</title>
 
-    <!-- Favicon: use flag-icon.svg -->
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <link rel="shortcut icon" href="img/favicon.svg">
 
@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="css/infopanel.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/cities.css">
-    <link rel="stylesheet" href="css/cities.css">
     <link rel="stylesheet" href="css/waterbodies.css">
     <link rel="stylesheet" href="css/tooltips.css">
     <link rel="stylesheet" href="css/boarding_schools.css">
@@ -34,69 +33,51 @@
     <header class="main-header">
         <div style="display:flex; align-items:center; gap:12px; flex-wrap:nowrap; min-width:0;">
             <img src="img/flag-icon.svg" alt="Kanada Flagge" style="width:32px; height:32px; flex-shrink:0;">
-            <h1
-                style="font-size:2rem; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-shrink:1;">
+            <h1 style="font-size:2rem; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-shrink:1;">
                 CANADA SCHOOL FINDER</h1>
             <i class="bi bi-mortarboard-fill" style="font-size:2rem; flex-shrink:0;"></i>
         </div>
     </header>
+
     <!-- Layout Container -->
     <div class="layout-container">
-        <!-- Linke Spalte: Layer Control -->
-    <div id="education-panel" class="layer-panel">
-        <div class="panel-header">
-            <i class="bi bi-mortarboard-fill" style="font-size: 1.5rem; margin-right: 8px;"></i>
-            <h3>Bildung</h3>
-            <button id="close-education-panel" class="close-btn">
-                <i class="bi bi-x"></i>
-            </button>
-        </div>
-        <div class="panel-content">
-            <!-- Hier können später Education-spezifische Inhalte eingefügt werden -->
-            <p>Hier erscheinen Informationen zu Bildungseinrichtungen.</p>
-        </div>
-    </div>
-    <div id="topography-panel" class="layer-panel">
+
+        <!-- Education Panel -->
+        <div id="education-panel" class="layer-panel">
             <div class="panel-header">
-                <i class="bi bi-images" style="font-size: 1.5rem; margin-right: 8px;"></i>
-                <h3>Topographie</h3>
-                <button id="close-topography-panel" class="close-btn">
-                    <i class="bi bi-x"></i>
-                </button>
+                <i class="bi bi-mortarboard-fill" style="font-size: 1.5rem; margin-right: 8px;"></i>
+                <h3>Bildung</h3>
+                <button id="close-education-panel" class="close-btn"><i class="bi bi-x"></i></button>
             </div>
             <div class="panel-content">
-                <!-- Suchelement -->
+                <p>Hier erscheinen Informationen zu Bildungseinrichtungen.</p>
+            </div>
+        </div>
+
+        <!-- Topography Panel -->
+        <div id="topography-panel" class="layer-panel">
+            <div class="panel-header">
+                <i class="bi bi-globe-americas" style="font-size: 1.5rem; margin-right: 8px;"></i>
+                <h3>Topografie</h3>
+                <button id="close-topography-panel" class="close-btn"><i class="bi bi-x"></i></button>
+            </div>
+            <div class="panel-content">
+                <!-- Suche -->
                 <div class="layer-item" style="margin-bottom: 12px;">
                     <div class="search-input-wrapper" style="position:relative;">
                         <input type="text" id="search-geojson" placeholder="Suche..."
                             style="width: 100%; padding: 6px 28px 6px 6px; border-radius: 4px; border: 1px solid #ccc;">
-                        <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="Suche löschen" title="Eingabe löschen" style="display:none;">
+                        <button type="button" id="search-clear-btn" class="search-clear-btn" title="Eingabe löschen" style="display:none;">
                             <i class="bi bi-x"></i>
                         </button>
                     </div>
                 </div>
-                <!-- Basemap Auswahl -->
+                <!-- Layer Optionen -->
                 <div class="layer-item">
-                    <button class="accordion-toggle" id="toggle-basemap-group" aria-expanded="false" aria-controls="basemap-radio-group">
-                        <span class="accordion-icon" id="basemap-accordion-icon">&#9654;</span>
-                        <span>Hintergrundkarte</span>
-                    </button>
-                    <div class="basemap-radio-group" id="basemap-radio-group" style="display: none; margin-left: 16px;">
-                        <label class="basemap-radio"><input type="radio" name="basemap" value="cartoLight" checked> Carto Light</label>
-                        <label class="basemap-radio"><input type="radio" name="basemap" value="stadiaStamenTerrain"> Stamen Terrain</label>
-                        <label class="basemap-radio"><input type="radio" name="basemap" value="osm"> OpenStreetMap</label>
-                        <label class="basemap-radio"><input type="radio" name="basemap" value="esriWorldImagery"> Satellit (Esri)</label>
-                    </div>
+                    <label><input type="checkbox" id="provincesCheckbox" checked> Provinzen und Territorien</label>
                 </div>
                 <div class="layer-item">
-                    <label>
-                        <input type="checkbox" id="provincesCheckbox" checked> Provinzen und Territorien
-                    </label>
-                </div>
-                <div class="layer-item">
-                    <label>
-                        <input type="checkbox" id="borealZonesCheckbox"> Boreale Zonen
-                    </label>
+                    <label><input type="checkbox" id="borealZonesCheckbox"> Boreale Zonen</label>
                 </div>
                 <div class="layer-item">
                     <button class="accordion-toggle" id="toggle-waters-group" aria-expanded="false"
@@ -105,15 +86,9 @@
                         <span>Gewässer</span>
                     </button>
                     <div class="waters-checkbox-group" id="waters-checkboxes" style="display: none;">
-                        <label class="waters-checkbox">
-                            <input type="checkbox" id="greatLakesCheckbox"> Great Lakes
-                        </label>
-                        <label class="waters-checkbox">
-                            <input type="checkbox" id="lakesCheckbox"> Seen
-                        </label>
-                        <label class="waters-checkbox">
-                            <input type="checkbox" id="riversCheckbox"> Flüsse
-                        </label>
+                        <label><input type="checkbox" id="greatLakesCheckbox"> Great Lakes</label>
+                        <label><input type="checkbox" id="lakesCheckbox"> Seen</label>
+                        <label><input type="checkbox" id="riversCheckbox"> Flüsse</label>
                     </div>
                 </div>
                 <div class="layer-item">
@@ -123,60 +98,60 @@
                         <span>Städte</span>
                     </button>
                     <div class="city-checkbox-group" id="cities-checkboxes" style="display: none;">
-                        <label class="city-checkbox">
-                            <input type="checkbox" id="citiesCat1">
-                            < 10k Einwohner </label>
-                                <label class="city-checkbox">
-                                    <input type="checkbox" id="citiesCat2"> 10k – 50k
-                                </label>
-                                <label class="city-checkbox">
-                                    <input type="checkbox" id="citiesCat3"> 50k – 250k
-                                </label>
-                                <label class="city-checkbox">
-                                    <input type="checkbox" id="citiesCat4"> 250k – 1M
-                                </label>
-                                <label class="city-checkbox">
-                                    <input type="checkbox" id="citiesCat5"> > 1M
-                                </label>
+                        <label><input type="checkbox" id="citiesCat1">< 10k Einwohner</label>
+                        <label><input type="checkbox" id="citiesCat2"> 10k – 50k</label>
+                        <label><input type="checkbox" id="citiesCat3"> 50k – 250k</label>
+                        <label><input type="checkbox" id="citiesCat4"> 250k – 1M</label>
+                        <label><input type="checkbox" id="citiesCat5"> > 1M</label>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Mittlere Spalte: Karte -->
+        <!-- Kartenbereich -->
         <div class="map-container">
-            <!-- Layer Control Toggle Button Wrapper -->
             <div id="toggle-layer-panel-wrapper"
-                style="position:absolute; top:18px; left:18px; z-index:1001; transition:left 0.3s cubic-bezier(.4,0,.2,1);">
+                style="position:absolute; top:18px; left:18px; z-index:1001; transition:left 0.3s;">
                 <div class="map-btn-group">
-                        <button id="reset-map-view-btn" class="toggle-btn" data-tooltip="Zur Ausgangsansicht springen">
-                            <i class="bi bi-pin-map-fill"></i>
-                        </button>
-                        <button id="toggle-education-panel" class="toggle-btn" data-tooltip="Kartenebene Bildung ein-/ausblenden">
-                            <i class="bi bi-mortarboard-fill"></i>
-                        </button>
-                        <button id="toggle-topography-panel" class="toggle-btn" data-tooltip="Kartenebene Topographie ein-/ausblenden">
+                    <div style="display: flex; align-items: center; position: relative;">
+                        <button id="toggle-basemap-panel" class="toggle-btn" data-tooltip="Hintergrundkarten">
                             <i class="bi bi-images"></i>
                         </button>
+                        <div id="basemap-panel" class="basemap-panel" style="position: absolute; left: 60px; top: 0;">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <h4 style="margin-top:0; margin-bottom:0px; font-size:1.1rem;">Hintergrundkarten</h4>
+                                <button id="close-basemap-panel" class="close-btn" style="margin-left:8px;"><i class="bi bi-x"></i></button>
+                            </div>
+                            <div class="basemap-radio-group" id="basemap-radio-group-popup">
+                                <label class="basemap-radio"><input type="radio" name="basemap-popup" value="cartoLight" checked> Carto Light</label>
+                                <label class="basemap-radio"><input type="radio" name="basemap-popup" value="openTopoMap"> OpenTopoMap</label>
+                                <label class="basemap-radio"><input type="radio" name="basemap-popup" value="osm"> OpenStreetMap</label>
+                                <label class="basemap-radio"><input type="radio" name="basemap-popup" value="esriWorldImagery"> Satellit (Esri)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="reset-map-view-btn" class="toggle-btn" data-tooltip="Zur Ausgangsansicht springen">
+                        <i class="bi bi-pin-map-fill"></i>
+                    </button>
+                    <button id="toggle-education-panel" class="toggle-btn" data-tooltip="Kartenebene Bildung">
+                        <i class="bi bi-mortarboard-fill"></i>
+                    </button>
+                    <button id="toggle-topography-panel" class="toggle-btn" data-tooltip="Kartenebene Topografie">
+                        <i class="bi bi-globe-americas"></i>
+                    </button>
                 </div>
             </div>
-
-            <!-- Karten-Container -->
             <div id="map"></div>
         </div>
 
-        <!-- Rechte Spalte: Feature Info -->
+        <!-- Info Panel -->
         <div id="info-panel" class="info-panel">
             <div class="panel-header">
                 <h3 id="feature-title">Feature Info</h3>
-                <button id="close-info-panel" class="close-btn">
-                    <i class="bi bi-x"></i>
-                </button>
+                <button id="close-info-panel" class="close-btn"><i class="bi bi-x"></i></button>
             </div>
             <div class="panel-content">
-                <div id="feature-image">
-                    <img src="" alt="Feature Bild" id="feature-img">
-                </div>
+                <div id="feature-image"><img src="" alt="Feature Bild" id="feature-img"></div>
                 <div id="feature-details">
                     <p>Klicken Sie auf eine Provinz oder ein Territorium, um Informationen anzuzeigen.</p>
                 </div>
@@ -186,22 +161,16 @@
 
     <!-- Fußzeile -->
     <footer class="main-footer">
-        <div class="footer-left">
-            <a href="mailto:korvin.brecht@gmail.com" title="E-Mail senden"><i class="bi bi-envelope-at-fill"></i></a>
-        </div>
-        <div class="footer-center">
-            Korvin Brecht
-        </div>
-        <div class="footer-right">
-            <i class="bi bi-c-circle"></i> 2025
-        </div>
+        <div class="footer-left"><a href="mailto:korvin.brecht@gmail.com"><i class="bi bi-envelope-at-fill"></i></a></div>
+        <div class="footer-center">Korvin Brecht</div>
+        <div class="footer-right"><i class="bi bi-c-circle"></i> 2025</div>
     </footer>
 
-    <!-- Leaflet JavaScript -->
+    <!-- Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    <!-- Eigene JavaScript-Dateien -->
+    <!-- Eigene Scripts -->
     <script src="js/basemap.js"></script>
     <script src="js/infopanel.js"></script>
     <script src="js/layer-panel.js"></script>
@@ -217,5 +186,4 @@
     <script src="js/topography/boreal_zones.js"></script>
     <script src="js/topography/topography-search.js"></script>
 </body>
-
 </html>
